@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="utf-8">
+    <!-- <base href="/"> -->
+
+    <title>OptimizedHTML 4</title>
+    <meta name="description" content="">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Template Basic Images Start -->
+    <meta property="og:image" content="path/to/image.jpg">
+    <link rel="icon" href="img/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon-180x180.png">
+    <!-- Template Basic Images End -->
+
+    <!-- Custom Browsers Color Start -->
+    <meta name="theme-color" content="#000">
+    <!-- Custom Browsers Color End -->
+
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script src="https://unpkg.com/@turf/turf/turf.min.js"></script> -->
+
+
+    <link rel="stylesheet" href="css/main.min.css">
+
+</head>
+
+<body>
+    <div class="app">
+
+        <header class="header-new">
+            <div class="header-new__container">
+                <a href="" class="header-new__link">LEARN MORE AT COMMONSENSEINSTITUTECO.COM</a>
+            </div>
+        </header>
+
+        <main class="main">
+
+            <section class="district-stat-sec">
+                <div class="district-stat-sec__container">
+                    <div class="district-stat-sec__header">
+                        <h1 class="district-stat-sec__title">Garfield School District RE-2</h1>
+                        <div class="district-stat-sec__header-right">
+
+                            <div class="select district-stat-select district-stat-select--header">
+                                <input class="select__input" type="hidden" name="">
+                                <div class="select__head">Choose your school district</div>
+                                <ul class="select__list" style="display: none;">
+                                    <li class="select__item" data-value="x1">Test 1</li>
+                                    <li class="select__item" data-value="x2">Test 2</li>
+                                    <li class="select__item" data-value="x3">Test 3</li>
+                                    <li class="select__item" data-value="x1">Test 1</li>
+                                    <li class="select__item" data-value="x2">Test 2</li>
+                                    <li class="select__item" data-value="x3">Test 3</li>
+                                    <li class="select__item" data-value="x1">Test 1</li>
+                                    <li class="select__item" data-value="x2">Test 2</li>
+                                    <li class="select__item" data-value="x3">Test 3</li>
+                                    <li class="select__item" data-value="x1">Test 1</li>
+                                    <li class="select__item" data-value="x2">Test 2</li>
+                                    <li class="select__item" data-value="x3">Test 3</li>
+                                    <li class="select__item" data-value="x1">Test 1</li>
+                                    <li class="select__item" data-value="x2">Test 2</li>
+                                    <li class="select__item" data-value="x3">Test 3</li>
+                                </ul>
+                            </div>
+
+                            <div class="district-stat-sec__header-export-btn">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M11.2929 2.29289C11.6834 1.90237 12.3166 1.90237 12.7071 2.29289L16.7071 6.29289C17.0976 6.68342 17.0976 7.31658 16.7071 7.70711C16.3166 8.09763 15.6834 8.09763 15.2929 7.70711L13 5.41421V16C13 16.5523 12.5523 17 12 17C11.4477 17 11 16.5523 11 16V5.41421L8.70711 7.70711C8.31658 8.09763 7.68342 8.09763 7.29289 7.70711C6.90237 7.31658 6.90237 6.68342 7.29289 6.29289L11.2929 2.29289ZM5 17C5.55228 17 6 17.4477 6 18V20H18V18C18 17.4477 18.4477 17 19 17C19.5523 17 20 17.4477 20 18V20C20 21.1046 19.1046 22 18 22H6C4.89543 22 4 21.1046 4 20V18C4 17.4477 4.44772 17 5 17Z"
+                                        fill="white" />
+                                </svg>
+
+                                Export Data
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="district-stat-sec__graf-control-wrapper">
+
+                        <div class="district-stat-sec__graf-container graf-container">
+                            <div class="graf-container__title-row">
+                                <p class="graf-container__title">
+                                    Callout Stat:
+                                    <span class="graf-container__title-value graf-container__title-value--red">72</span>
+                                </p>
+
+                                <p class="graf-container__title">
+                                    / Colorado Avg Score:
+                                    <span class="graf-container__title-value">82</span>
+                                </p>
+                            </div>
+
+                            <div class="graf-container__canvas-wrapper">
+                                <div class="graf-container__canvas-wrapper-text">
+                                    <p>SCORE</p>
+                                </div>
+                                <canvas id="statDistrictChart" class=" graf-container__chart stat-district-chart"
+                                    height="290px"></canvas>
+                            </div>
+
+                        </div>
+
+                        <div class="district-stat-sec__controll-container controll-container">
+                            <p class="controll-container__title">Compare your district</p>
+                            <p class="controll-container__subtitle">Use the slider to compare your district with
+                                previous
+                                years data.</p>
+
+
+                            <div class="timeline">
+                                <div class="timeline__row-line">
+                                    <div class="timeline__row-line-fulling"></div>
+                                </div>
+                                <input type="range" id="range" min="1" max="3" step="1" value="3">
+                                <div class="marks">
+                                    <span>2019</span>
+                                    <span>2023</span>
+                                    <span>2024</span>
+                                </div>
+                            </div>
+
+                            <div class="controll-container__select-wrapper">
+                                <p class="controll-container__select-wrapper-title">Compare your district</p>
+                                <div class="select district-stat-select district-stat-select--controll">
+                                    <input class="select__input" type="hidden" name="">
+                                    <div class="select__head">Select the state or another district</div>
+                                    <ul class="select__list" style="display: none;">
+                                        <li class="select__item" data-value="x1">Test 1</li>
+                                        <li class="select__item" data-value="x2">Test 2</li>
+                                        <li class="select__item" data-value="x3">Test 3</li>
+                                        <li class="select__item" data-value="x1">Test 1</li>
+                                        <li class="select__item" data-value="x2">Test 2</li>
+                                        <li class="select__item" data-value="x3">Test 3</li>
+                                        <li class="select__item" data-value="x1">Test 1</li>
+                                        <li class="select__item" data-value="x2">Test 2</li>
+                                        <li class="select__item" data-value="x3">Test 3</li>
+                                        <li class="select__item" data-value="x1">Test 1</li>
+                                        <li class="select__item" data-value="x2">Test 2</li>
+                                        <li class="select__item" data-value="x3">Test 3</li>
+                                        <li class="select__item" data-value="x1">Test 1</li>
+                                        <li class="select__item" data-value="x2">Test 2</li>
+                                        <li class="select__item" data-value="x3">Test 3</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="district-stat-sec__down-wrapper">
+                        <div class="district-stat-sec__down-wrapper-main-data down-wrapper-main-data">
+
+                            <div class="acordeon-data-claster">
+                                <div class="acordeon-data-claster__header">
+                                    <p class="acordeon-data-claster__title">Enrollment and Choice</p>
+                                    <div class="acordeon-data-claster__icon">
+                                        <svg width="14" height="8" viewBox="0 0 14 8" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M0.292893 0.292893C0.683417 -0.0976311 1.31658 -0.0976311 1.70711 0.292893L7 5.58579L12.2929 0.292893C12.6834 -0.0976311 13.3166 -0.0976311 13.7071 0.292893C14.0976 0.683418 14.0976 1.31658 13.7071 1.70711L7.70711 7.70711C7.31658 8.09763 6.68342 8.09763 6.29289 7.70711L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683418 0.292893 0.292893Z"
+                                                fill="#013364" />
+                                        </svg>
+
+                                    </div>
+                                </div>
+
+                                <div class="acordeon-data-claster__body">
+
+                                    <div class="acordeon-data-claster__row acordeon-data-claster__row--v1">
+                                        <div
+                                            class="district-data-element district-data-element-v1 district-data-element--blue-mod">
+                                            <div class="district-data-element-v1__wrapper">
+                                                <div class="district-data-element-v1__top-values">
+                                                    <div class="district-data-element-v1__top-values-title">Overall
+                                                        public enrollment</div>
+                                                    <div class="district-data-element-v1__top-values-value">72%</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="district-data-element-info">
+                                                <div class="district-data-element-info__icon-wrapper">
+                                                    <div
+                                                        class="district-data-element-info__data-container  district-data-element-info__data-container--big">
+                                                        <div class="district-data-element-info__data-container-wrapper">
+                                                            <div
+                                                                class="district-data-element-info__data-container-wrapper-text">
+                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                                Maecenas nec convallis massa.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="district-data-element-info__icon">
+                                                        <svg width="10" height="9" viewBox="0 0 10 9" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M0 1C0 0.447715 0.447715 0 1 0H9C9.55228 0 10 0.447715 10 1V6.5C10 7.05228 9.55228 7.5 9 7.5H6.70711L5.35355 8.85355C5.15829 9.04882 4.84171 9.04882 4.64645 8.85355L3.29289 7.5H1C0.447715 7.5 0 7.05228 0 6.5V1ZM9 1H1V6.5H3.5C3.63261 6.5 3.75979 6.55268 3.85355 6.64645L5 7.79289L6.14645 6.64645C6.24021 6.55268 6.36739 6.5 6.5 6.5H9V1Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M5.75 3.75C5.75 4.16421 5.41421 4.5 5 4.5C4.58579 4.5 4.25 4.16421 4.25 3.75C4.25 3.33579 4.58579 3 5 3C5.41421 3 5.75 3.33579 5.75 3.75Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M7.75 3.75C7.75 4.16421 7.41421 4.5 7 4.5C6.58579 4.5 6.25 4.16421 6.25 3.75C6.25 3.33579 6.58579 3 7 3C7.41421 3 7.75 3.33579 7.75 3.75Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M3.75 3.75C3.75 4.16421 3.41421 4.5 3 4.5C2.58579 4.5 2.25 4.16421 2.25 3.75C2.25 3.33579 2.58579 3 3 3C3.41421 3 3.75 3.33579 3.75 3.75Z"
+                                                                fill="#013364" />
+                                                        </svg>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="district-data-element district-data-element-v1 ">
+                                            <div class="district-data-element-v1__wrapper">
+                                                <div class="district-data-element-v1__top-values">
+                                                    <div class="district-data-element-v1__top-values-title">Percent in
+                                                        Private enrollment (CDE)</div>
+                                                    <div class="district-data-element-v1__top-values-value">72%</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="district-data-element-info">
+                                                <div class="district-data-element-info__icon-wrapper">
+                                                    <div
+                                                        class="district-data-element-info__data-container  district-data-element-info__data-container--big">
+                                                        <div class="district-data-element-info__data-container-wrapper">
+                                                            <div
+                                                                class="district-data-element-info__data-container-wrapper-text">
+                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                                Maecenas nec convallis massa.
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="district-data-element-info__icon">
+                                                        <svg width="10" height="9" viewBox="0 0 10 9" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M0 1C0 0.447715 0.447715 0 1 0H9C9.55228 0 10 0.447715 10 1V6.5C10 7.05228 9.55228 7.5 9 7.5H6.70711L5.35355 8.85355C5.15829 9.04882 4.84171 9.04882 4.64645 8.85355L3.29289 7.5H1C0.447715 7.5 0 7.05228 0 6.5V1ZM9 1H1V6.5H3.5C3.63261 6.5 3.75979 6.55268 3.85355 6.64645L5 7.79289L6.14645 6.64645C6.24021 6.55268 6.36739 6.5 6.5 6.5H9V1Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M5.75 3.75C5.75 4.16421 5.41421 4.5 5 4.5C4.58579 4.5 4.25 4.16421 4.25 3.75C4.25 3.33579 4.58579 3 5 3C5.41421 3 5.75 3.33579 5.75 3.75Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M7.75 3.75C7.75 4.16421 7.41421 4.5 7 4.5C6.58579 4.5 6.25 4.16421 6.25 3.75C6.25 3.33579 6.58579 3 7 3C7.41421 3 7.75 3.33579 7.75 3.75Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M3.75 3.75C3.75 4.16421 3.41421 4.5 3 4.5C2.58579 4.5 2.25 4.16421 2.25 3.75C2.25 3.33579 2.58579 3 3 3C3.41421 3 3.75 3.33579 3.75 3.75Z"
+                                                                fill="#013364" />
+                                                        </svg>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="district-data-element district-data-element-v1 ">
+                                            <div class="district-data-element-v1__wrapper">
+                                                <div class="district-data-element-v1__top-values">
+                                                    <div class="district-data-element-v1__top-values-title">Percent in
+                                                        Charter data (on CDE website)</div>
+                                                    <div class="district-data-element-v1__top-values-value">72%</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="district-data-element district-data-element-v1 ">
+                                            <div class="district-data-element-v1__wrapper">
+                                                <div class="district-data-element-v1__top-values">
+                                                    <div class="district-data-element-v1__top-values-title">Percent
+                                                        Utilizing Open Enrollment</div>
+                                                    <div class="district-data-element-v1__top-values-value">72%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="district-data-element district-data-element-v1 ">
+                                            <div class="district-data-element-v1__wrapper">
+                                                <div class="district-data-element-v1__top-values">
+                                                    <div class="district-data-element-v1__top-values-title">Absenteeism
+                                                        Rate</div>
+                                                    <div class="district-data-element-v1__top-values-value">72%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="acordeon-data-claster">
+                                <div class="acordeon-data-claster__header">
+                                    <p class="acordeon-data-claster__title">Proficiency</p>
+                                    <div class="acordeon-data-claster__icon">
+                                        <svg width="14" height="8" viewBox="0 0 14 8" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M0.292893 0.292893C0.683417 -0.0976311 1.31658 -0.0976311 1.70711 0.292893L7 5.58579L12.2929 0.292893C12.6834 -0.0976311 13.3166 -0.0976311 13.7071 0.292893C14.0976 0.683418 14.0976 1.31658 13.7071 1.70711L7.70711 7.70711C7.31658 8.09763 6.68342 8.09763 6.29289 7.70711L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683418 0.292893 0.292893Z"
+                                                fill="#013364" />
+                                        </svg>
+
+                                    </div>
+                                </div>
+
+                                <div class="acordeon-data-claster__body">
+                                    <div class="acordeon-data-claster__row acordeon-data-claster__row--v2">
+
+
+                                        <div class="district-data-element district-data-element-v1 ">
+                                            <div class="district-data-element-v1__wrapper">
+                                                <div class="district-data-element-v1__top-values">
+                                                    <div class="district-data-element-v1__top-values-title">Overall
+                                                        public enrollment</div>
+                                                    <div class="district-data-element-v1__top-values-value">72%</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="district-data-element-info">
+                                                <p class="district-data-element-info__text">Display by socio economic
+                                                    status</p>
+                                                <div class="district-data-element-info__icon-wrapper">
+                                                    <div
+                                                        class="district-data-element-info__data-container  district-data-element-info__data-container--small">
+                                                        <div class="district-data-element-info__data-container-wrapper">
+                                                            <div
+                                                                class="district-data-element-info__data-container-wrapper-rate">
+                                                                <p
+                                                                    class="district-data-element-info__data-container-wrapper-rate-title">
+                                                                    LSE RATE
+                                                                </p>
+                                                                <div
+                                                                    class="district-data-element-info__data-container-wrapper-rate-value red-text-mod">
+                                                                    <svg width="8" height="20" viewBox="0 0 8 20"
+                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M3.64645 19.8536C3.84171 20.0488 4.15829 20.0488 4.35355 19.8536L7.53553 16.6716C7.7308 16.4763 7.7308 16.1597 7.53553 15.9645C7.34027 15.7692 7.02369 15.7692 6.82843 15.9645L4 18.7929L1.17157 15.9645C0.976311 15.7692 0.659728 15.7692 0.464466 15.9645C0.269204 16.1597 0.269204 16.4763 0.464466 16.6716L3.64645 19.8536ZM4 0L3.5 0L3.5 19.5H4H4.5L4.5 0L4 0Z"
+                                                                            fill="#CE3538" />
+                                                                    </svg>
+
+                                                                    <span>60%</span>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="district-data-element-info__icon">
+                                                        <svg width="10" height="9" viewBox="0 0 10 9" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M0 1C0 0.447715 0.447715 0 1 0H9C9.55228 0 10 0.447715 10 1V6.5C10 7.05228 9.55228 7.5 9 7.5H6.70711L5.35355 8.85355C5.15829 9.04882 4.84171 9.04882 4.64645 8.85355L3.29289 7.5H1C0.447715 7.5 0 7.05228 0 6.5V1ZM9 1H1V6.5H3.5C3.63261 6.5 3.75979 6.55268 3.85355 6.64645L5 7.79289L6.14645 6.64645C6.24021 6.55268 6.36739 6.5 6.5 6.5H9V1Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M5.75 3.75C5.75 4.16421 5.41421 4.5 5 4.5C4.58579 4.5 4.25 4.16421 4.25 3.75C4.25 3.33579 4.58579 3 5 3C5.41421 3 5.75 3.33579 5.75 3.75Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M7.75 3.75C7.75 4.16421 7.41421 4.5 7 4.5C6.58579 4.5 6.25 4.16421 6.25 3.75C6.25 3.33579 6.58579 3 7 3C7.41421 3 7.75 3.33579 7.75 3.75Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M3.75 3.75C3.75 4.16421 3.41421 4.5 3 4.5C2.58579 4.5 2.25 4.16421 2.25 3.75C2.25 3.33579 2.58579 3 3 3C3.41421 3 3.75 3.33579 3.75 3.75Z"
+                                                                fill="#013364" />
+                                                        </svg>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div
+                                            class="district-data-element district-data-element-v1 district-data-element--blue-mod">
+                                            <div class="district-data-element-v1__wrapper">
+                                                <div class="district-data-element-v1__top-values">
+                                                    <div class="district-data-element-v1__top-values-title">High school
+                                                        graduation rate (within 6 years)</div>
+                                                    <div class="district-data-element-v1__top-values-value">97%</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="district-data-element district-data-element-v1 ">
+                                            <div class="district-data-element-v1__wrapper">
+                                                <div class="district-data-element-v1__top-values">
+                                                    <div class="district-data-element-v1__top-values-title">Rates of 3rd
+                                                        Grade Mathematics</div>
+                                                    <div class="district-data-element-v1__top-values-value">72%</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="district-data-element-info">
+                                                <p class="district-data-element-info__text">Display by socio economic
+                                                    status</p>
+                                                <div class="district-data-element-info__icon-wrapper">
+                                                    <div
+                                                        class="district-data-element-info__data-container  district-data-element-info__data-container--small">
+                                                        <div class="district-data-element-info__data-container-wrapper">
+                                                            <div
+                                                                class="district-data-element-info__data-container-wrapper-rate">
+                                                                <p
+                                                                    class="district-data-element-info__data-container-wrapper-rate-title">
+                                                                    LSE RATE
+                                                                </p>
+                                                                <div
+                                                                    class="district-data-element-info__data-container-wrapper-rate-value red-text-mod">
+                                                                    <svg width="8" height="20" viewBox="0 0 8 20"
+                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M3.64645 19.8536C3.84171 20.0488 4.15829 20.0488 4.35355 19.8536L7.53553 16.6716C7.7308 16.4763 7.7308 16.1597 7.53553 15.9645C7.34027 15.7692 7.02369 15.7692 6.82843 15.9645L4 18.7929L1.17157 15.9645C0.976311 15.7692 0.659728 15.7692 0.464466 15.9645C0.269204 16.1597 0.269204 16.4763 0.464466 16.6716L3.64645 19.8536ZM4 0L3.5 0L3.5 19.5H4H4.5L4.5 0L4 0Z"
+                                                                            fill="#CE3538" />
+                                                                    </svg>
+
+                                                                    <span>60%</span>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="district-data-element-info__icon">
+                                                        <svg width="10" height="9" viewBox="0 0 10 9" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M0 1C0 0.447715 0.447715 0 1 0H9C9.55228 0 10 0.447715 10 1V6.5C10 7.05228 9.55228 7.5 9 7.5H6.70711L5.35355 8.85355C5.15829 9.04882 4.84171 9.04882 4.64645 8.85355L3.29289 7.5H1C0.447715 7.5 0 7.05228 0 6.5V1ZM9 1H1V6.5H3.5C3.63261 6.5 3.75979 6.55268 3.85355 6.64645L5 7.79289L6.14645 6.64645C6.24021 6.55268 6.36739 6.5 6.5 6.5H9V1Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M5.75 3.75C5.75 4.16421 5.41421 4.5 5 4.5C4.58579 4.5 4.25 4.16421 4.25 3.75C4.25 3.33579 4.58579 3 5 3C5.41421 3 5.75 3.33579 5.75 3.75Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M7.75 3.75C7.75 4.16421 7.41421 4.5 7 4.5C6.58579 4.5 6.25 4.16421 6.25 3.75C6.25 3.33579 6.58579 3 7 3C7.41421 3 7.75 3.33579 7.75 3.75Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M3.75 3.75C3.75 4.16421 3.41421 4.5 3 4.5C2.58579 4.5 2.25 4.16421 2.25 3.75C2.25 3.33579 2.58579 3 3 3C3.41421 3 3.75 3.33579 3.75 3.75Z"
+                                                                fill="#013364" />
+                                                        </svg>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="district-data-element district-data-element-v1 ">
+                                            <div class="district-data-element-v1__wrapper">
+                                                <div class="district-data-element-v1__top-values">
+                                                    <div class="district-data-element-v1__top-values-title">PSAT Average
+                                                        Score</div>
+                                                    <div class="district-data-element-v1__top-values-value">72%</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="district-data-element-info">
+                                                <p class="district-data-element-info__text">Display by socio economic
+                                                    status</p>
+                                                <div class="district-data-element-info__icon-wrapper">
+                                                    <div
+                                                        class="district-data-element-info__data-container  district-data-element-info__data-container--small">
+                                                        <div class="district-data-element-info__data-container-wrapper">
+                                                            <div
+                                                                class="district-data-element-info__data-container-wrapper-rate">
+                                                                <p
+                                                                    class="district-data-element-info__data-container-wrapper-rate-title">
+                                                                    LSE RATE
+                                                                </p>
+                                                                <div
+                                                                    class="district-data-element-info__data-container-wrapper-rate-value red-text-mod">
+                                                                    <svg width="8" height="20" viewBox="0 0 8 20"
+                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M3.64645 19.8536C3.84171 20.0488 4.15829 20.0488 4.35355 19.8536L7.53553 16.6716C7.7308 16.4763 7.7308 16.1597 7.53553 15.9645C7.34027 15.7692 7.02369 15.7692 6.82843 15.9645L4 18.7929L1.17157 15.9645C0.976311 15.7692 0.659728 15.7692 0.464466 15.9645C0.269204 16.1597 0.269204 16.4763 0.464466 16.6716L3.64645 19.8536ZM4 0L3.5 0L3.5 19.5H4H4.5L4.5 0L4 0Z"
+                                                                            fill="#CE3538" />
+                                                                    </svg>
+
+                                                                    <span>60%</span>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="district-data-element-info__icon">
+                                                        <svg width="10" height="9" viewBox="0 0 10 9" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M0 1C0 0.447715 0.447715 0 1 0H9C9.55228 0 10 0.447715 10 1V6.5C10 7.05228 9.55228 7.5 9 7.5H6.70711L5.35355 8.85355C5.15829 9.04882 4.84171 9.04882 4.64645 8.85355L3.29289 7.5H1C0.447715 7.5 0 7.05228 0 6.5V1ZM9 1H1V6.5H3.5C3.63261 6.5 3.75979 6.55268 3.85355 6.64645L5 7.79289L6.14645 6.64645C6.24021 6.55268 6.36739 6.5 6.5 6.5H9V1Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M5.75 3.75C5.75 4.16421 5.41421 4.5 5 4.5C4.58579 4.5 4.25 4.16421 4.25 3.75C4.25 3.33579 4.58579 3 5 3C5.41421 3 5.75 3.33579 5.75 3.75Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M7.75 3.75C7.75 4.16421 7.41421 4.5 7 4.5C6.58579 4.5 6.25 4.16421 6.25 3.75C6.25 3.33579 6.58579 3 7 3C7.41421 3 7.75 3.33579 7.75 3.75Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M3.75 3.75C3.75 4.16421 3.41421 4.5 3 4.5C2.58579 4.5 2.25 4.16421 2.25 3.75C2.25 3.33579 2.58579 3 3 3C3.41421 3 3.75 3.33579 3.75 3.75Z"
+                                                                fill="#013364" />
+                                                        </svg>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="acordeon-data-claster">
+                                <div class="acordeon-data-claster__header">
+                                    <p class="acordeon-data-claster__title">School Finance</p>
+                                    <div class="acordeon-data-claster__icon">
+                                        <svg width="14" height="8" viewBox="0 0 14 8" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M0.292893 0.292893C0.683417 -0.0976311 1.31658 -0.0976311 1.70711 0.292893L7 5.58579L12.2929 0.292893C12.6834 -0.0976311 13.3166 -0.0976311 13.7071 0.292893C14.0976 0.683418 14.0976 1.31658 13.7071 1.70711L7.70711 7.70711C7.31658 8.09763 6.68342 8.09763 6.29289 7.70711L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683418 0.292893 0.292893Z"
+                                                fill="#013364" />
+                                        </svg>
+
+                                    </div>
+                                </div>
+
+                                <div class="acordeon-data-claster__body">
+                                    <div class="acordeon-data-claster__row acordeon-data-claster__row--v3">
+
+
+                                        <div class="acordeon-data-claster__col">
+
+
+                                            <div
+                                                class="district-data-element district-data-element-v1 district-data-element--blue-mod">
+                                                <div class="district-data-element-v1__wrapper">
+                                                    <div class="district-data-element-v1__top-values">
+                                                        <div class="district-data-element-v1__top-values-title">Spending
+                                                            per student</div>
+                                                        <div class="district-data-element-v1__top-values-value">$400/yr
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="district-data-element-info">
+                                                    <div class="district-data-element-info__icon-wrapper">
+                                                        <div
+                                                            class="district-data-element-info__data-container  district-data-element-info__data-container--big">
+                                                            <div
+                                                                class="district-data-element-info__data-container-wrapper">
+                                                                <div
+                                                                    class="district-data-element-info__data-container-wrapper-text">
+                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing
+                                                                    elit.
+                                                                    Maecenas nec convallis massa.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="district-data-element-info__icon">
+                                                            <svg width="10" height="9" viewBox="0 0 10 9" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M0 1C0 0.447715 0.447715 0 1 0H9C9.55228 0 10 0.447715 10 1V6.5C10 7.05228 9.55228 7.5 9 7.5H6.70711L5.35355 8.85355C5.15829 9.04882 4.84171 9.04882 4.64645 8.85355L3.29289 7.5H1C0.447715 7.5 0 7.05228 0 6.5V1ZM9 1H1V6.5H3.5C3.63261 6.5 3.75979 6.55268 3.85355 6.64645L5 7.79289L6.14645 6.64645C6.24021 6.55268 6.36739 6.5 6.5 6.5H9V1Z"
+                                                                    fill="#013364" />
+                                                                <path
+                                                                    d="M5.75 3.75C5.75 4.16421 5.41421 4.5 5 4.5C4.58579 4.5 4.25 4.16421 4.25 3.75C4.25 3.33579 4.58579 3 5 3C5.41421 3 5.75 3.33579 5.75 3.75Z"
+                                                                    fill="#013364" />
+                                                                <path
+                                                                    d="M7.75 3.75C7.75 4.16421 7.41421 4.5 7 4.5C6.58579 4.5 6.25 4.16421 6.25 3.75C6.25 3.33579 6.58579 3 7 3C7.41421 3 7.75 3.33579 7.75 3.75Z"
+                                                                    fill="#013364" />
+                                                                <path
+                                                                    d="M3.75 3.75C3.75 4.16421 3.41421 4.5 3 4.5C2.58579 4.5 2.25 4.16421 2.25 3.75C2.25 3.33579 2.58579 3 3 3C3.41421 3 3.75 3.33579 3.75 3.75Z"
+                                                                    fill="#013364" />
+                                                            </svg>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="district-data-element district-data-element-v1 ">
+                                                <div class="district-data-element-v1__wrapper">
+                                                    <div class="district-data-element-v1__top-values">
+                                                        <div class="district-data-element-v1__top-values-title">
+                                                            Instructional spending/ total share of spending</div>
+                                                        <div class="district-data-element-v1__top-values-value">72%
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="district-data-element-info">
+                                                    <div class="district-data-element-info__icon-wrapper">
+                                                        <div
+                                                            class="district-data-element-info__data-container  district-data-element-info__data-container--big">
+                                                            <div
+                                                                class="district-data-element-info__data-container-wrapper">
+                                                                <div
+                                                                    class="district-data-element-info__data-container-wrapper-text">
+                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing
+                                                                    elit.
+                                                                    Maecenas nec convallis massa.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="district-data-element-info__icon">
+                                                            <svg width="10" height="9" viewBox="0 0 10 9" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M0 1C0 0.447715 0.447715 0 1 0H9C9.55228 0 10 0.447715 10 1V6.5C10 7.05228 9.55228 7.5 9 7.5H6.70711L5.35355 8.85355C5.15829 9.04882 4.84171 9.04882 4.64645 8.85355L3.29289 7.5H1C0.447715 7.5 0 7.05228 0 6.5V1ZM9 1H1V6.5H3.5C3.63261 6.5 3.75979 6.55268 3.85355 6.64645L5 7.79289L6.14645 6.64645C6.24021 6.55268 6.36739 6.5 6.5 6.5H9V1Z"
+                                                                    fill="#013364" />
+                                                                <path
+                                                                    d="M5.75 3.75C5.75 4.16421 5.41421 4.5 5 4.5C4.58579 4.5 4.25 4.16421 4.25 3.75C4.25 3.33579 4.58579 3 5 3C5.41421 3 5.75 3.33579 5.75 3.75Z"
+                                                                    fill="#013364" />
+                                                                <path
+                                                                    d="M7.75 3.75C7.75 4.16421 7.41421 4.5 7 4.5C6.58579 4.5 6.25 4.16421 6.25 3.75C6.25 3.33579 6.58579 3 7 3C7.41421 3 7.75 3.33579 7.75 3.75Z"
+                                                                    fill="#013364" />
+                                                                <path
+                                                                    d="M3.75 3.75C3.75 4.16421 3.41421 4.5 3 4.5C2.58579 4.5 2.25 4.16421 2.25 3.75C2.25 3.33579 2.58579 3 3 3C3.41421 3 3.75 3.33579 3.75 3.75Z"
+                                                                    fill="#013364" />
+                                                            </svg>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="acordeon-data-claster__chart-wrapper">
+                                            <!-- <canvas id="financeChart1"
+                                                class=" graf-container__chart stat-district-chart"
+                                                height="290px"></canvas> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="acordeon-data-claster">
+                                <div class="acordeon-data-claster__header">
+                                    <p class="acordeon-data-claster__title">Staffing & Safety</p>
+                                    <div class="acordeon-data-claster__icon">
+                                        <svg width="14" height="8" viewBox="0 0 14 8" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M0.292893 0.292893C0.683417 -0.0976311 1.31658 -0.0976311 1.70711 0.292893L7 5.58579L12.2929 0.292893C12.6834 -0.0976311 13.3166 -0.0976311 13.7071 0.292893C14.0976 0.683418 14.0976 1.31658 13.7071 1.70711L7.70711 7.70711C7.31658 8.09763 6.68342 8.09763 6.29289 7.70711L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683418 0.292893 0.292893Z"
+                                                fill="#013364" />
+                                        </svg>
+
+                                    </div>
+                                </div>
+
+                                <div class="acordeon-data-claster__body">
+                                    <div class="acordeon-data-claster__row acordeon-data-claster__row--v2">
+
+
+                                        <div class="district-data-element district-data-element-v1 ">
+                                            <div class="district-data-element-v1__wrapper">
+                                                <div class="district-data-element-v1__top-values">
+                                                    <div class="district-data-element-v1__top-values-title">Teacher
+                                                        student ratio</div>
+                                                    <div class="district-data-element-v1__top-values-value">24:1</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="district-data-element-info">
+                                                <p class="district-data-element-info__text">Display by socio economic
+                                                    status</p>
+                                                <div class="district-data-element-info__icon-wrapper">
+                                                    <div
+                                                        class="district-data-element-info__data-container  district-data-element-info__data-container--small">
+                                                        <div class="district-data-element-info__data-container-wrapper">
+                                                            <div
+                                                                class="district-data-element-info__data-container-wrapper-rate">
+                                                                <p
+                                                                    class="district-data-element-info__data-container-wrapper-rate-title">
+                                                                    LSE RATE
+                                                                </p>
+                                                                <div
+                                                                    class="district-data-element-info__data-container-wrapper-rate-value red-text-mod">
+                                                                    <svg width="8" height="20" viewBox="0 0 8 20"
+                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M3.64645 19.8536C3.84171 20.0488 4.15829 20.0488 4.35355 19.8536L7.53553 16.6716C7.7308 16.4763 7.7308 16.1597 7.53553 15.9645C7.34027 15.7692 7.02369 15.7692 6.82843 15.9645L4 18.7929L1.17157 15.9645C0.976311 15.7692 0.659728 15.7692 0.464466 15.9645C0.269204 16.1597 0.269204 16.4763 0.464466 16.6716L3.64645 19.8536ZM4 0L3.5 0L3.5 19.5H4H4.5L4.5 0L4 0Z"
+                                                                            fill="#CE3538" />
+                                                                    </svg>
+
+                                                                    <span>60%</span>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="district-data-element-info__icon">
+                                                        <svg width="10" height="9" viewBox="0 0 10 9" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M0 1C0 0.447715 0.447715 0 1 0H9C9.55228 0 10 0.447715 10 1V6.5C10 7.05228 9.55228 7.5 9 7.5H6.70711L5.35355 8.85355C5.15829 9.04882 4.84171 9.04882 4.64645 8.85355L3.29289 7.5H1C0.447715 7.5 0 7.05228 0 6.5V1ZM9 1H1V6.5H3.5C3.63261 6.5 3.75979 6.55268 3.85355 6.64645L5 7.79289L6.14645 6.64645C6.24021 6.55268 6.36739 6.5 6.5 6.5H9V1Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M5.75 3.75C5.75 4.16421 5.41421 4.5 5 4.5C4.58579 4.5 4.25 4.16421 4.25 3.75C4.25 3.33579 4.58579 3 5 3C5.41421 3 5.75 3.33579 5.75 3.75Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M7.75 3.75C7.75 4.16421 7.41421 4.5 7 4.5C6.58579 4.5 6.25 4.16421 6.25 3.75C6.25 3.33579 6.58579 3 7 3C7.41421 3 7.75 3.33579 7.75 3.75Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M3.75 3.75C3.75 4.16421 3.41421 4.5 3 4.5C2.58579 4.5 2.25 4.16421 2.25 3.75C2.25 3.33579 2.58579 3 3 3C3.41421 3 3.75 3.33579 3.75 3.75Z"
+                                                                fill="#013364" />
+                                                        </svg>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="district-data-element district-data-element-v1 ">
+                                            <div class="district-data-element-v1__wrapper">
+                                                <div class="district-data-element-v1__top-values">
+                                                    <div class="district-data-element-v1__top-values-title">Staffing -
+                                                        Administrative staff versus instructional staff</div>
+                                                    <div class="district-data-element-v1__top-values-value">46/54</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="district-data-element district-data-element-v1 ">
+                                            <div class="district-data-element-v1__wrapper">
+                                                <div class="district-data-element-v1__top-values">
+                                                    <div class="district-data-element-v1__top-values-title">Ratio of
+                                                        psychologists: students</div>
+                                                    <div class="district-data-element-v1__top-values-value">1:170</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="district-data-element-info">
+                                                <p class="district-data-element-info__text">Display by socio economic
+                                                    status</p>
+                                                <div class="district-data-element-info__icon-wrapper">
+                                                    <div
+                                                        class="district-data-element-info__data-container  district-data-element-info__data-container--small">
+                                                        <div class="district-data-element-info__data-container-wrapper">
+                                                            <div
+                                                                class="district-data-element-info__data-container-wrapper-rate">
+                                                                <p
+                                                                    class="district-data-element-info__data-container-wrapper-rate-title">
+                                                                    LSE RATE
+                                                                </p>
+                                                                <div
+                                                                    class="district-data-element-info__data-container-wrapper-rate-value red-text-mod">
+                                                                    <svg width="8" height="20" viewBox="0 0 8 20"
+                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M3.64645 19.8536C3.84171 20.0488 4.15829 20.0488 4.35355 19.8536L7.53553 16.6716C7.7308 16.4763 7.7308 16.1597 7.53553 15.9645C7.34027 15.7692 7.02369 15.7692 6.82843 15.9645L4 18.7929L1.17157 15.9645C0.976311 15.7692 0.659728 15.7692 0.464466 15.9645C0.269204 16.1597 0.269204 16.4763 0.464466 16.6716L3.64645 19.8536ZM4 0L3.5 0L3.5 19.5H4H4.5L4.5 0L4 0Z"
+                                                                            fill="#CE3538" />
+                                                                    </svg>
+
+                                                                    <span>60%</span>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="district-data-element-info__icon">
+                                                        <svg width="10" height="9" viewBox="0 0 10 9" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M0 1C0 0.447715 0.447715 0 1 0H9C9.55228 0 10 0.447715 10 1V6.5C10 7.05228 9.55228 7.5 9 7.5H6.70711L5.35355 8.85355C5.15829 9.04882 4.84171 9.04882 4.64645 8.85355L3.29289 7.5H1C0.447715 7.5 0 7.05228 0 6.5V1ZM9 1H1V6.5H3.5C3.63261 6.5 3.75979 6.55268 3.85355 6.64645L5 7.79289L6.14645 6.64645C6.24021 6.55268 6.36739 6.5 6.5 6.5H9V1Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M5.75 3.75C5.75 4.16421 5.41421 4.5 5 4.5C4.58579 4.5 4.25 4.16421 4.25 3.75C4.25 3.33579 4.58579 3 5 3C5.41421 3 5.75 3.33579 5.75 3.75Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M7.75 3.75C7.75 4.16421 7.41421 4.5 7 4.5C6.58579 4.5 6.25 4.16421 6.25 3.75C6.25 3.33579 6.58579 3 7 3C7.41421 3 7.75 3.33579 7.75 3.75Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M3.75 3.75C3.75 4.16421 3.41421 4.5 3 4.5C2.58579 4.5 2.25 4.16421 2.25 3.75C2.25 3.33579 2.58579 3 3 3C3.41421 3 3.75 3.33579 3.75 3.75Z"
+                                                                fill="#013364" />
+                                                        </svg>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="district-data-element district-data-element-v1 ">
+                                            <div class="district-data-element-v1__wrapper">
+                                                <div class="district-data-element-v1__top-values">
+                                                    <div class="district-data-element-v1__top-values-title">Total
+                                                        behavioral incidents</div>
+                                                    <div class="district-data-element-v1__top-values-value">24%</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="district-data-element-info">
+                                                <p class="district-data-element-info__text">Display by socio economic
+                                                    status</p>
+                                                <div class="district-data-element-info__icon-wrapper">
+                                                    <div
+                                                        class="district-data-element-info__data-container  district-data-element-info__data-container--small">
+                                                        <div class="district-data-element-info__data-container-wrapper">
+                                                            <div
+                                                                class="district-data-element-info__data-container-wrapper-rate">
+                                                                <p
+                                                                    class="district-data-element-info__data-container-wrapper-rate-title">
+                                                                    LSE RATE
+                                                                </p>
+                                                                <div
+                                                                    class="district-data-element-info__data-container-wrapper-rate-value red-text-mod">
+                                                                    <svg width="8" height="20" viewBox="0 0 8 20"
+                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M3.64645 19.8536C3.84171 20.0488 4.15829 20.0488 4.35355 19.8536L7.53553 16.6716C7.7308 16.4763 7.7308 16.1597 7.53553 15.9645C7.34027 15.7692 7.02369 15.7692 6.82843 15.9645L4 18.7929L1.17157 15.9645C0.976311 15.7692 0.659728 15.7692 0.464466 15.9645C0.269204 16.1597 0.269204 16.4763 0.464466 16.6716L3.64645 19.8536ZM4 0L3.5 0L3.5 19.5H4H4.5L4.5 0L4 0Z"
+                                                                            fill="#CE3538" />
+                                                                    </svg>
+
+                                                                    <span>60%</span>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="district-data-element-info__icon">
+                                                        <svg width="10" height="9" viewBox="0 0 10 9" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M0 1C0 0.447715 0.447715 0 1 0H9C9.55228 0 10 0.447715 10 1V6.5C10 7.05228 9.55228 7.5 9 7.5H6.70711L5.35355 8.85355C5.15829 9.04882 4.84171 9.04882 4.64645 8.85355L3.29289 7.5H1C0.447715 7.5 0 7.05228 0 6.5V1ZM9 1H1V6.5H3.5C3.63261 6.5 3.75979 6.55268 3.85355 6.64645L5 7.79289L6.14645 6.64645C6.24021 6.55268 6.36739 6.5 6.5 6.5H9V1Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M5.75 3.75C5.75 4.16421 5.41421 4.5 5 4.5C4.58579 4.5 4.25 4.16421 4.25 3.75C4.25 3.33579 4.58579 3 5 3C5.41421 3 5.75 3.33579 5.75 3.75Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M7.75 3.75C7.75 4.16421 7.41421 4.5 7 4.5C6.58579 4.5 6.25 4.16421 6.25 3.75C6.25 3.33579 6.58579 3 7 3C7.41421 3 7.75 3.33579 7.75 3.75Z"
+                                                                fill="#013364" />
+                                                            <path
+                                                                d="M3.75 3.75C3.75 4.16421 3.41421 4.5 3 4.5C2.58579 4.5 2.25 4.16421 2.25 3.75C2.25 3.33579 2.58579 3 3 3C3.41421 3 3.75 3.33579 3.75 3.75Z"
+                                                                fill="#013364" />
+                                                        </svg>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <aside class="district-stat-sec__down-wrapper-aside down-wrapper-aside">
+                            <div class="section-views">
+                                <p class="section-views__title">Toggle Data Section Views</p>
+
+                                <label class="container-checkbox">
+                                    Enrollment and Choice
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                </label>
+
+                                <label class="container-checkbox">
+                                    Proficiency
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                </label>
+
+                                <label class="container-checkbox">
+                                    School Finance
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                </label>
+
+                                <label class="container-checkbox">
+                                    Staffing & Safety
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                </label>
+
+                            </div>
+
+                            <div class="section-users-container">
+                                <p class="section-users-container__title">Superintendent</p>
+                                <div class="section-users-container__user user-element">
+                                    <img src="img/_src/img.jpg" alt="" class="user-element__img">
+                                    <div class="user-element__data">
+                                        <p class="user-element__name">Name</p>
+                                        <ul class="user-element__contacts-list">
+                                            <li class="user-element__contacts-list-element">Office Address</li>
+                                            <li class="user-element__contacts-list-element">Phone</li>
+                                            <li class="user-element__contacts-list-element">Email</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="section-users-container">
+                                <p class="section-users-container__title">School board members</p>
+                                <div class="section-users-container__user user-element">
+                                    <img src="img/_src/img.jpg" alt="" class="user-element__img">
+                                    <div class="user-element__data">
+                                        <p class="user-element__name">Name</p>
+                                        <ul class="user-element__contacts-list">
+                                            <li class="user-element__contacts-list-element">Office Address</li>
+                                            <li class="user-element__contacts-list-element">Phone</li>
+                                            <li class="user-element__contacts-list-element">Email</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+
+                                <div class="section-users-container__user user-element">
+                                    <img src="img/_src/img.jpg" alt="" class="user-element__img">
+                                    <div class="user-element__data">
+                                        <p class="user-element__name">Name</p>
+                                        <ul class="user-element__contacts-list">
+                                            <li class="user-element__contacts-list-element">Office Address</li>
+                                            <li class="user-element__contacts-list-element">Phone</li>
+                                            <li class="user-element__contacts-list-element">Email</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+
+                                <div class="section-users-container__user user-element">
+                                    <img src="img/_src/img.jpg" alt="" class="user-element__img">
+                                    <div class="user-element__data">
+                                        <p class="user-element__name">Name</p>
+                                        <ul class="user-element__contacts-list">
+                                            <li class="user-element__contacts-list-element">Office Address</li>
+                                            <li class="user-element__contacts-list-element">Phone</li>
+                                            <li class="user-element__contacts-list-element">Email</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+
+
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/scripts.min.js"></script>
+</body>
+
+</html>
