@@ -47,6 +47,10 @@
         font-size: 24px;
         line-height: 1;
         border: none;
+
+        a {
+            color: #013364;
+        }
     }
 
     .select__list {
@@ -551,6 +555,11 @@
         width: calc(33.333% - 60px);
         margin: 0 30px 24px 30px;
     }
+
+    .district-data-element-v2 {
+        width: calc(33.333% - 60px);
+        margin: 0 30px 24px 30px;
+    }
 }
 
 .acordeon-data-claster__row--v2 {
@@ -558,6 +567,11 @@
     justify-content: space-between;
 
     .district-data-element-v1 {
+        width: calc(50% - 30px);
+        margin: 0 0 36px 0;
+    }
+
+    .district-data-element-v2 {
         width: calc(50% - 30px);
         margin: 0 0 36px 0;
     }
@@ -575,6 +589,12 @@
     .district-data-element-v1 {
         width: 100%;
     }
+
+    .district-data-element-v2 {
+        width: 100%;
+    }
+
+
 }
 
 
@@ -724,19 +744,89 @@
 
 
 
-.red-text-mod {
-    color: #CE3538;
+.district-data-element-v2 {
+    width: calc(100%);
+    background: #FAFAFA;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px 25px;
 }
 
-.acordeon-data-claster__col {
-    .district-data-element {
-        margin-bottom: 25px;
+.district-data-element-v2__current {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    width: 100%;
+    border-bottom: 1px solid #707070;
+}
 
-        &:last-child {
-            margin-bottom: 0;
-        }
+.district-data-element-v2__current-title {
+    font-size: 18px;
+    line-height: 23px;
+    color: #013364;
+    width: 100%;
+    text-align: center;
+
+    span {
+        font-weight: 300;
     }
 }
+
+.district-data-element-v2__current-subtitle {
+    text-align: center;
+    color: #938C87;
+    margin-top: 13px;
+    font-size: 11px;
+    line-height: 1;
+}
+
+.district-data-element-v2__current-value-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.district-data-element-v2__current-value-ar {
+    margin-right: 10px;
+
+    svg {
+        display: block;
+    }
+}
+
+.district-data-element-v2__current-value {
+    color: #013364;
+    font-size: 60px;
+    line-height: 74px;
+}
+
+.district-data-element-v2__past {
+    width: 100%;
+    padding-top: 16px;
+}
+
+.district-data-element-v2__past-value {
+    text-align: center;
+    font-size: 21px;
+    line-height: 26px;
+    color: #013364;
+}
+
+.district-data-element-v2__past-year {
+    color: #938C87;
+    font-size: 12px;
+    line-height: 12px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+
+
 
 .district-data-element--blue-mod {
     background: #0273B2;
@@ -763,6 +853,411 @@
         color: #fff;
     }
 }
+
+.acordeon-data-claster__chart-wrapper {
+    width: calc(66.666% - 30px);
+    background: #FAFAFA;
+    padding: 25px;
+}
+
+.acordeon-data-claster__chart-wrapper-title {
+    text-align: center;
+    font-size: 18px;
+    line-height: 22px;
+    color: #013364;
+    margin-bottom: 22px;
+    width: 100%;
+}
+
+.acordeon-data-claster__chart--type-1 {
+    display: flex;
+    align-items: center;
+}
+
+.chart-diagram-value-list--main {
+    .chart-diagram-value-list__element {
+        &:nth-child(1) {
+            .chart-diagram-value-list__element-value {
+                background: #013364;
+            }
+        }
+
+        &:nth-child(2) {
+            .chart-diagram-value-list__element-value {
+                background: #0273B2;
+            }
+        }
+
+        &:nth-child(3) {
+            .chart-diagram-value-list__element-value {
+                background: #CE3538;
+            }
+        }
+
+        &:nth-child(4) {
+            .chart-diagram-value-list__element-value {
+                background: #037971;
+            }
+        }
+
+        &:nth-child(5) {
+            .chart-diagram-value-list__element-value {
+                background: #D58D21;
+            }
+        }
+    }
+
+}
+
+.chart-diagram-value-list--sub {
+    .chart-diagram-value-list__element {
+        &:nth-child(1) {
+            .chart-diagram-value-list__element-value {
+                background: #307FCC;
+            }
+        }
+
+        &:nth-child(2) {
+            .chart-diagram-value-list__element-value {
+                background: #707070;
+            }
+        }
+
+        &:nth-child(3) {
+            .chart-diagram-value-list__element-value {
+                background: #FDAFB1;
+            }
+        }
+
+        &:nth-child(4) {
+            .chart-diagram-value-list__element-value {
+                background: #73F2E9;
+            }
+        }
+
+        &:nth-child(5) {
+            .chart-diagram-value-list__element-value {
+                background: #FFE2B7;
+            }
+        }
+    }
+}
+
+.chart-diagram-value-list__element {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.chart-diagram-value-list__element-value {
+    display: block;
+    border: 1px solid #707070;
+    width: 20px;
+    height: 20px;
+    background: #0273B2;
+}
+
+.chart-diagram-value-list__element-text {
+    display: block;
+    padding-left: 25px;
+    width: calc(100% - 20px);
+    color: #013364;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.acordeon-data-claster__chart-diagram-value {
+    margin-left: 90px;
+}
+
+.acordeon-data-claster__chart-diagram-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.acordeon-data-claster__chart--type-1 {
+    .acordeon-data-claster__chart-diagram-wrapper {
+        width: 328px;
+        height: 328px;
+    }
+}
+
+.acordeon-data-claster__chart--type-2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+
+    .acordeon-data-claster__chart-diagram-wrapper {
+        width: 163px;
+        height: 163px;
+    }
+
+    .acordeon-data-claster__chart-diagram-value {
+        width: 200px;
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .acordeon-data-claster__chart-diagram-wrapper-chart-1 {
+        width: 163px;
+        height: 163px;
+    }
+}
+
+.acordeon-data-claster__chart-diagram-wrapper-chart-1 {
+    position: absolute;
+    z-index: 10;
+    width: 246px;
+    height: 246px;
+    border-radius: 1000px;
+
+
+    .stat-district-chart {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.acordeon-data-claster__chart-diagram-wrapper-chart-1--shadow {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+.acordeon-data-claster__chart-diagram-wrapper-chart-2 {
+    position: absolute;
+    z-index: 1;
+    width: 100;
+    height: 100%;
+    border-radius: 1000px;
+
+
+    .stat-district-chart {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.acordeon-data-claster__chart-diagram-value-two {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 90px;
+}
+
+.acordeon-data-claster__chart-diagram-value-two-header {
+    display: flex;
+    width: 100%;
+}
+
+.acordeon-data-claster__chart-diagram-value-two-header-1 {
+    width: 60px;
+    font-size: 12px;
+    color: #938C87;
+    margin-bottom: 10px;
+}
+
+.acordeon-data-claster__chart-diagram-value-two-header-2 {
+
+    font-size: 12px;
+    color: #013364;
+    margin-bottom: 10px;
+}
+
+.chart-diagram-value-list--sub {
+    width: 60px;
+
+}
+
+
+.acordeon-data-claster__chart-wrapper--two-col {
+    .acordeon-data-claster__chart-diagram-value-two {
+        padding-left: 40px;
+    }
+}
+
+
+.acordeon-data-claster__chart--type-3 {}
+
+.acordeon-data-claster__chart--type-3-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .acordeon-data-claster__chart-diagram-wrapper {
+        width: 276px;
+        height: 276px;
+    }
+
+    .acordeon-data-claster__chart-diagram-wrapper-chart-2 {
+        width: 100%;
+        height: 100%;
+    }
+
+    .acordeon-data-claster__chart-diagram-wrapper-chart-1 {
+        width: 207px;
+        height: 207px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+    }
+}
+
+.acordeon-data-claster__chart--type-3-row-chart-box-title {
+    text-align: center;
+    color: #938C87;
+    font-size: 11px;
+    margin-bottom: 20px;
+}
+
+.acordeon-data-claster__chart--type-3-row-chart-box {
+    margin: 0 40px;
+}
+
+.acordeon-data-claster__chart--type-3-table-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.claster-value-table__row {
+    display: flex;
+    margin-bottom: 9px;
+}
+
+.claster-value-table__col {
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.claster-value-table__el-title {
+    text-align: center;
+    font-size: 18px;
+    line-height: 22px;
+    color: #013364;
+}
+
+.claster-value-table__el-year {
+    color: #013364;
+    font-size: 12px;
+}
+
+.claster-value-table__el-value {
+    display: block;
+    border: 1px solid #707070;
+    width: 20px;
+    height: 20px;
+    background: #0273B2;
+}
+
+.claster-value-table__el-year--old {
+    color: #938C87;
+}
+
+.district-data-element-v2__values-row {
+    display: flex;
+    justify-content: center;
+
+    .district-data-element-v2__value-claster {
+        &:first-child {
+            margin-right: 30px;
+        }
+    }
+}
+
+.district-data-element-v2--dop {
+    .district-data-element-v2__current-value {
+        font-size: 50px;
+        line-height: 60px;
+
+
+    }
+}
+
+.district-data-element-v2--no-border {
+    .district-data-element-v2__current {
+        border: none;
+        padding-bottom: 0;
+    }
+}
+
+.district-data-element-v2__value-claster-title {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #938C87;
+    text-align: center;
+}
+
+.district-data-element-v2__past-row {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+    .district-data-element-v2__past {
+        width: auto;
+    }
+}
+
+
+
+.red-text-mod {
+    color: #CE3538;
+}
+
+.acordeon-data-claster__col {
+    .district-data-element {
+        margin-bottom: 25px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+
+
+.district-data-element--light-blue-mod {
+    background: #0273B20D;
+}
+
+.district-data-element--rise-mod {
+    .district-data-element-v2__current-value {
+        color: #037971;
+    }
+
+    .district-data-element-v2__current-value-ar {
+        svg {
+            path {
+                fill: #037971;
+            }
+        }
+    }
+}
+
+.district-data-element--down-mod {
+    .district-data-element-v2__current-value {
+        color: #CE3538;
+    }
+
+    .district-data-element-v2__current-value-ar {
+        svg {
+            transform: rotate(180deg);
+
+            path {
+                fill: #CE3538;
+            }
+        }
+    }
+}
+
+
+
+
 
 @media only screen and (max-width: 1780px) {
     .district-stat-sec__container {
