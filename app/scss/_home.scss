@@ -655,6 +655,48 @@
     color: #CE3538;
 }
 
+.map-pop {
+    .map-pop__title {
+        margin: 0;
+        font-size: 20px;
+        font-family: $mainFont;
+        font-weight: 700;
+        color: #013364;
+        line-height: 1.2;
+        text-align: center;
+    }
+
+    .map-pop__value {
+        text-align: center;
+        margin: 0;
+        margin-top: 10px;
+        font-size: 14px;
+        color: #938C87;
+
+        b {
+            color: #013364;
+            font-weight: 700;
+            font-size: 16px;
+
+        }
+    }
+
+    .map-pop__link {
+        text-align: center;
+        font-size: 12px;
+        margin: 0;
+        margin-top: 10px;
+
+        a {
+            color: #0273B2;
+        }
+    }
+}
+
+.leaflet-control-attribution {
+    display: none;
+}
+
 @media only screen and (max-width: 1780px) {
 
     .hero-sec__container,

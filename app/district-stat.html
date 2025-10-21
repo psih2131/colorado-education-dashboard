@@ -47,6 +47,21 @@
         <main class="main">
 
             <section class="district-stat-sec">
+
+
+                <div class="preloader-conteiner">
+                    <div class="preloader">
+                        <div class="sk-chase">
+                            <div class="sk-chase-dot"></div>
+                            <div class="sk-chase-dot"></div>
+                            <div class="sk-chase-dot"></div>
+                            <div class="sk-chase-dot"></div>
+                            <div class="sk-chase-dot"></div>
+                            <div class="sk-chase-dot"></div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="district-stat-sec__container">
                     <div class="district-stat-sec__header">
                         <h1 class="district-stat-sec__title">Garfield School District RE-2</h1>
@@ -56,28 +71,13 @@
                                 <input class="select__input" type="hidden" name="">
                                 <div class="select__head">Choose your school district</div>
                                 <ul class="select__list" style="display: none;">
-                                    <li class="select__item" data-value="x1">
+                                    <!-- <li class="select__item" data-value="x1">
                                         <a href="">Test 1</a>
-                                    </li>
-                                    <li class="select__item" data-value="x2">
-                                        <a href="">Test 2</a>
-                                    </li>
-                                    <li class="select__item" data-value="x3">
-                                        <a href="">Test 3</a>
-                                    </li>
-                                    <li class="select__item" data-value="x4">
-                                        <a href="">Test 4</a>
-                                    </li>
-                                    <li class="select__item" data-value="x5">
-                                        <a href="">Test 5</a>
-                                    </li>
-                                    <li class="select__item" data-value="x6">
-                                        <a href="">Test 6</a>
-                                    </li>
+                                    </li>-->
                                 </ul>
                             </div>
 
-                            <a href="img/_src/img.jpg" download="" class="district-stat-sec__header-export-btn">
+                            <a class="district-stat-sec__header-export-btn">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -97,12 +97,12 @@
 
                         <div class="district-stat-sec__graf-container graf-container">
                             <div class="graf-container__title-row">
-                                <p class="graf-container__title">
+                                <p class="graf-container__title graf-container__title--current">
                                     Callout Stat:
-                                    <span class="graf-container__title-value graf-container__title-value--red">72</span>
+                                    <span class="graf-container__title-value">72</span>
                                 </p>
 
-                                <p class="graf-container__title">
+                                <p class="graf-container__title graf-container__title--current-dop">
                                     / Colorado Avg Score:
                                     <span class="graf-container__title-value">82</span>
                                 </p>
@@ -129,11 +129,11 @@
                                 <div class="timeline__row-line">
                                     <div class="timeline__row-line-fulling"></div>
                                 </div>
-                                <input type="range" id="range" min="1" max="3" step="1" value="3">
+                                <input type="range" id="range" min="2019" max="2025" step="1" value="2025">
                                 <div class="marks">
                                     <span>2019</span>
-                                    <span>2023</span>
                                     <span>2024</span>
+                                    <span>2025</span>
                                 </div>
                             </div>
 
@@ -141,23 +141,11 @@
                                 <p class="controll-container__select-wrapper-title">Compare your district</p>
                                 <div class="select district-stat-select district-stat-select--controll">
                                     <input class="select__input" type="hidden" name="">
+                                    <div class="select__head-clear">X Clear</div>
                                     <div class="select__head">Select the state or another district</div>
+
                                     <ul class="select__list" style="display: none;">
-                                        <li class="select__item" data-value="x1">Test 1</li>
-                                        <li class="select__item" data-value="x2">Test 2</li>
-                                        <li class="select__item" data-value="x3">Test 3</li>
-                                        <li class="select__item" data-value="x1">Test 1</li>
-                                        <li class="select__item" data-value="x2">Test 2</li>
-                                        <li class="select__item" data-value="x3">Test 3</li>
-                                        <li class="select__item" data-value="x1">Test 1</li>
-                                        <li class="select__item" data-value="x2">Test 2</li>
-                                        <li class="select__item" data-value="x3">Test 3</li>
-                                        <li class="select__item" data-value="x1">Test 1</li>
-                                        <li class="select__item" data-value="x2">Test 2</li>
-                                        <li class="select__item" data-value="x3">Test 3</li>
-                                        <li class="select__item" data-value="x1">Test 1</li>
-                                        <li class="select__item" data-value="x2">Test 2</li>
-                                        <li class="select__item" data-value="x3">Test 3</li>
+                                        <!-- <li class="select__item" data-value="x1">Test 1</li> -->
                                     </ul>
                                 </div>
                             </div>
@@ -170,7 +158,7 @@
                     <div class="district-stat-sec__down-wrapper">
                         <div class="district-stat-sec__down-wrapper-main-data down-wrapper-main-data">
 
-                            <div class="acordeon-data-claster">
+                            <div class="acordeon-data-claster acordeon-data-claster--enrollment-and-choise">
                                 <div class="acordeon-data-claster__header">
                                     <p class="acordeon-data-claster__title">Enrollment and Choice</p>
                                     <div class="acordeon-data-claster__icon">
@@ -187,6 +175,10 @@
                                 <div class="acordeon-data-claster__body">
 
                                     <div class="acordeon-data-claster__row acordeon-data-claster__row--v1">
+
+                                    </div>
+
+                                    <!-- <div class="acordeon-data-claster__row acordeon-data-claster__row--v1">
                                         <div
                                             class="district-data-element district-data-element-v1 district-data-element--blue-mod">
                                             <div class="district-data-element-v1__wrapper">
@@ -314,10 +306,9 @@
                                         </div>
 
 
-                                    </div>
+                                    </div> -->
 
-
-                                    <div class="acordeon-data-claster__row acordeon-data-claster__row--v1">
+                                    <!-- <div class="acordeon-data-claster__row acordeon-data-claster__row--v1 sad">
 
                                         <div
                                             class="district-data-element district-data-element-v2 district-data-element--light-blue-mod district-data-element--rise-mod">
@@ -393,7 +384,7 @@
                                                 <div class="district-data-element-v2__current-top">
                                                     <p class="district-data-element-v2__current-title">Percent in
                                                         Private enrollment <br>(CDE)</p>
-                                                    <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                               
                                                 </div>
 
                                                 <div class="district-data-element-v2__current-value-row">
@@ -424,18 +415,11 @@
                                                 <div class="district-data-element-v2__current-top">
                                                     <p class="district-data-element-v2__current-title">Percent in
                                                         Charter data <br>(on CDE website)</p>
-                                                    <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                                   
                                                 </div>
 
                                                 <div class="district-data-element-v2__current-value-row">
-                                                    <!-- <div class="district-data-element-v2__current-value-ar">
-                                                        <svg width="16" height="40" viewBox="0 0 16 40" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M8.70711 0.792893C8.31658 0.402369 7.68342 0.402369 7.29289 0.792893L0.928932 7.15685C0.538408 7.54738 0.538408 8.18054 0.928932 8.57107C1.31946 8.96159 1.95262 8.96159 2.34315 8.57107L8 2.91421L13.6569 8.57107C14.0474 8.96159 14.6805 8.96159 15.0711 8.57107C15.4616 8.18054 15.4616 7.54738 15.0711 7.15685L8.70711 0.792893ZM8 39.5H9L9 1.5H8H7L7 39.5H8Z"
-                                                                fill="#037971" />
-                                                        </svg>
-                                                    </div> -->
+               
                                                     <div class="district-data-element-v2__current-value">72%</div>
                                                 </div>
                                             </div>
@@ -454,7 +438,7 @@
                                                 <div class="district-data-element-v2__current-top">
                                                     <p class="district-data-element-v2__current-title">Percent Utilizing
                                                         Open Enrollment</p>
-                                                    <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                              
                                                 </div>
 
                                                 <div class="district-data-element-v2__current-value-row">
@@ -484,7 +468,7 @@
                                                 <div class="district-data-element-v2__current-top">
                                                     <p class="district-data-element-v2__current-title">Absenteeism Rate
                                                     </p>
-                                                    <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                                   
                                                 </div>
 
                                                 <div class="district-data-element-v2__current-value-row">
@@ -510,9 +494,9 @@
 
 
 
-                                    </div>
+                                    </div> -->
 
-                                    <div class="acordeon-data-claster__row acordeon-data-claster__row--v1">
+                                    <!-- <div class="acordeon-data-claster__row acordeon-data-claster__row--v1 sad">
 
                                         <div
                                             class="district-data-element district-data-element-v2 district-data-element-v2--dop district-data-element-v2--no-border">
@@ -521,7 +505,7 @@
                                                 <div class="district-data-element-v2__current-top">
                                                     <p class="district-data-element-v2__current-title">Percent in
                                                         Private enrollment <br>(CDE)</p>
-                                                    <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                                    
                                                 </div>
 
 
@@ -568,10 +552,7 @@
 
                                             </div>
 
-                                            <!-- <div class="district-data-element-v2__past">
-                                                <div class="district-data-element-v2__past-value">25%</div>
-                                                <p class="district-data-element-v2__past-year">2023</p>
-                                            </div> -->
+                               
 
 
 
@@ -584,7 +565,7 @@
                                                 <div class="district-data-element-v2__current-top">
                                                     <p class="district-data-element-v2__current-title">Percent in
                                                         Private enrollment <br>(CDE)</p>
-                                                    <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                                   
                                                 </div>
 
 
@@ -594,14 +575,7 @@
                                                         <p class="district-data-element-v2__value-claster-title">CURRENT
                                                             DISTRICT</p>
                                                         <div class="district-data-element-v2__current-value-row">
-                                                            <!-- <div class="district-data-element-v2__current-value-ar">
-                                                                <svg width="16" height="40" viewBox="0 0 16 40"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M8.70711 0.792893C8.31658 0.402369 7.68342 0.402369 7.29289 0.792893L0.928932 7.15685C0.538408 7.54738 0.538408 8.18054 0.928932 8.57107C1.31946 8.96159 1.95262 8.96159 2.34315 8.57107L8 2.91421L13.6569 8.57107C14.0474 8.96159 14.6805 8.96159 15.0711 8.57107C15.4616 8.18054 15.4616 7.54738 15.0711 7.15685L8.70711 0.792893ZM8 39.5H9L9 1.5H8H7L7 39.5H8Z"
-                                                                        fill="#037971" />
-                                                                </svg>
-                                                            </div> -->
+        
                                                             <div class="district-data-element-v2__current-value">72%
                                                             </div>
                                                         </div>
@@ -632,11 +606,7 @@
 
                                             </div>
 
-                                            <!-- <div class="district-data-element-v2__past">
-                                                <div class="district-data-element-v2__past-value">25%</div>
-                                                <p class="district-data-element-v2__past-year">2023</p>
-                                            </div> -->
-
+                                 
 
 
                                         </div>
@@ -649,7 +619,7 @@
                                                 <div class="district-data-element-v2__current-top">
                                                     <p class="district-data-element-v2__current-title">Percent in
                                                         Private enrollment <br>(CDE)</p>
-                                                    <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                                   
                                                 </div>
 
 
@@ -659,14 +629,7 @@
                                                         <p class="district-data-element-v2__value-claster-title">CURRENT
                                                             DISTRICT</p>
                                                         <div class="district-data-element-v2__current-value-row">
-                                                            <!-- <div class="district-data-element-v2__current-value-ar">
-                                                                <svg width="16" height="40" viewBox="0 0 16 40"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M8.70711 0.792893C8.31658 0.402369 7.68342 0.402369 7.29289 0.792893L0.928932 7.15685C0.538408 7.54738 0.538408 8.18054 0.928932 8.57107C1.31946 8.96159 1.95262 8.96159 2.34315 8.57107L8 2.91421L13.6569 8.57107C14.0474 8.96159 14.6805 8.96159 15.0711 8.57107C15.4616 8.18054 15.4616 7.54738 15.0711 7.15685L8.70711 0.792893ZM8 39.5H9L9 1.5H8H7L7 39.5H8Z"
-                                                                        fill="#037971" />
-                                                                </svg>
-                                                            </div> -->
+                                                    
                                                             <div class="district-data-element-v2__current-value">72%
                                                             </div>
                                                         </div>
@@ -697,19 +660,14 @@
 
                                             </div>
 
-                                            <!-- <div class="district-data-element-v2__past">
-                                                <div class="district-data-element-v2__past-value">25%</div>
-                                                <p class="district-data-element-v2__past-year">2023</p>
-                                            </div> -->
 
 
 
                                         </div>
 
-                                    </div>
+                                    </div> -->
 
-
-                                    <div class="acordeon-data-claster__row acordeon-data-claster__row--v1">
+                                    <!-- <div class="acordeon-data-claster__row acordeon-data-claster__row--v1 sad">
                                         <div
                                             class="district-data-element district-data-element-v2 district-data-element-v2--dop ">
 
@@ -717,7 +675,6 @@
                                                 <div class="district-data-element-v2__current-top">
                                                     <p class="district-data-element-v2__current-title">Percent Utilizing
                                                         Open Enrollment</p>
-                                                    <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
                                                 </div>
 
 
@@ -789,7 +746,7 @@
                                                 <div class="district-data-element-v2__current-top">
                                                     <p class="district-data-element-v2__current-title">Percent Utilizing
                                                         Open Enrollment</p>
-                                                    <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                              
                                                 </div>
 
 
@@ -861,7 +818,7 @@
                                                 <div class="district-data-element-v2__current-top">
                                                     <p class="district-data-element-v2__current-title">Percent Utilizing
                                                         Open Enrollment</p>
-                                                    <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                                   
                                                 </div>
 
 
@@ -871,14 +828,7 @@
                                                         <p class="district-data-element-v2__value-claster-title">CURRENT
                                                             DISTRICT</p>
                                                         <div class="district-data-element-v2__current-value-row">
-                                                            <!-- <div class="district-data-element-v2__current-value-ar">
-                                                                <svg width="16" height="40" viewBox="0 0 16 40"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M8.70711 0.792893C8.31658 0.402369 7.68342 0.402369 7.29289 0.792893L0.928932 7.15685C0.538408 7.54738 0.538408 8.18054 0.928932 8.57107C1.31946 8.96159 1.95262 8.96159 2.34315 8.57107L8 2.91421L13.6569 8.57107C14.0474 8.96159 14.6805 8.96159 15.0711 8.57107C15.4616 8.18054 15.4616 7.54738 15.0711 7.15685L8.70711 0.792893ZM8 39.5H9L9 1.5H8H7L7 39.5H8Z"
-                                                                        fill="#037971" />
-                                                                </svg>
-                                                            </div> -->
+                                            
                                                             <div class="district-data-element-v2__current-value">72%
                                                             </div>
                                                         </div>
@@ -923,12 +873,12 @@
 
 
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
 
 
-                            <div class="acordeon-data-claster">
+                            <div class="acordeon-data-claster acordeon-data-claster--proficiency">
                                 <div class="acordeon-data-claster__header">
                                     <p class="acordeon-data-claster__title">Proficiency</p>
                                     <div class="acordeon-data-claster__icon">
@@ -943,14 +893,15 @@
                                 </div>
 
                                 <div class="acordeon-data-claster__body">
-                                    <div class="acordeon-data-claster__row acordeon-data-claster__row--v2">
+                                    <div class="acordeon-data-claster__row acordeon-data-claster__row--v2"></div>
+                                    <!-- <div class="acordeon-data-claster__row acordeon-data-claster__row--v2">
 
 
                                         <div class="district-data-element district-data-element-v1 ">
                                             <div class="district-data-element-v1__wrapper">
                                                 <div class="district-data-element-v1__top-values">
-                                                    <div class="district-data-element-v1__top-values-title">Overall
-                                                        public enrollment</div>
+                                                    <div class="district-data-element-v1__top-values-title">Rates of 3rd
+                                                        Grade Language Arts</div>
                                                     <div class="district-data-element-v1__top-values-value">72%
                                                     </div>
                                                 </div>
@@ -1153,10 +1104,10 @@
                                         </div>
 
 
-                                    </div>
+                                    </div> -->
 
 
-                                    <div class="acordeon-data-claster__row acordeon-data-claster__row--v2">
+                                    <!-- <div class="acordeon-data-claster__row acordeon-data-claster__row--v2 sad">
 
                                         <div
                                             class="district-data-element district-data-element-v2 district-data-element--rise-mod">
@@ -1166,7 +1117,7 @@
                                                     <p class="district-data-element-v2__current-title">Rates of
                                                         English
                                                         Language Arts and Mathematics</p>
-                                                    <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                                    
                                                 </div>
 
                                                 <div class="district-data-element-v2__current-value-row">
@@ -1249,7 +1200,7 @@
                                                 <div class="district-data-element-v2__current-top">
                                                     <p class="district-data-element-v2__current-title">High school
                                                         graduation rate <span>(within 6 years)</span></p>
-                                                    <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                                   
                                                 </div>
 
                                                 <div class="district-data-element-v2__current-value-row">
@@ -1280,7 +1231,7 @@
                                                 <div class="district-data-element-v2__current-top">
                                                     <p class="district-data-element-v2__current-title">Rates of 3rd
                                                         Grade Mathematics</p>
-                                                    <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                                  
                                                 </div>
 
                                                 <div class="district-data-element-v2__current-value-row">
@@ -1363,7 +1314,7 @@
                                                 <div class="district-data-element-v2__current-top">
                                                     <p class="district-data-element-v2__current-title">Rates of 3rd
                                                         Grade Mathematics</p>
-                                                    <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                              
                                                 </div>
 
                                                 <div class="district-data-element-v2__current-value-row">
@@ -1438,12 +1389,12 @@
 
                                         </div>
 
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
 
 
-                            <div class="acordeon-data-claster">
+                            <div class="acordeon-data-claster acordeon-data-claster--finance">
                                 <div class="acordeon-data-claster__header">
                                     <p class="acordeon-data-claster__title">School Finance</p>
                                     <div class="acordeon-data-claster__icon">
@@ -1461,8 +1412,11 @@
 
                                     <div class="acordeon-data-claster__row acordeon-data-claster__row--v3">
 
-
                                         <div class="acordeon-data-claster__col">
+
+                                        </div>
+
+                                        <!-- <div class="acordeon-data-claster__col">
 
 
                                             <div
@@ -1568,7 +1522,7 @@
                                             </div>
 
 
-                                        </div>
+                                        </div> -->
 
 
                                         <div class="acordeon-data-claster__chart-wrapper">
@@ -1577,59 +1531,8 @@
                                                 <span>(federal/state/local)</span>
                                             </p>
 
-                                            <div class="acordeon-data-claster__chart-claster">
-                                                <div
-                                                    class="acordeon-data-claster__chart acordeon-data-claster__chart--type-1">
+                                            <div class="acordeon-data-claster__chart-claster chart-claster-wrapper-x">
 
-                                                    <div class="acordeon-data-claster__chart-diagram-wrapper">
-
-                                                        <div
-                                                            class="acordeon-data-claster__chart-diagram-wrapper-chart-1">
-                                                            <canvas id="financeChart1"
-                                                                class=" graf-container__chart stat-district-chart"></canvas>
-                                                        </div>
-                                                        <div
-                                                            class="acordeon-data-claster__chart-diagram-wrapper-chart-2">
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="acordeon-data-claster__chart-diagram-value">
-                                                        <ul
-                                                            class="chart-diagram-value-list chart-diagram-value-list--main">
-                                                            <li class="chart-diagram-value-list__element">
-                                                                <span
-                                                                    class="chart-diagram-value-list__element-value"></span>
-                                                                <span
-                                                                    class="chart-diagram-value-list__element-text">Label</span>
-                                                            </li>
-                                                            <li class="chart-diagram-value-list__element">
-                                                                <span
-                                                                    class="chart-diagram-value-list__element-value"></span>
-                                                                <span
-                                                                    class="chart-diagram-value-list__element-text">Label</span>
-                                                            </li>
-                                                            <li class="chart-diagram-value-list__element">
-                                                                <span
-                                                                    class="chart-diagram-value-list__element-value"></span>
-                                                                <span
-                                                                    class="chart-diagram-value-list__element-text">Label</span>
-                                                            </li>
-                                                            <li class="chart-diagram-value-list__element">
-                                                                <span
-                                                                    class="chart-diagram-value-list__element-value"></span>
-                                                                <span
-                                                                    class="chart-diagram-value-list__element-text">Label</span>
-                                                            </li>
-                                                            <li class="chart-diagram-value-list__element">
-                                                                <span
-                                                                    class="chart-diagram-value-list__element-value"></span>
-                                                                <span
-                                                                    class="chart-diagram-value-list__element-text">Label</span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
                                             </div>
 
 
@@ -1638,7 +1541,7 @@
 
                                     </div>
 
-                                    <div class="acordeon-data-claster__row acordeon-data-claster__row--v3">
+                                    <!-- <div class="acordeon-data-claster__row acordeon-data-claster__row--v3 sad">
                                         <div class="acordeon-data-claster__col">
 
                                             <div
@@ -1649,7 +1552,7 @@
                                                         <p class="district-data-element-v2__current-title">Spending
                                                             per
                                                             student</p>
-                                                        <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                                       
                                                     </div>
 
                                                     <div class="district-data-element-v2__current-value-row">
@@ -1682,7 +1585,7 @@
                                                         <p class="district-data-element-v2__current-title">
                                                             Instructional
                                                             spending/ total share of spending</p>
-                                                        <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                                       
                                                     </div>
 
                                                     <div class="district-data-element-v2__current-value-row">
@@ -1853,10 +1756,10 @@
                                         </div>
 
 
-                                    </div>
+                                    </div> -->
 
 
-                                    <div class="acordeon-data-claster__row acordeon-data-claster__row--v3">
+                                    <!-- <div class="acordeon-data-claster__row acordeon-data-claster__row--v3 sad">
                                         <div class="acordeon-data-claster__col"></div>
 
                                         <div class="acordeon-data-claster__chart-wrapper ">
@@ -1880,11 +1783,7 @@
                                                                 <canvas id="financeChart4"
                                                                     class=" graf-container__chart stat-district-chart"></canvas>
                                                             </div>
-                                                            <!-- <div
-                                                                class="acordeon-data-claster__chart-diagram-wrapper-chart-2">
-                                                                <canvas id="financeChart"
-                                                                    class=" graf-container__chart stat-district-chart"></canvas>
-                                                            </div> -->
+                                    
 
                                                         </div>
 
@@ -1897,11 +1796,7 @@
                                                                 <canvas id="financeChart5"
                                                                     class=" graf-container__chart stat-district-chart"></canvas>
                                                             </div>
-                                                            <!-- <div
-                                                                class="acordeon-data-claster__chart-diagram-wrapper-chart-2">
-                                                                <canvas id="financeChart3"
-                                                                    class=" graf-container__chart stat-district-chart"></canvas>
-                                                            </div> -->
+                                                
 
                                                         </div>
 
@@ -1948,11 +1843,11 @@
                                             </div>
 
                                         </div>
-                                    </div>
+                                    </div> -->
 
 
 
-                                    <div class="acordeon-data-claster__row acordeon-data-claster__row--v3">
+                                    <!-- <div class="acordeon-data-claster__row acordeon-data-claster__row--v3 sad">
                                         <div class="acordeon-data-claster__col"></div>
 
                                         <div class="acordeon-data-claster__chart-wrapper ">
@@ -2105,11 +2000,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
 
-                            <div class="acordeon-data-claster">
+                            <div class="acordeon-data-claster acordeon-data-claster--staffing">
                                 <div class="acordeon-data-claster__header">
                                     <p class="acordeon-data-claster__title">Staffing & Safety</p>
                                     <div class="acordeon-data-claster__icon">
@@ -2124,7 +2019,12 @@
                                 </div>
 
                                 <div class="acordeon-data-claster__body">
+
                                     <div class="acordeon-data-claster__row acordeon-data-claster__row--v2">
+
+                                    </div>
+
+                                    <!-- <div class="acordeon-data-claster__row acordeon-data-claster__row--v2">
 
 
                                         <div class="district-data-element district-data-element-v1 ">
@@ -2331,10 +2231,10 @@
                                         </div>
 
 
-                                    </div>
+                                    </div> -->
 
 
-                                    <div class="acordeon-data-claster__row acordeon-data-claster__row--v2">
+                                    <!-- <div class="acordeon-data-claster__row acordeon-data-claster__row--v2 sad">
 
 
 
@@ -2346,7 +2246,7 @@
                                                     <p class="district-data-element-v2__current-title">Teacher
                                                         student
                                                         ratio</p>
-                                                    <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                        
                                                 </div>
 
                                                 <div class="district-data-element-v2__current-value-row">
@@ -2428,7 +2328,7 @@
                                                 <div class="district-data-element-v2__current-top">
                                                     <p class="district-data-element-v2__current-title">Staffing -
                                                         Administrative staff versus instructional staff</p>
-                                                    <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                               
                                                 </div>
 
                                                 <div class="district-data-element-v2__current-value-row">
@@ -2511,7 +2411,7 @@
                                                 <div class="district-data-element-v2__current-top">
                                                     <p class="district-data-element-v2__current-title">Ratio of
                                                         psychologists: students</p>
-                                                    <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                               
                                                 </div>
 
                                                 <div class="district-data-element-v2__current-value-row">
@@ -2595,7 +2495,7 @@
                                                     <p class="district-data-element-v2__current-title">Total
                                                         behavioral
                                                         incidents</p>
-                                                    <!-- <p class="district-data-element-v2__current-subtitle">CURRENT</p> -->
+                                               
                                                 </div>
 
                                                 <div class="district-data-element-v2__current-value-row">
@@ -2670,7 +2570,7 @@
 
                                         </div>
 
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
 
@@ -2708,62 +2608,44 @@
 
                             </div>
 
-                            <div class="section-users-container">
+                            <div class="section-users-container super-wrap">
                                 <p class="section-users-container__title">Superintendent</p>
-                                <div class="section-users-container__user user-element">
-                                    <img src="img/_src/img.jpg" alt="" class="user-element__img">
-                                    <div class="user-element__data">
-                                        <p class="user-element__name">Name</p>
-                                        <ul class="user-element__contacts-list">
-                                            <li class="user-element__contacts-list-element">Office Address</li>
-                                            <li class="user-element__contacts-list-element">Phone</li>
-                                            <li class="user-element__contacts-list-element">Email</li>
-                                        </ul>
-                                    </div>
+                                <div class="super-wrap__list">
+                                    <!-- <div class="section-users-container__user user-element">
+                                        <img src="img/_src/img.jpg" alt="" class="user-element__img">
+                                        <div class="user-element__data">
+                                            <p class="user-element__name">Name</p>
+                                            <ul class="user-element__contacts-list">
+                                                <li class="user-element__contacts-list-element">Office Address</li>
+                                                <li class="user-element__contacts-list-element">Phone</li>
+                                                <li class="user-element__contacts-list-element">Email</li>
+                                            </ul>
+                                        </div>
 
+                                    </div> -->
                                 </div>
+
                             </div>
 
-                            <div class="section-users-container">
+                            <div class="section-users-container members-wrap">
                                 <p class="section-users-container__title">School board members</p>
-                                <div class="section-users-container__user user-element">
-                                    <img src="img/_src/img.jpg" alt="" class="user-element__img">
-                                    <div class="user-element__data">
-                                        <p class="user-element__name">Name</p>
-                                        <ul class="user-element__contacts-list">
-                                            <li class="user-element__contacts-list-element">Office Address</li>
-                                            <li class="user-element__contacts-list-element">Phone</li>
-                                            <li class="user-element__contacts-list-element">Email</li>
-                                        </ul>
-                                    </div>
 
+                                <div class="members-wrap__list">
+                                    <!-- <div class="section-users-container__user user-element">
+                                        <img src="img/_src/img.jpg" alt="" class="user-element__img">
+                                        <div class="user-element__data">
+                                            <p class="user-element__name">Name</p>
+                                            <ul class="user-element__contacts-list">
+                                                <li class="user-element__contacts-list-element">Office Address</li>
+                                                <li class="user-element__contacts-list-element">Phone</li>
+                                                <li class="user-element__contacts-list-element">Email</li>
+                                            </ul>
+                                        </div>
+
+                                    </div> -->
                                 </div>
 
-                                <div class="section-users-container__user user-element">
-                                    <img src="img/_src/img.jpg" alt="" class="user-element__img">
-                                    <div class="user-element__data">
-                                        <p class="user-element__name">Name</p>
-                                        <ul class="user-element__contacts-list">
-                                            <li class="user-element__contacts-list-element">Office Address</li>
-                                            <li class="user-element__contacts-list-element">Phone</li>
-                                            <li class="user-element__contacts-list-element">Email</li>
-                                        </ul>
-                                    </div>
 
-                                </div>
-
-                                <div class="section-users-container__user user-element">
-                                    <img src="img/_src/img.jpg" alt="" class="user-element__img">
-                                    <div class="user-element__data">
-                                        <p class="user-element__name">Name</p>
-                                        <ul class="user-element__contacts-list">
-                                            <li class="user-element__contacts-list-element">Office Address</li>
-                                            <li class="user-element__contacts-list-element">Phone</li>
-                                            <li class="user-element__contacts-list-element">Email</li>
-                                        </ul>
-                                    </div>
-
-                                </div>
                             </div>
                         </aside>
                     </div>
