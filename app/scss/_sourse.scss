@@ -6,6 +6,7 @@
 
 a {
 	text-decoration: none;
+	box-shadow: none;
 
 	&:hover {
 		text-decoration: none;
@@ -19,6 +20,7 @@ li {
 button {
 	cursor: pointer;
 	outline: 0 none !important;
+	box-shadow: none;
 
 }
 
@@ -69,7 +71,7 @@ body::-webkit-scrollbar-thumb {
 
 input {
 	outline: 0 none !important;
-
+	box-shadow: none;
 	font-family: $mainFont
 }
 
@@ -148,10 +150,6 @@ ul {
 
 
 
-@media only screen and (max-width: 1200px) {
-	
-}
+@media only screen and (max-width: 1200px) {}
 
-@media only screen and (max-width: 650px) {
-	
-}
+@media only screen and (max-width: 650px) {}

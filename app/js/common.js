@@ -43,6 +43,109 @@ jQuery(function ($) {
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    let devMod = true
+
+
+
+    let devModData = devMod
+    let urlGeoFile = ''
+    let urlDomain = ''
+
+
+
+
+
+
+    if (devMod == true) {
+        urlGeoFile = '../js/map.geojson'
+    }
+    else {
+        urlGeoFile = '/wp-content/themes/csi/js/map.geojson'
+    }
+
+    if (devModData == true) {
+        urlDomain = 'http://district-dashbord.test'
+    }
+    else {
+        // urlDomain = 'https://csi.theprojectview.com'
+        urlDomain = '   https://coloradoeducationdashboard.com'
+
+
+
+    }
+
+
+
+
+
+    var swiper = new Swiper(".post-slider-swiper", {
+        slidesPerView: 3,
+        spaceBetween: 0,
+        speed: 1000,
+        loop: true,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+            // when window width is >= 320px
+            300: {
+                slidesPerView: 1,
+                spaceBetween: 0,
+
+                // centeredSlides: true
+            },
+            // when window width is >= 320px
+
+            // when window width is >= 320px
+            767: {
+                slidesPerView: 2,
+                spaceBetween: 0,
+            },
+            // when window width is >= 480px
+            1220: {
+                slidesPerView: 3,
+                spaceBetween: 0,
+            },
+            // when window width is >= 640px
+            1540: {
+                slidesPerView: 3,
+                spaceBetween: 0,
+            }
+        }
+
+    });
+
+
+
+
+
+
+    //нормализация высот заголовков блоков
+    function normalisationEventBox() {
+        const elements = document.querySelectorAll('.event-element__title-wrapper');
+
+        if (elements && elements.length) {
+            // Получаем все элементы с нужным классом
+
+            if (!elements.length) return;
+
+            // Сбрасываем высоту, чтобы правильно измерить исходную
+            elements.forEach(el => (el.style.height = 'auto'));
+
+            // Находим максимальную высоту
+            const maxHeight = Math.max(...Array.from(elements).map(el => el.offsetHeight));
+
+            // Устанавливаем всем одинаковую высоту
+            elements.forEach(el => (el.style.height = `${maxHeight}px`));
+        }
+
+
+    }
+
+    normalisationEventBox()
+
+
     //map district search and load
     function mapSearchLoad() {
 
@@ -100,8 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             //получаем дистрикты заполненые в админке
             async function getServerDistrictDataList() {
-                // let urlDomain = 'http://district-dashbord.test'
-                let urlDomain = 'https://csi.theprojectview.com'
+
 
                 let endpoint = `${urlDomain}/wp-json/wp/v2/district`
                 try {
@@ -122,8 +224,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             //получаем дистрикты с файла для карты
             function genDistrictList() {
-                // fetch('../js/map.geojson')
-                fetch('/wp-content/themes/csi/js/map.geojson')
+
+                fetch(urlGeoFile)
                     .then(res => res.json())
                     .then(data => {
                         console.log(data)
@@ -141,6 +243,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 let dataListObjects = dataGeo.features
 
+
+                dataListObjects.sort((a, b) => {
+                    return a.properties.NAME.localeCompare(b.properties.NAME, 'en', { sensitivity: 'base' });
+                });
+
+                // dataListObjects = dataListObjects.filter(item => item.title.rendered !== 'State');
+
                 for (let i = 0; i < dataListObjects.length; i++) {
                     let newOptionLi = document.createElement('li')
                     newOptionLi.classList.add('select__item')
@@ -157,91 +266,126 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
 
+            let mapOptions = {}
 
             let zoomValue = 7.5
 
-            const coloradoBounds = [
-                [36.1, -110.2], // юго-запад (с запасом)
-                [41.9, -100.8]  // северо-восток (с запасом)
+            let minZoomValue = 7.5
+
+            let maxPopupWith = 300
+
+            let coloradoBounds = [
+                [36.9, -110.2], // юго-запад (с запасом)
+                [41.5, -100]  // северо-восток (с запасом)
             ];
 
-            if (window.matchMedia('(min-width: 1460px)').matches) {
-                zoomValue = 7.5
-            } else {
-                zoomValue = 7.2
+            if (window.matchMedia('(min-width: 1781px)').matches) {
+
+                minZoomValue = 7.5
+
+                mapOptions = {
+                    center: [39, -105.5],
+                    zoom: minZoomValue,
+                    zoomSnap: 0,
+                    maxBounds: coloradoBounds,
+                    maxBoundsViscosity: 1.0,
+                    dragging: false,
+                    zoomControl: false,
+                    scrollWheelZoom: false,
+                    doubleClickZoom: false,
+                    boxZoom: false,
+                    keyboard: false,
+                    tap: false
+                }
+                maxPopupWith = 300
+
+            }
+            else if (window.matchMedia('(min-width: 1461px)').matches) {
+
+
+                minZoomValue = 7.5
+
+                mapOptions = {
+                    center: [39, -105.5],
+                    zoom: minZoomValue,
+                    zoomSnap: 0,
+
+                    maxBoundsViscosity: 1.0,
+                    dragging: false,
+                    zoomControl: false,
+                    scrollWheelZoom: false,
+                    doubleClickZoom: false,
+                    boxZoom: false,
+                    keyboard: false,
+                    tap: false
+
+                }
+                maxPopupWith = 200
+            }
+
+            else if (window.matchMedia('(min-width: 1201px)').matches) {
+
+                maxPopupWith = 150
+
+                minZoomValue = 7
+
+                mapOptions = {
+                    center: [39, -105.5],
+                    zoom: minZoomValue,
+                    zoomSnap: 0,
+
+                    maxBoundsViscosity: 1.0,
+                    dragging: false,
+                    zoomControl: false,
+                    scrollWheelZoom: false,
+                    doubleClickZoom: false,
+                    boxZoom: false,
+                    keyboard: false,
+                    tap: false
+                }
+            }
+
+            else {
+                maxPopupWith = 150
+                coloradoBounds = [
+                    [35.9, -111.3], // юго-запад (с запасом)
+                    [43, -100]  // северо-восток (с запасом)
+                ]
+
+                minZoomValue = 7
+                mapOptions = {
+                    center: [39, -105.5],
+                    zoom: 7,
+                    zoomSnap: 0,
+                    maxBounds: coloradoBounds,
+                    maxBoundsViscosity: 1.0,
+                    // dragging: false,
+                    // zoomControl: false,
+                    // scrollWheelZoom: false,
+                    // doubleClickZoom: false,
+                    // boxZoom: false,
+                    // keyboard: false,
+                    // tap: false
+                }
             }
 
 
+
+
+
             function loadMap() {
-                const map = L.map('map', {
-                    center: [39, -105.5],
-                    zoom: zoomValue,
-                    zoomSnap: 0,
-                    maxBounds: coloradoBounds,
-                    maxBoundsViscosity: 1.0
-                });
+                const map = L.map('map', mapOptions);
 
                 // серый фон (Carto)
                 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
                     // attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
                     subdomains: 'abcd',
-
-                    minZoom: 7.5
+                    minZoom: minZoomValue
                 }).addTo(map);
 
                 let geojson;
 
-                // fetch('../js/map.geojson')
-                //     // fetch('/wp-content/themes/csi/js/map.geojson')
-                //     .then(res => res.json())
-                //     .then(data => {
-                //         // базовый стиль
-                //         function style() {
-                //             return {
-                //                 color: "#D6D9DB",
-                //                 weight: 1.5,
-                //                 fillColor: "#609DC9",
-                //                 fillOpacity: 1
-                //             };
-                //         }
-
-                //         // подсветка при наведении
-                //         function highlightFeature(e) {
-                //             const layer = e.target;
-                //             layer.setStyle({
-                //                 weight: 2.5,
-                //                 color: "#fff",
-                //                 fillColor: "#91B4D3",
-                //                 fillOpacity: 1
-                //             });
-                //             layer.bringToFront();
-                //         }
-
-                //         // возврат к исходному стилю
-                //         function resetHighlight(e) {
-                //             geojson.resetStyle(e.target);
-                //         }
-
-
-
-                //         function onEachFeature(feature, layer) {
-                //             layer.bindPopup(feature.properties.NAME);
-                //             layer.on({
-                //                 mouseover: highlightFeature,
-                //                 mouseout: resetHighlight
-                //             });
-                //         }
-
-                //         geojson = L.geoJSON(data, {
-                //             style,
-                //             onEachFeature
-                //         }).addTo(map);
-                //     });
-
-
-
-                // fetch('../js/map.geojson')
-                fetch('/wp-content/themes/csi/js/map.geojson')
+                fetch(urlGeoFile)
                     .then(res => res.json())
                     .then(data => {
                         // базовый стиль
@@ -275,7 +419,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         function onEachFeature(feature, layer) {
                             let geoIdFile = feature.properties.GEOID; // нужный geoid
                             let districtData = districtListDataServer.find(
-                                item => item.acf.geoid === geoIdFile
+                                item => +item.acf.geoid === +geoIdFile
                             );
 
 
@@ -283,21 +427,21 @@ document.addEventListener("DOMContentLoaded", () => {
                             let url = ''
                             let score = ''
                             console.log('districtData,', districtData)
-                            if (districtData && +districtData?.acf?.geoid == +geoIdFile) {
+                            if (districtData && +districtData.acf.geoid == +geoIdFile) {
                                 url = districtData.link
 
                                 if (districtData.acf?.years[0]?.overall_score) {
-                                    score = (+districtData.acf.years[0].overall_score * 100).toFixed(2)
+                                    score = (+districtData.acf.years[1].overall_score * 100).toFixed(2)
                                     console.log('bingo2', score)
                                 }
                                 else {
-                                    score = '-'
+                                    score = 'N/A'
                                 }
 
                                 console.log('bingo', url)
                             }
                             else {
-                                score = '-'
+                                score = 'N/A'
                             }
 
 
@@ -307,14 +451,18 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <p class="map-pop__value">Overall Score: <b> ${score}</b></p>
                                     <p class="map-pop__link">
                                         <a href="${url}" >
-                                            VIEW ALL DATA
+                                            VIEW ALL DISTRICT DATA 
                                         </a>
                                     </p>
                                     
                                 </div>
                             `;
 
-                            layer.bindPopup(popupContent);
+                            layer.bindPopup(popupContent, {
+                                maxWidth: maxPopupWith,   // максимальная ширина в пикселях
+                                minWidth: 50,   // минимальная ширина (опционально)
+                                className: 'custom-popup' // кастомный класс для дополнительных стилей
+                            });
 
                             layer.on({
                                 mouseover: highlightFeature,
@@ -370,7 +518,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                             let geoIdFile = layer.feature.properties.GEOID; // нужный geoid
                             let districtData = districtListDataServer.find(
-                                item => item.acf.geoid === geoIdFile
+                                item => +item.acf.geoid === +geoIdFile
                             );
 
 
@@ -378,21 +526,21 @@ document.addEventListener("DOMContentLoaded", () => {
                             let url = ''
                             let score = ''
                             console.log('districtData,', districtData)
-                            if (districtData && +districtData?.acf?.geoid == +geoIdFile) {
+                            if (districtData && +districtData.acf.geoid == +geoIdFile) {
                                 url = districtData.link
 
                                 if (districtData.acf?.years[0]?.overall_score) {
-                                    score = (+districtData.acf.years[0].overall_score * 100).toFixed(2)
+                                    score = (+districtData.acf.years[1].overall_score * 100).toFixed(2)
                                     console.log('bingo2', score)
                                 }
                                 else {
-                                    score = '-'
+                                    score = 'N/A'
                                 }
 
                                 console.log('bingo', url)
                             }
                             else {
-                                score = '-'
+                                score = 'N/A'
                             }
 
 
@@ -402,7 +550,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <p class="map-pop__value">Overall Score: <b> ${score}</b></p>
                                     <p class="map-pop__link">
                                         <a href="${url}" >
-                                            VIEW ALL DATA
+                                            VIEW ALL DISTRICT DATA
                                         </a>
                                     </p>
                                     
@@ -448,29 +596,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
                                     let geoIdFile = layer.feature.properties.GEOID; // нужный geoid
                                     let districtData = districtListDataServer.find(
-                                        item => item.acf.geoid === geoIdFile
+                                        item => +item.acf.geoid === +geoIdFile
                                     );
 
-
+                                    console.log('geoIdFile', geoIdFile, districtData, districtListDataServer)
                                     let name = layer.feature.properties.NAME;
                                     let url = ''
                                     let score = ''
                                     console.log('districtData,', districtData)
-                                    if (districtData && +districtData?.acf?.geoid == +geoIdFile) {
+                                    if (districtData && +districtData.acf.geoid == +geoIdFile) {
                                         url = districtData.link
 
                                         if (districtData.acf?.years[0]?.overall_score) {
-                                            score = (+districtData.acf.years[0].overall_score * 100).toFixed(2)
+                                            score = (+districtData.acf.years[1].overall_score * 100).toFixed(2)
                                             console.log('bingo2', score)
                                         }
                                         else {
-                                            score = '-'
+                                            score = 'N/A'
                                         }
 
                                         console.log('bingo', url)
                                     }
                                     else {
-                                        score = '-'
+                                        score = 'N/A'
                                     }
 
 
@@ -480,7 +628,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <p class="map-pop__value">Overall Score: <b> ${score}</b></p>
                                     <p class="map-pop__link">
                                         <a href="${url}" >
-                                            VIEW ALL DATA
+                                            VIEW ALL DISTRICT DATA
                                         </a>
                                     </p>
                                     
@@ -551,16 +699,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let loadStatusCurrentDistrict = null
 
-        // let slug = 'mapleton-1';
-        let slug = window.location.pathname.split('/').filter(Boolean).pop();
+        let slug = '';
+        if (devMod == true) {
+            // slug = 'mapleton-1';
+            // slug = 'otis-r-3';
+            slug = 'weld-county-school-district-re-3j';
 
-        // let urlDomain = 'http://district-dashbord.test'
+        }
+        else {
+            slug = window.location.pathname.split('/').filter(Boolean).pop();
+        }
 
-        let urlDomain = 'https://csi.theprojectview.com'
 
         let endpoint = `${urlDomain}/wp-json/wp/v2/district?slug=${slug}`;
 
         let dataCurrentDistrict = null
+
+        let dataDopDistrict = null
 
         let currentSelectYearRangeValue = null
 
@@ -575,6 +730,9 @@ document.addEventListener("DOMContentLoaded", () => {
         let dopDistrictYearListForChart = null
 
         let multiDistrictData = null
+
+        let allMembers = null
+
 
 
 
@@ -592,9 +750,6 @@ document.addEventListener("DOMContentLoaded", () => {
         //METHODS
 
 
-
-
-
         //получаем дату для текущего дистрикта
         async function getDataCurrentDistrict() {
             try {
@@ -606,6 +761,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     loadStatusCurrentDistrict = true
                     dataCurrentDistrict = response[0]
                     multiDistrictData = false
+                    if (dataCurrentDistrict?.acf?.members) {
+                        allMembers = dataCurrentDistrict.acf.members
+                    }
+                    else {
+                        allMembers = []
+                    }
+
+                    console.log('allMembers', allMembers)
+
 
                     //берм масив городов и сортируем его по возрастанию
                     currentDistrictYearListForChart = getAndSortYearListForChart(dataCurrentDistrict)
@@ -617,16 +781,19 @@ document.addEventListener("DOMContentLoaded", () => {
                     loalAddDistrictList()
 
                     //получаем членов
-                    getMembersData()
+                    // getMembersData()
+
 
                     //получаем супера
-                    getSuperintendent()
+                    loadHtmlSuper()
+                    loadHtmlMembers()
+                    // getSuperintendent()
 
                     //вызываем метод для рендеринга названия текущего дистрикта
                     renderTitleCurrentDistrict()
 
                     //скачивание данных при клике
-                    loadDataDistrictScript(dataCurrentDistrict)
+                    // loadDataDistrictScript(dataCurrentDistrict)
 
                 }
 
@@ -681,6 +848,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 console.log('dop district data', response)
+                console.log('dopDistrictSelectValue ss', dopDistrictSelectValue, response[0])
                 preloaderEnd()
             }
 
@@ -690,42 +858,115 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-
-
         //кнопка скачивания
         function loadDataDistrictScript(data) {
             let btn = document.querySelector('.district-stat-sec__header-export-btn')
+            console.log('download district data', data)
             btn.addEventListener('click', () => {
                 downloadFile(data)
             })
         }
 
-        function downloadFile(data, filename = 'file.txt', type = 'text/plain') {
-            // Если пришёл объект — превращаем в строку
-            const content = typeof data === 'object' ? JSON.stringify(data, null, 2) : data;
+        //формирование файла .csv
+        function downloadFile(data, filename = 'school-district.csv') {
+            if (typeof data !== 'object') return;
 
-            const blob = new Blob([content], { type });
+            // Собираем все уникальные заголовки по всем разделам
+            const allTitles = new Set();
+
+            for (const sectionKey in data) {
+                const section = data[sectionKey];
+                if (!Array.isArray(section)) continue;
+                section.forEach(item => {
+                    item.data?.forEach(d => allTitles.add(d.title));
+                    item.diagramData?.forEach(d => allTitles.add(d.title));
+                });
+            }
+
+            const titles = Array.from(allTitles);
+
+            // Первая строка — заголовки (перед ними добавляем "Year")
+            let csv = ['Year', ...titles].join(',') + '\n';
+
+            // Получаем все годы
+            const years = new Set();
+            for (const sectionKey in data) {
+                const section = data[sectionKey];
+                section.forEach(item => years.add(item.year));
+            }
+
+            const sortedYears = Array.from(years).sort((a, b) => a - b);
+
+            // Для каждого года собираем значения по всем заголовкам
+            sortedYears.forEach(year => {
+                const row = [year]; // год в первую колонку
+                titles.forEach(title => {
+                    let value = '';
+                    for (const sectionKey in data) {
+                        const section = data[sectionKey];
+                        const foundItem = section.find(item => item.year === year);
+                        if (foundItem) {
+                            const foundData = foundItem.data?.find(d => d.title === title)
+                                || foundItem.diagramData?.find(d => d.title === title);
+                            if (foundData) {
+                                value = foundData.value ?? '';
+                                break;
+                            }
+                        }
+                    }
+                    // экранируем запятые и кавычки
+                    if (typeof value === 'string' && (value.includes(',') || value.includes('"'))) {
+                        value = `"${value.replace(/"/g, '""')}"`;
+                    }
+                    row.push(value);
+                });
+                csv += row.join(',') + '\n';
+            });
+
+            // Скачивание
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
             link.download = filename;
-
-            // Триггерим скачивание
+            document.body.appendChild(link);
             link.click();
-
-            // Чистим ссылку из памяти
+            document.body.removeChild(link);
             URL.revokeObjectURL(link.href);
         }
 
-        //рендерим список дистриктов в выпадающий список
+
+        //рендерим список дистриктов в выпадаюнщий список
         function loadHtmlDistrictsListAside(districtsListArray) {
             let districtListWrapper = document.querySelector('.controll-container__select-wrapper .select__list')
             districtListWrapper.innerHTML = ''
+            console.log('districtsListArray', districtsListArray)
+
+            districtsListArray.sort((a, b) => {
+                return a.title.rendered.localeCompare(b.title.rendered, 'en', { sensitivity: 'base' });
+            });
+
+            districtsListArray.sort((a, b) => {
+                if (a.title.rendered === 'State') return -1;
+                if (b.title.rendered === 'State') return 1;
+                return 0;
+            });
 
             for (let i = 0; i < districtsListArray.length; i++) {
                 let newListElement = document.createElement('li')
                 newListElement.classList.add('select__item')
+
+                if (districtsListArray[i].title.rendered == 'State') {
+                    newListElement.classList.add('select__item--state')
+                }
+                if (districtsListArray[i].title.rendered == 'State') {
+                    newListElement.innerHTML = `Colorado State Average`
+                }
+                else {
+                    newListElement.innerHTML = `${districtsListArray[i].title.rendered}`
+                }
+
                 newListElement.setAttribute('data-value', districtsListArray[i].slug)
-                newListElement.innerHTML = `${districtsListArray[i].title.rendered}`
+
 
                 districtListWrapper.appendChild(newListElement)
             }
@@ -736,9 +977,18 @@ document.addEventListener("DOMContentLoaded", () => {
             let districtListWrapper = document.querySelector('.district-stat-select--header .select__list')
             districtListWrapper.innerHTML = ''
 
+            districtsListArray.sort((a, b) => {
+                return a.title.rendered.localeCompare(b.title.rendered, 'en', { sensitivity: 'base' });
+            });
+
+            districtsListArray = districtsListArray.filter(item => item.title.rendered !== 'State');
+
             for (let i = 0; i < districtsListArray.length; i++) {
                 let newListElement = document.createElement('li')
                 newListElement.classList.add('select__item')
+                // if (districtsListArray[i].title.rendered == 'State') {
+                //     newListElement.classList.add('select__item--state')
+                // }
                 newListElement.setAttribute('data-value', districtsListArray[i].slug)
                 newListElement.innerHTML = `
                 <a href="${districtsListArray[i].link}">${districtsListArray[i].title.rendered}</a>
@@ -831,20 +1081,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        function loadHtmlSuper(data) {
+        function loadHtmlSuper() {
+            let data = allMembers[0]
             let superWrapper = document.querySelector('.super-wrap')
             superWrapper.style.display = 'block'
             let superWrapperList = document.querySelector('.super-wrap__list')
 
+            let defaultImage
+
+            if (devMod == true) {
+                defaultImage = '../img/_src/user.png'
+            }
+            else {
+                defaultImage = '/wp-content/themes/csi/img/_src/user.png'
+
+            }
+
             let superUserComponentHtml = `
             <div class="section-users-container__user user-element">
-                <img src="${data.acf.photo.url}" alt="" class="user-element__img">
+                <img src="${data.photo || defaultImage}" alt="" class="user-element__img">
                 <div class="user-element__data">
-                    <p class="user-element__name">${data.title.rendered}</p>
+                    <p class="user-element__name">${data.name}</p>
                     <ul class="user-element__contacts-list">
-                        <li class="user-element__contacts-list-element">${data.acf.office_address}</li>
-                        <li class="user-element__contacts-list-element">${data.acf.email}</li>
-                        <li class="user-element__contacts-list-element">${data.acf.phone}</li>
+                        <li class="user-element__contacts-list-element">${data.type}</li>
                     </ul>
                 </div>
 
@@ -855,31 +1114,49 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        function loadHtmlMembers(data) {
-            let membersList = data
+        function loadHtmlMembers() {
+            let membersList = allMembers
             let membersWrapper = document.querySelector('.members-wrap')
             membersWrapper.style.display = 'block'
             let membersWrapperList = document.querySelector('.members-wrap__list')
-            console.log(data.length)
-            for (let i = 0; i < membersList.length; i++) {
-                console.log(i)
-                memberData = membersList[i]
-                let memberUserComponentHtml = `
+            console.log('allMembers', allMembers)
+
+            let defaultImage
+
+            if (devMod == true) {
+                defaultImage = '../img/_src/user.png'
+            }
+            else {
+                defaultImage = '/wp-content/themes/csi/img/_src/user.png'
+
+            }
+
+
+            if (membersList.length > 1) {
+                membersWrapper.style.display = 'block'
+                for (let i = 1; i < membersList.length; i++) {
+                    console.log(i)
+                    memberData = membersList[i]
+                    let memberUserComponentHtml = `
                 <div class="section-users-container__user user-element">
-                    <img src="${memberData.acf.photo.url}" alt="" class="user-element__img">
+                    <img src="${memberData.photo || defaultImage}" alt="" class="user-element__img">
                     <div class="user-element__data">
-                        <p class="user-element__name">${memberData.title.rendered}</p>
+                        <p class="user-element__name">${memberData.name}</p>
                         <ul class="user-element__contacts-list">
-                            <li class="user-element__contacts-list-element">${memberData.acf.office_address}</li>
-                            <li class="user-element__contacts-list-element">${memberData.acf.email}</li>
-                            <li class="user-element__contacts-list-element">${memberData.acf.phone}</li>
+                            <li class="user-element__contacts-list-element">${memberData.type}</li>
                         </ul>
                     </div>
 
                 </div>
                 `
-                membersWrapperList.insertAdjacentHTML('beforeend', memberUserComponentHtml)
+                    membersWrapperList.insertAdjacentHTML('beforeend', memberUserComponentHtml)
+                }
             }
+
+            else {
+                membersWrapper.style.display = 'none'
+            }
+
         }
 
 
@@ -964,15 +1241,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     const list = this.parentElement;
                     const select = list.parentElement;
                     const head = select.querySelector('.select__head');
-                    const input = select.querySelector('.select__input'); // исправлено
+                    const input = select.querySelector('.select__input');
 
                     document.querySelectorAll(".select__head").forEach(h => h.classList.remove("open"));
                     list.style.display = "none";
 
-                    head.textContent = this.textContent;
+                    head.textContent = truncateString(this.textContent, 26);
                     if (input) input.value = this.getAttribute('data-value');
 
-                    // ВАЖНО: диспатчим событие на реальном input
+                    //  диспатчим событие на реальном input
                     input?.dispatchEvent(new Event("input", { bubbles: true }));
                 });
             });
@@ -1153,6 +1430,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 options: {
                     scales: {
                         y: {
+                            max: 100,
                             beginAtZero: true,
                             grid: {
                                 drawTicks: false,   // убрать маленькие деления
@@ -1160,11 +1438,16 @@ document.addEventListener("DOMContentLoaded", () => {
                                 display: false      // полностью скрыть линии сетки
                             },
                             ticks: {
-                                color: '#9B9B9B', // цвет шрифта оси Y
+                                color: '#9B9B9B',
                                 font: {
-                                    size: 14,       // размер шрифта
+                                    size: 14,
                                     family: 'Arial',
                                     weight: '300'
+                                },
+                                callback: function (value) {
+                                    // показываем только нужные значения
+                                    const allowed = [0, 20, 40, 60, 80, 100];
+                                    return allowed.includes(value) ? value : null;
                                 }
                             }
 
@@ -1264,7 +1547,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         // labels: ['2019', '2023', '2024'],
                         labels: labelsCurrentDistryctsYears,
                         datasets: [{
-                            label: 'Overall Score',
+                            label: 'Current',
                             // data: [+currentDistrictServerData[0].value, +currentDistrictServerData[1].value, +currentDistrictServerData[2].value],
                             data: dataCurrentDistryctsOveralScore,
                             borderWidth: 8,
@@ -1272,7 +1555,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         },
 
                         {
-                            label: 'Overall Score',
+                            label: 'Сomparable',
                             data: dataCurrentDopDistryctsOveralScore,
                             borderWidth: 5,
                             borderColor: '#559EC7',
@@ -1308,24 +1591,33 @@ document.addEventListener("DOMContentLoaded", () => {
         //рендеринг значения зааголовка для рафика
         function scoreChartValueTitle() {
 
+            let titleRow = document.querySelector('.graf-container__title-row')
             let currentScoreWrapper = document.querySelector('.graf-container__title--current')
             let dopScoreWrapper = document.querySelector('.graf-container__title--current-dop')
 
             let currentScoreValue = currentScoreWrapper.querySelector('.graf-container__title-value')
             let dopScoreValue = dopScoreWrapper.querySelector('.graf-container__title-value')
 
+            let dopScoreStateTitle = document.querySelector('.graf-container__title--current-dop-text')
 
+
+
+            // dopDistrictSelectValue
             //задаем значение для первоначальной загрузки
             currentScoreValue.innerHTML = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100) * 100) / 100
-
+            currentScoreValue.classList.add('red')
             //чекаем подгрузку нового дистрикта для сравнения
             document.addEventListener('LoadDopDataDistrict', () => {
                 if (dopDistrictYearListForChart && multiDistrictData == true) {
 
+                    let titleDopDostrict = document.querySelector('.controll-container__select-wrapper .select__head').innerText
+
+                    dopScoreStateTitle.innerHTML = truncateString(titleDopDostrict, 20)
+
                     let valueCurrent = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100) * 100) / 100
                     let valueDop = Math.floor((+dopDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100) * 100) / 100
 
-
+                    titleRow.classList.add('active')
                     currentScoreValue.innerHTML = valueCurrent
                     dopScoreValue.innerHTML = valueDop
 
@@ -1334,6 +1626,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (valueDop > valueCurrent) {
                         currentScoreValue.classList.add('red')
                         currentScoreValue.classList.remove('green')
+
                     }
                     else if (valueDop < valueCurrent) {
                         currentScoreValue.classList.add('green')
@@ -1348,7 +1641,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     currentScoreValue.innerHTML = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100) * 100) / 100
                     dopScoreWrapper.classList.remove('active')
                     currentScoreValue.classList.remove('green')
-                    currentScoreValue.classList.remove('red')
+                    currentScoreValue.classList.add('red')
+                    titleRow.classList.remove('active')
                 }
             })
 
@@ -1361,7 +1655,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     currentScoreValue.innerHTML = valueCurrent
                     dopScoreValue.innerHTML = valueDop
-
+                    currentScoreValue.classList.add('red')
                     dopScoreWrapper.classList.add('active')
 
                     if (valueDop > valueCurrent) {
@@ -1381,7 +1675,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     currentScoreValue.innerHTML = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100) * 100) / 100
                     dopScoreWrapper.classList.remove('active')
                     currentScoreValue.classList.remove('green')
-                    currentScoreValue.classList.remove('red')
+                    currentScoreValue.classList.add('red')
                 }
             })
 
@@ -1413,6 +1707,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let staffingDopDistrictArray = []
 
+            let districtDataClasterDownload
+
 
             for (let i = 0; i < currentDistrictYearListForChart.length; i++) {
                 let objectNewEnrollment = {
@@ -1425,7 +1721,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 ? +currentDistrictYearListForChart[i].overall_public_enrollment
                                 : currentDistrictYearListForChart[i].overall_public_enrollment === 0
                                     ? 0
-                                    : '-',
+                                    : 'N/A',
                             'value_number': currentDistrictYearListForChart[i].overall_public_enrollment
                                 ? +currentDistrictYearListForChart[i].overall_public_enrollment
                                 : currentDistrictYearListForChart[i].overall_public_enrollment === 0
@@ -1438,7 +1734,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 ? +currentDistrictYearListForChart[i].percent_in_private_enrollment
                                 : currentDistrictYearListForChart[i].percent_in_private_enrollment === 0
                                     ? 0
-                                    : '-',
+                                    : 'N/A',
                             'title': 'Percent in Private enrollment (CDE)'
                         },
                         {
@@ -1446,23 +1742,40 @@ document.addEventListener("DOMContentLoaded", () => {
                                 ? +currentDistrictYearListForChart[i].percent_in_charter_data
                                 : currentDistrictYearListForChart[i].percent_in_charter_data === 0
                                     ? 0
-                                    : '-',
+                                    : 'N/A',
                             'title': 'Percent in Charter data (on CDE website)'
                         },
+                        // {
+                        //     'value': currentDistrictYearListForChart[i].percent_utilizing_open_enrollment
+                        //         ? +currentDistrictYearListForChart[i].percent_utilizing_open_enrollment
+                        //         : currentDistrictYearListForChart[i].percent_utilizing_open_enrollment === 0
+                        //             ? 0
+                        //             : 'N/A',
+                        //     'title': 'Percent Utilizing Open Enrollment'
+                        // },
                         {
-                            'value': currentDistrictYearListForChart[i].percent_utilizing_open_enrollment
-                                ? +currentDistrictYearListForChart[i].percent_utilizing_open_enrollment
-                                : currentDistrictYearListForChart[i].percent_utilizing_open_enrollment === 0
+                            'value': currentDistrictYearListForChart[i].intra_district_choice
+                                ? +currentDistrictYearListForChart[i].intra_district_choice
+                                : currentDistrictYearListForChart[i].intra_district_choice === 0
                                     ? 0
-                                    : '-',
-                            'title': 'Percent Utilizing Open Enrollment'
+                                    : 'N/A',
+                            'title': 'Intra-district choice'
+                        },
+
+                        {
+                            'value': currentDistrictYearListForChart[i].inter_district_choice
+                                ? +currentDistrictYearListForChart[i].inter_district_choice
+                                : currentDistrictYearListForChart[i].inter_district_choice === 0
+                                    ? 0
+                                    : 'N/A',
+                            'title': 'Inter-district choice'
                         },
                         {
                             'value': currentDistrictYearListForChart[i].absenteeism_rate
-                                ? (Math.floor((+currentDistrictYearListForChart[i].absenteeism_rate * 100) * 100) / 100) + '%'
+                                ? (+currentDistrictYearListForChart[i].absenteeism_rate) + '%'
                                 : currentDistrictYearListForChart[i].absenteeism_rate === 0
                                     ? 0
-                                    : '-',
+                                    : 'N/A',
                             'title': 'Absenteeism Rate'
                         },
                     ]
@@ -1476,8 +1789,8 @@ document.addEventListener("DOMContentLoaded", () => {
                                 ? +currentDistrictYearListForChart[i].rates_of_3rd_grade_language_arts
                                 : currentDistrictYearListForChart[i].rates_of_3rd_grade_language_arts === 0
                                     ? 0
-                                    : '-',
-                            'title': 'Rates of 3rd Grade Language Arts'
+                                    : 'N/A',
+                            'title': 'Rates of Grades 3–8 Language Arts'
                         },
 
                         {
@@ -1485,7 +1798,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 ? +currentDistrictYearListForChart[i].high_school_graduation_rate_within_6_years
                                 : currentDistrictYearListForChart[i].high_school_graduation_rate_within_6_years === 0
                                     ? 0
-                                    : '-',
+                                    : 'N/A',
                             'title': 'High school graduation rate (within 6 years)'
                         },
 
@@ -1494,18 +1807,18 @@ document.addEventListener("DOMContentLoaded", () => {
                                 ? +currentDistrictYearListForChart[i].rates_of_3rd_grade_mathematics
                                 : currentDistrictYearListForChart[i].rates_of_3rd_grade_mathematics === 0
                                     ? 0
-                                    : '-',
-                            'title': 'Rates of 3rd Grade Mathematics'
+                                    : 'N/A',
+                            'title': 'Rates of Grades 3–8 Mathematics'
                         },
 
-                        {
-                            'value': currentDistrictYearListForChart[i].psat_average_score
-                                ? +currentDistrictYearListForChart[i].psat_average_score
-                                : currentDistrictYearListForChart[i].psat_average_score === 0
-                                    ? 0
-                                    : '-',
-                            'title': 'PSAT Average Score'
-                        },
+                        // {
+                        //     'value': currentDistrictYearListForChart[i].psat_average_score
+                        //         ? +currentDistrictYearListForChart[i].psat_average_score
+                        //         : currentDistrictYearListForChart[i].psat_average_score === 0
+                        //             ? 0
+                        //             : 'N/A',
+                        //     'title': 'PSAT Average Score'
+                        // },
                     ]
                 }
 
@@ -1514,10 +1827,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     'data': [
                         {
                             'value': currentDistrictYearListForChart[i].spending_per_student
-                                ? Math.trunc(+currentDistrictYearListForChart[i].spending_per_student)
+                                ? '$' + Math.trunc(+currentDistrictYearListForChart[i].spending_per_student)
                                 : currentDistrictYearListForChart[i].spending_per_student === 0
                                     ? 0
-                                    : '-',
+                                    : 'N/A',
                             'title': 'Spending per student'
                         },
 
@@ -1526,7 +1839,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 ? +currentDistrictYearListForChart[i].instructional_spending_total_share_of_spending
                                 : currentDistrictYearListForChart[i].instructional_spending_total_share_of_spending === 0
                                     ? 0
-                                    : '-',
+                                    : 'N/A',
                             'title': 'Instructional spending/ total share of spending'
                         },
 
@@ -1570,7 +1883,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 ? (+currentDistrictYearListForChart[i].teacher_student_ratio).toFixed(1)
                                 : currentDistrictYearListForChart[i].teacher_student_ratio === 0
                                     ? 0
-                                    : '-',
+                                    : 'N/A',
                             'title': 'Teacher student ratio',
                             'type': 'more-one'
                         },
@@ -1580,12 +1893,12 @@ document.addEventListener("DOMContentLoaded", () => {
                                 ? (+currentDistrictYearListForChart[i].staffing_administrative_staff).toFixed(0)
                                 : currentDistrictYearListForChart[i].staffing_administrative_staff === 0
                                     ? 0
-                                    : '-',
+                                    : 'N/A',
                             'value2': currentDistrictYearListForChart[i].staffing_instructional_staff
                                 ? (+currentDistrictYearListForChart[i].staffing_instructional_staff).toFixed(0)
                                 : currentDistrictYearListForChart[i].staffing_instructional_staff === 0
                                     ? 0
-                                    : '-',
+                                    : 'N/A',
                             'title': 'Staffing - Administrative staff versus instructional staff',
                             'type': 'versus'
                         },
@@ -1595,7 +1908,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 ? (+currentDistrictYearListForChart[i].ratio_of_psychologists_students).toFixed(0)
                                 : currentDistrictYearListForChart[i].ratio_of_psychologists_students === 0
                                     ? 0
-                                    : '-',
+                                    : 'N/A',
                             'title': 'Ratio of psychologists: students',
                             'type': 'more-one'
                         },
@@ -1605,7 +1918,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 ? (+currentDistrictYearListForChart[i].total_behavioral_incidents).toFixed(0)
                                 : currentDistrictYearListForChart[i].total_behavioral_incidents === 0
                                     ? 0
-                                    : '-',
+                                    : 'N/A',
                             'title': 'Total behavioral incidents'
                         },
                     ]
@@ -1616,6 +1929,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 financeyCurrentDistrictArray.push(objectNewFinancey)
                 staffingCurrentDistrictArray.push(objectNewStaffing)
             }
+
+            districtDataClasterDownload = {
+                "objectNewEnrollment": enrollmentAndChoiceCurrentDistrictArray,
+                "objectNewProficiency": proficiencyCurrentDistrictArray,
+                "objectNewFinancey": financeyCurrentDistrictArray,
+                "objectNewStaffing": staffingCurrentDistrictArray,
+            }
+
+            //вызов метода для скачивания файла
+            loadDataDistrictScript(districtDataClasterDownload)
 
 
             console.log('enrollmentAndChoiceCurrentDistrictArray', enrollmentAndChoiceCurrentDistrictArray)
@@ -1632,7 +1955,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
+            //метод вычленения инфы для второго дистрикта 
             function getDopDistrictData() {
                 for (let i = 0; i < dopDistrictYearListForChart.length; i++) {
                     let objectNewEnrollment = {
@@ -1645,7 +1968,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     ? +dopDistrictYearListForChart[i].overall_public_enrollment
                                     : dopDistrictYearListForChart[i].overall_public_enrollment === 0
                                         ? 0
-                                        : '-',
+                                        : 'N/A',
                                 'title': 'Overall public enrollment'
                             },
                             {
@@ -1653,7 +1976,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     ? +dopDistrictYearListForChart[i].percent_in_private_enrollment
                                     : dopDistrictYearListForChart[i].percent_in_private_enrollment === 0
                                         ? 0
-                                        : '-',
+                                        : 'N/A',
                                 'title': 'Percent in Private enrollment (CDE)'
                             },
                             {
@@ -1661,23 +1984,41 @@ document.addEventListener("DOMContentLoaded", () => {
                                     ? +dopDistrictYearListForChart[i].percent_in_charter_data
                                     : dopDistrictYearListForChart[i].percent_in_charter_data === 0
                                         ? 0
-                                        : '-',
+                                        : 'N/A',
                                 'title': 'Percent in Charter data (on CDE website)'
                             },
+                            // {
+                            //     'value': dopDistrictYearListForChart[i].percent_utilizing_open_enrollment
+                            //         ? +dopDistrictYearListForChart[i].percent_utilizing_open_enrollment
+                            //         : dopDistrictYearListForChart[i].percent_utilizing_open_enrollment === 0
+                            //             ? 0
+                            //             : 'N/A',
+                            //     'title': 'Percent Utilizing Open Enrollment'
+                            // },
+
                             {
-                                'value': dopDistrictYearListForChart[i].percent_utilizing_open_enrollment
-                                    ? +dopDistrictYearListForChart[i].percent_utilizing_open_enrollment
-                                    : dopDistrictYearListForChart[i].percent_utilizing_open_enrollment === 0
+                                'value': dopDistrictYearListForChart[i].intra_district_choice
+                                    ? +dopDistrictYearListForChart[i].intra_district_choice
+                                    : dopDistrictYearListForChart[i].intra_district_choice === 0
                                         ? 0
-                                        : '-',
-                                'title': 'Percent Utilizing Open Enrollment'
+                                        : 'N/A',
+                                'title': 'Intra-district choice'
+                            },
+
+                            {
+                                'value': dopDistrictYearListForChart[i].inter_district_choice
+                                    ? +dopDistrictYearListForChart[i].inter_district_choice
+                                    : dopDistrictYearListForChart[i].inter_district_choice === 0
+                                        ? 0
+                                        : 'N/A',
+                                'title': 'Inter-district choice'
                             },
                             {
                                 'value': dopDistrictYearListForChart[i].absenteeism_rate
-                                    ? (Math.floor((+dopDistrictYearListForChart[i].absenteeism_rate * 100) * 100) / 100) + '%'
+                                    ? (+dopDistrictYearListForChart[i].absenteeism_rate) + '%'
                                     : dopDistrictYearListForChart[i].absenteeism_rate === 0
                                         ? 0
-                                        : '-',
+                                        : 'N/A',
                                 'title': 'Absenteeism Rate'
                             },
                         ]
@@ -1691,8 +2032,8 @@ document.addEventListener("DOMContentLoaded", () => {
                                     ? +dopDistrictYearListForChart[i].rates_of_3rd_grade_language_arts
                                     : dopDistrictYearListForChart[i].rates_of_3rd_grade_language_arts === 0
                                         ? 0
-                                        : '-',
-                                'title': 'Rates of 3rd Grade Language Arts'
+                                        : 'N/A',
+                                'title': 'Rates of Grades 3–8 Language Arts'
                             },
 
                             {
@@ -1700,7 +2041,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     ? +dopDistrictYearListForChart[i].high_school_graduation_rate_within_6_years
                                     : dopDistrictYearListForChart[i].high_school_graduation_rate_within_6_years === 0
                                         ? 0
-                                        : '-',
+                                        : 'N/A',
                                 'title': 'High school graduation rate (within 6 years)'
                             },
 
@@ -1709,18 +2050,18 @@ document.addEventListener("DOMContentLoaded", () => {
                                     ? +dopDistrictYearListForChart[i].rates_of_3rd_grade_mathematics
                                     : dopDistrictYearListForChart[i].rates_of_3rd_grade_mathematics === 0
                                         ? 0
-                                        : '-',
-                                'title': 'Rates of 3rd Grade Mathematics'
+                                        : 'N/A',
+                                'title': 'Rates of Grades 3–8 Mathematics'
                             },
 
-                            {
-                                'value': dopDistrictYearListForChart[i].psat_average_score
-                                    ? +dopDistrictYearListForChart[i].psat_average_score
-                                    : dopDistrictYearListForChart[i].psat_average_score === 0
-                                        ? 0
-                                        : '-',
-                                'title': 'PSAT Average Score'
-                            },
+                            // {
+                            //     'value': dopDistrictYearListForChart[i].psat_average_score
+                            //         ? +dopDistrictYearListForChart[i].psat_average_score
+                            //         : dopDistrictYearListForChart[i].psat_average_score === 0
+                            //             ? 0
+                            //             : 'N/A',
+                            //     'title': 'PSAT Average Score'
+                            // },
                         ]
                     }
 
@@ -1729,10 +2070,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         'data': [
                             {
                                 'value': dopDistrictYearListForChart[i].spending_per_student
-                                    ? Math.trunc(+dopDistrictYearListForChart[i].spending_per_student)
+                                    ? '$' + Math.trunc(+dopDistrictYearListForChart[i].spending_per_student)
                                     : dopDistrictYearListForChart[i].spending_per_student === 0
                                         ? 0
-                                        : '-',
+                                        : 'N/A',
                                 'title': 'Spending per student'
                             },
 
@@ -1741,7 +2082,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     ? +dopDistrictYearListForChart[i].instructional_spending_total_share_of_spending
                                     : dopDistrictYearListForChart[i].instructional_spending_total_share_of_spending === 0
                                         ? 0
-                                        : '-',
+                                        : 'N/A',
                                 'title': 'Instructional spending/ total share of spending'
                             },
 
@@ -1784,7 +2125,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     ? (+dopDistrictYearListForChart[i].teacher_student_ratio).toFixed(1)
                                     : dopDistrictYearListForChart[i].teacher_student_ratio === 0
                                         ? 0
-                                        : '-',
+                                        : 'N/A',
                                 'title': 'Teacher student ratio',
                                 'type': 'more-one'
                             },
@@ -1794,12 +2135,12 @@ document.addEventListener("DOMContentLoaded", () => {
                                     ? (+dopDistrictYearListForChart[i].staffing_administrative_staff).toFixed(0)
                                     : dopDistrictYearListForChart[i].staffing_administrative_staff === 0
                                         ? 0
-                                        : '-',
+                                        : 'N/A',
                                 'value2': dopDistrictYearListForChart[i].staffing_instructional_staff
                                     ? (+dopDistrictYearListForChart[i].staffing_instructional_staff).toFixed(0)
                                     : dopDistrictYearListForChart[i].staffing_instructional_staff === 0
                                         ? 0
-                                        : '-',
+                                        : 'N/A',
                                 'title': 'Staffing - Administrative staff versus instructional staff',
                                 'type': 'versus'
                             },
@@ -1809,7 +2150,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     ? (+dopDistrictYearListForChart[i].ratio_of_psychologists_students).toFixed(0)
                                     : dopDistrictYearListForChart[i].ratio_of_psychologists_students === 0
                                         ? 0
-                                        : '-',
+                                        : 'N/A',
                                 'title': 'Ratio of psychologists: students',
                                 'type': 'more-one'
                             },
@@ -1819,7 +2160,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     ? (+dopDistrictYearListForChart[i].total_behavioral_incidents).toFixed(0)
                                     : dopDistrictYearListForChart[i].total_behavioral_incidents === 0
                                         ? 0
-                                        : '-',
+                                        : 'N/A',
                                 'title': 'Total behavioral incidents'
                             },
                         ]
@@ -2117,6 +2458,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         //рендер третьего кластера блоков данных Financey
         function renderFinanceyHtmlBox(typeRenderBox, dataArray, dataArrayDop) {
+
+
             let wrapper = document.querySelector('.acordeon-data-claster--finance')
             let row = wrapper.querySelector('.acordeon-data-claster__col')
             let diagramContainer = wrapper.querySelector('.chart-claster-wrapper-x')
@@ -2347,8 +2690,6 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log('maxYearItem', maxYearItem);
         }
 
-
-
         //информ блок тип 1
         function htmlDataBoxV1(data) {
             let blueMob = false
@@ -2361,7 +2702,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 customValueElement = `${data.value}/${data.value2}`
             }
             else {
-                customValueElement = data.value
+                customValueElement = formatTruncated(data.value)
             }
 
             if (data.title == 'Overall public enrollment'
@@ -2399,22 +2740,47 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
 
                         <div class="district-data-element-info__icon">
-                            <svg width="10" height="9" viewBox="0 0 10 9" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M0 1C0 0.447715 0.447715 0 1 0H9C9.55228 0 10 0.447715 10 1V6.5C10 7.05228 9.55228 7.5 9 7.5H6.70711L5.35355 8.85355C5.15829 9.04882 4.84171 9.04882 4.64645 8.85355L3.29289 7.5H1C0.447715 7.5 0 7.05228 0 6.5V1ZM9 1H1V6.5H3.5C3.63261 6.5 3.75979 6.55268 3.85355 6.64645L5 7.79289L6.14645 6.64645C6.24021 6.55268 6.36739 6.5 6.5 6.5H9V1Z"
-                                    fill="#013364" />
-                                <path
-                                    d="M5.75 3.75C5.75 4.16421 5.41421 4.5 5 4.5C4.58579 4.5 4.25 4.16421 4.25 3.75C4.25 3.33579 4.58579 3 5 3C5.41421 3 5.75 3.33579 5.75 3.75Z"
-                                    fill="#013364" />
-                                <path
-                                    d="M7.75 3.75C7.75 4.16421 7.41421 4.5 7 4.5C6.58579 4.5 6.25 4.16421 6.25 3.75C6.25 3.33579 6.58579 3 7 3C7.41421 3 7.75 3.33579 7.75 3.75Z"
-                                    fill="#013364" />
-                                <path
-                                    d="M3.75 3.75C3.75 4.16421 3.41421 4.5 3 4.5C2.58579 4.5 2.25 4.16421 2.25 3.75C2.25 3.33579 2.58579 3 3 3C3.41421 3 3.75 3.33579 3.75 3.75Z"
-                                    fill="#013364" />
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1882 7.3739C12.8803 7.4792 13.5267 7.00351 13.632 6.3114C13.7374 5.61928 13.2616 4.97284 12.5695 4.86753C11.8774 4.76222 11.231 5.23791 11.1257 5.93003C11.0204 6.62214 11.4961 7.26859 12.1882 7.3739ZM11.0985 8.91768C10.637 8.84747 10.2061 9.16461 10.1359 9.62601C10.0657 10.0874 10.3828 10.5184 10.8442 10.5886L9.82723 17.2722C9.75702 17.7337 10.0741 18.1646 10.5356 18.2348C10.997 18.305 11.4279 17.9879 11.4981 17.5265L12.6423 10.0074C12.7125 9.54598 12.3953 9.11502 11.9339 9.04481L11.0985 8.91768Z" fill="#013364"/>
                             </svg>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="district-data-element-info info-rate-popup">
+                    <p class="district-data-element-info__text">Display by socio
+                        economic
+                        status</p>
+                    <div class="district-data-element-info__icon-wrapper">
+                        <div
+                            class="district-data-element-info__data-container  district-data-element-info__data-container--small">
+                            <div class="district-data-element-info__data-container-wrapper">
+                                <div
+                                    class="district-data-element-info__data-container-wrapper-rate">
+                                    <p
+                                        class="district-data-element-info__data-container-wrapper-rate-title">
+                                        LSE RATE
+                                    </p>
+                                    <div
+                                        class="district-data-element-info__data-container-wrapper-rate-value red-text-mod">
+                                        <svg width="8" height="20" viewBox="0 0 8 20"
+                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M3.64645 19.8536C3.84171 20.0488 4.15829 20.0488 4.35355 19.8536L7.53553 16.6716C7.7308 16.4763 7.7308 16.1597 7.53553 15.9645C7.34027 15.7692 7.02369 15.7692 6.82843 15.9645L4 18.7929L1.17157 15.9645C0.976311 15.7692 0.659728 15.7692 0.464466 15.9645C0.269204 16.1597 0.269204 16.4763 0.464466 16.6716L3.64645 19.8536ZM4 0L3.5 0L3.5 19.5H4H4.5L4.5 0L4 0Z"
+                                                fill="#CE3538" />
+                                        </svg>
+
+                                        <span>60%</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="district-data-element-info__icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1882 7.3739C12.8803 7.4792 13.5267 7.00351 13.632 6.3114C13.7374 5.61928 13.2616 4.97284 12.5695 4.86753C11.8774 4.76222 11.231 5.23791 11.1257 5.93003C11.0204 6.62214 11.4961 7.26859 12.1882 7.3739ZM11.0985 8.91768C10.637 8.84747 10.2061 9.16461 10.1359 9.62601C10.0657 10.0874 10.3828 10.5184 10.8442 10.5886L9.82723 17.2722C9.75702 17.7337 10.0741 18.1646 10.5356 18.2348C10.997 18.305 11.4279 17.9879 11.4981 17.5265L12.6423 10.0074C12.7125 9.54598 12.3953 9.11502 11.9339 9.04481L11.0985 8.91768Z" fill="#013364"/>
+                            </svg>
                         </div>
                     </div>
                 </div>
@@ -2435,7 +2801,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (data.type && data.type == 'more-one') {
 
                 if (data.value == '-') {
-                    customValueElement = '-'
+                    customValueElement = 'N/A'
                 }
                 else {
 
@@ -2447,14 +2813,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 customValueElement = `${data.value}/${data.value2}`
             }
             else {
-                customValueElement = data.value
+                customValueElement = formatTruncated(data.value)
             }
 
             let customValueElement2 = ''
 
             if (data2.type && data2.type == 'more-one') {
                 if (data2.value == '-') {
-                    customValueElement2 = '-'
+                    customValueElement2 = 'N/A'
                 }
                 else {
 
@@ -2465,7 +2831,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 customValueElement2 = `${data2.value}/${data2.value2}`
             }
             else {
-                customValueElement2 = data2.value
+                customValueElement2 = formatTruncated(data2.value)
             }
 
 
@@ -2478,10 +2844,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 blueMob = false
             }
 
-            if (data.value > data2.value) {
+            if (cleanNumberString(data.value) > cleanNumberString(data2.value)) {
                 riseMod = true
             }
-            else if (data.value < data2.value) {
+            else if (cleanNumberString(data.value) < cleanNumberString(data2.value)) {
                 riseMod = false
             }
             else {
@@ -2541,22 +2907,49 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
 
                         <div class="district-data-element-info__icon">
-                            <svg width="10" height="9" viewBox="0 0 10 9" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M0 1C0 0.447715 0.447715 0 1 0H9C9.55228 0 10 0.447715 10 1V6.5C10 7.05228 9.55228 7.5 9 7.5H6.70711L5.35355 8.85355C5.15829 9.04882 4.84171 9.04882 4.64645 8.85355L3.29289 7.5H1C0.447715 7.5 0 7.05228 0 6.5V1ZM9 1H1V6.5H3.5C3.63261 6.5 3.75979 6.55268 3.85355 6.64645L5 7.79289L6.14645 6.64645C6.24021 6.55268 6.36739 6.5 6.5 6.5H9V1Z"
-                                    fill="#013364" />
-                                <path
-                                    d="M5.75 3.75C5.75 4.16421 5.41421 4.5 5 4.5C4.58579 4.5 4.25 4.16421 4.25 3.75C4.25 3.33579 4.58579 3 5 3C5.41421 3 5.75 3.33579 5.75 3.75Z"
-                                    fill="#013364" />
-                                <path
-                                    d="M7.75 3.75C7.75 4.16421 7.41421 4.5 7 4.5C6.58579 4.5 6.25 4.16421 6.25 3.75C6.25 3.33579 6.58579 3 7 3C7.41421 3 7.75 3.33579 7.75 3.75Z"
-                                    fill="#013364" />
-                                <path
-                                    d="M3.75 3.75C3.75 4.16421 3.41421 4.5 3 4.5C2.58579 4.5 2.25 4.16421 2.25 3.75C2.25 3.33579 2.58579 3 3 3C3.41421 3 3.75 3.33579 3.75 3.75Z"
-                                    fill="#013364" />
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1882 7.3739C12.8803 7.4792 13.5267 7.00351 13.632 6.3114C13.7374 5.61928 13.2616 4.97284 12.5695 4.86753C11.8774 4.76222 11.231 5.23791 11.1257 5.93003C11.0204 6.62214 11.4961 7.26859 12.1882 7.3739ZM11.0985 8.91768C10.637 8.84747 10.2061 9.16461 10.1359 9.62601C10.0657 10.0874 10.3828 10.5184 10.8442 10.5886L9.82723 17.2722C9.75702 17.7337 10.0741 18.1646 10.5356 18.2348C10.997 18.305 11.4279 17.9879 11.4981 17.5265L12.6423 10.0074C12.7125 9.54598 12.3953 9.11502 11.9339 9.04481L11.0985 8.91768Z" fill="#013364"/>
                             </svg>
+                        </div>
+                    </div>
+                </div>
 
+
+
+                <div class="district-data-element-info info-rate-popup">
+                    <p class="district-data-element-info__text">Display by socio
+                        economic
+                        status</p>
+                    <div class="district-data-element-info__icon-wrapper">
+                        <div
+                            class="district-data-element-info__data-container  district-data-element-info__data-container--small">
+                            <div class="district-data-element-info__data-container-wrapper">
+                                <div
+                                    class="district-data-element-info__data-container-wrapper-rate">
+                                    <p
+                                        class="district-data-element-info__data-container-wrapper-rate-title">
+                                        LSE RATE
+                                    </p>
+                                    <div
+                                        class="district-data-element-info__data-container-wrapper-rate-value red-text-mod">
+                                        <svg width="8" height="20" viewBox="0 0 8 20"
+                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M3.64645 19.8536C3.84171 20.0488 4.15829 20.0488 4.35355 19.8536L7.53553 16.6716C7.7308 16.4763 7.7308 16.1597 7.53553 15.9645C7.34027 15.7692 7.02369 15.7692 6.82843 15.9645L4 18.7929L1.17157 15.9645C0.976311 15.7692 0.659728 15.7692 0.464466 15.9645C0.269204 16.1597 0.269204 16.4763 0.464466 16.6716L3.64645 19.8536ZM4 0L3.5 0L3.5 19.5H4H4.5L4.5 0L4 0Z"
+                                                fill="#CE3538" />
+                                        </svg>
+
+                                        <span>60%</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="district-data-element-info__icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1882 7.3739C12.8803 7.4792 13.5267 7.00351 13.632 6.3114C13.7374 5.61928 13.2616 4.97284 12.5695 4.86753C11.8774 4.76222 11.231 5.23791 11.1257 5.93003C11.0204 6.62214 11.4961 7.26859 12.1882 7.3739ZM11.0985 8.91768C10.637 8.84747 10.2061 9.16461 10.1359 9.62601C10.0657 10.0874 10.3828 10.5184 10.8442 10.5886L9.82723 17.2722C9.75702 17.7337 10.0741 18.1646 10.5356 18.2348C10.997 18.305 11.4279 17.9879 11.4981 17.5265L12.6423 10.0074C12.7125 9.54598 12.3953 9.11502 11.9339 9.04481L11.0985 8.91768Z" fill="#013364"/>
+                            </svg>
                         </div>
                     </div>
                 </div>
@@ -2569,9 +2962,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         //информ блок тип 3
         function htmlDataBoxV3(data, dataDop) {
+            let titleDopDostrict = document.querySelector('.controll-container__select-wrapper .select__head').innerText
             let blueMob = false
             let riseMod1 = null
             let riseMod2 = null
+            let yearCurrent = data.year
 
 
             let customValueElement = ''
@@ -2579,7 +2974,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (data.type && data.type == 'more-one') {
 
                 if (data.value == '-') {
-                    customValueElement = '-'
+                    customValueElement = 'N/A'
                 }
                 else {
 
@@ -2591,14 +2986,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 customValueElement = `${data.value}/${data.value2}`
             }
             else {
-                customValueElement = data.value
+                customValueElement = formatTruncated(data.value)
             }
 
             let customValueElement2 = ''
 
             if (dataDop.type && dataDop.type == 'more-one') {
                 if (dataDop.value == '-') {
-                    customValueElement2 = '-'
+                    customValueElement2 = 'N/A'
                 }
                 else {
 
@@ -2609,7 +3004,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 customValueElement2 = `${dataDop.value}/${dataDop.value2}`
             }
             else {
-                customValueElement2 = dataDop.value
+                customValueElement2 = formatTruncated(dataDop.value)
             }
 
 
@@ -2663,6 +3058,14 @@ document.addEventListener("DOMContentLoaded", () => {
                             <p class="district-data-element-v2__value-claster-title">CURRENT
                                 DISTRICT</p>
                             <div class="district-data-element-v2__current-value-row">
+                                <div class="district-data-element-v2__current-value-ar">
+                                    <svg width="16" height="40" viewBox="0 0 16 40"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M8.70711 0.792893C8.31658 0.402369 7.68342 0.402369 7.29289 0.792893L0.928932 7.15685C0.538408 7.54738 0.538408 8.18054 0.928932 8.57107C1.31946 8.96159 1.95262 8.96159 2.34315 8.57107L8 2.91421L13.6569 8.57107C14.0474 8.96159 14.6805 8.96159 15.0711 8.57107C15.4616 8.18054 15.4616 7.54738 15.0711 7.15685L8.70711 0.792893ZM8 39.5H9L9 1.5H8H7L7 39.5H8Z"
+                                            fill="#037971" />
+                                    </svg>
+                                </div>
 
                                 <div class="district-data-element-v2__current-value">${customValueElement}
                                 </div>
@@ -2671,11 +3074,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         <div
                             class="district-data-element-v2__value-claster 
-                            ${riseMod1 == true ? 'district-data-element--down-mod' : ''}
-                            ${riseMod1 == false ? 'district-data-element--rise-mod' : ''} 
+                   
                             ">
-                            <p class="district-data-element-v2__value-claster-title">CO
-                                STATE AVG.</p>
+                            <p class="district-data-element-v2__value-claster-title">${truncateString(titleDopDostrict)}</p>
                             <div class="district-data-element-v2__current-value-row">
                                 <div class="district-data-element-v2__current-value-ar">
                                     <svg width="16" height="40" viewBox="0 0 16 40"
@@ -2708,6 +3109,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         //информ блок тип 4
         function htmlDataBoxV4(data, data2, dataDop, dataDop2) {
+            let titleDopDostrict = document.querySelector('.controll-container__select-wrapper .select__head').innerText
+
             let blueMob = false
             let riseMod1 = null
             let riseMod2 = null
@@ -2717,7 +3120,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (data.type && data.type == 'more-one') {
 
                 if (data.value == '-') {
-                    customValueElement = '-'
+                    customValueElement = 'N/A'
                 }
                 else {
 
@@ -2729,14 +3132,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 customValueElement = `${data.value}/${data.value2}`
             }
             else {
-                customValueElement = data.value
+                customValueElement = formatTruncated(data.value)
             }
 
             let customValueElement2 = ''
 
             if (data2.type && data2.type == 'more-one') {
                 if (data2.value == '-') {
-                    customValueElement2 = '-'
+                    customValueElement2 = 'N/A'
                 }
                 else {
 
@@ -2747,7 +3150,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 customValueElement2 = `${data2.value}/${data2.value2}`
             }
             else {
-                customValueElement2 = data2.value
+                customValueElement2 = formatTruncated(data2.value)
             }
 
 
@@ -2755,7 +3158,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (dataDop.type && dataDop.type == 'more-one') {
                 if (data2.value == '-') {
-                    customValueElementDop = '-'
+                    customValueElementDop = 'N/A'
                 }
                 else {
 
@@ -2766,7 +3169,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 customValueElementDop = `${dataDop.value}/${dataDop.value2}`
             }
             else {
-                customValueElementDop = dataDop.value
+                customValueElementDop = formatTruncated(dataDop.value)
             }
 
 
@@ -2774,7 +3177,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (dataDop2.type && dataDop2.type == 'more-one') {
                 if (data2.value == '-') {
-                    customValueElementDop2 = '-'
+                    customValueElementDop2 = 'N/A'
                 }
                 else {
 
@@ -2785,7 +3188,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 customValueElementDop2 = `${dataDop2.value}/${dataDop2.value2}`
             }
             else {
-                customValueElementDop2 = dataDop2.value
+                customValueElementDop2 = formatTruncated(dataDop2.value)
             }
 
 
@@ -2801,12 +3204,20 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             let val1 = parseFloat(data.value.toString().replace(/[^\d.-]/g, ''));
+            let val1_old = parseFloat(data2.value.toString().replace(/[^\d.-]/g, ''));
             let val2 = parseFloat(dataDop.value.toString().replace(/[^\d.-]/g, ''));
+            let val2_old = parseFloat(dataDop2.value.toString().replace(/[^\d.-]/g, ''));
 
-            if (val1 < val2) {
+            if (val1 < val1_old) {
                 riseMod1 = false;
-            } else if (val1 > val2) {
+            } else if (val1 > val1_old) {
                 riseMod1 = true;
+            }
+
+            if (val2 < val2_old) {
+                riseMod2 = false;
+            } else if (val2 > val2_old) {
+                riseMod2 = true;
             }
 
 
@@ -2855,11 +3266,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         <div
                             class="district-data-element-v2__value-claster 
-                            ${riseMod1 == true ? 'district-data-element--down-mod' : ''}
-                            ${riseMod1 == false ? 'district-data-element--rise-mod' : ''} 
+                            ${riseMod2 == false ? 'district-data-element--down-mod' : ''}
+                            ${riseMod2 == true ? 'district-data-element--rise-mod' : ''} 
                             ">
-                            <p class="district-data-element-v2__value-claster-title">CO
-                                STATE AVG.</p>
+                            <p class="district-data-element-v2__value-claster-title">${truncateString(titleDopDostrict)}</p>
                             <div class="district-data-element-v2__current-value-row">
                                 <div class="district-data-element-v2__current-value-ar">
                                     <svg width="16" height="40" viewBox="0 0 16 40"
@@ -3020,6 +3430,7 @@ document.addEventListener("DOMContentLoaded", () => {
         function htmlDataDiagramV3(data, data2, diargamColorList) {
             let listValues = ''
             let listValuesFront = ''
+            let titleDopDostrict = document.querySelector('.controll-container__select-wrapper .select__head').innerText
 
             for (let i = 0; i < data.length; i++) {
 
@@ -3039,10 +3450,13 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="acordeon-data-claster__chart-claster">
                 <div
                     class="acordeon-data-claster__chart acordeon-data-claster__chart--type-2">
-
+                
                     <div
                         class="acordeon-data-claster__chart-diagram-wrapper acordeon-data-claster__chart-diagram-wrapper--small">
-
+                        <p
+                            class="acordeon-data-claster__chart--type-3-row-chart-box-title">
+                            DISTRICT
+                        </p>
                         <div
                             class="acordeon-data-claster__chart-diagram-wrapper-chart-1 ">
                             <canvas id="financeChart4"
@@ -3053,6 +3467,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     <div
                         class="acordeon-data-claster__chart-diagram-wrapper acordeon-data-claster__chart-diagram-wrapper--small">
+
+                        <p
+                            class="acordeon-data-claster__chart--type-3-row-chart-box-title">
+                            ${titleDopDostrict}
+                        </p>
 
                         <div
                             class="acordeon-data-claster__chart-diagram-wrapper-chart-1 ">
@@ -3078,7 +3497,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         //диаграма тип 4
         function htmlDataDiagramV4(data1Current, data1Old, data2Current, data2Old, diargamColorList, diargamColorListFront) {
-
+            let titleDopDostrict = document.querySelector('.controll-container__select-wrapper .select__head').innerText
             let titleCols = ''
 
             let colorRow = ''
@@ -3140,7 +3559,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="acordeon-data-claster__chart--type-3-row-chart-box">
                         <p
                             class="acordeon-data-claster__chart--type-3-row-chart-box-title">
-                            CO STATE AVG.
+                            ${titleDopDostrict}
                         </p>
                         <div
                             class="acordeon-data-claster__chart-diagram-wrapper acordeon-data-claster__chart-diagram-wrapper--small">
@@ -3206,8 +3625,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             return htmlCode
         }
-
-
 
         // настройки для диаграм данных
         const optionsSettings = {
@@ -3487,11 +3904,35 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
+        //приведение строки в нормальный вид удалаем символы оставляем числа
+        function cleanNumberString(str) {
+            return +parseFloat(str.toString().replace(/[^\d.-]/g, ''));
+        }
+
+        //обрезка строки
+        function truncateString(str, countText = 20) {
+            if (str.length > countText) {
+                return str.slice(0, countText - 3) + '...';
+            }
+            return str;
+        }
 
 
 
+        function formatTruncated(value) {
+            return value
+            // Проверяем, является ли значением число
+            if (typeof value !== 'number' || isNaN(value)) return value;
 
+            // Обрезаем без округления до 3 знаков после запятой
+            const truncated = Math.trunc(value * 1000) / 1000;
 
+            // Красиво форматируем (разделители тысяч, без лишних нулей)
+            return truncated.toLocaleString(undefined, {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 3
+            });
+        }
 
 
 

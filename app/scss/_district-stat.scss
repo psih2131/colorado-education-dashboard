@@ -16,7 +16,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding-top: 62px;
+    padding-top: 30px;
     padding-bottom: 24px;
 }
 
@@ -24,10 +24,32 @@
     color: #013364;
     font-size: 53px;
     line-height: 66px;
+    max-width: calc(100% - 610px);
 }
 
 .district-stat-select--header {
     width: 390px;
+
+    .select__item {
+        padding: 0;
+    }
+
+    a {
+        padding: 10px 15px;
+    }
+}
+
+.select__item--state {
+
+    position: relative;
+
+    &::before {
+        position: absolute;
+        content: "🏛️";
+        right: 20px;
+
+    }
+
 }
 
 .district-stat-sec__header-right {
@@ -53,6 +75,7 @@
 
         a {
             color: #013364;
+            display: block;
         }
     }
 
@@ -174,6 +197,13 @@
 
 .graf-container__title-row {
     display: flex;
+}
+
+.graf-container__title-row.active {
+    .graf-container__title {
+        font-size: 32px;
+    }
+
 }
 
 .graf-container__title-value {
@@ -479,7 +509,7 @@
 
 .user-element {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 50px;
 
     &:last-child {
@@ -610,6 +640,10 @@
 
     .acordeon-data-claster__col {
         width: calc(33.333% - 30px);
+
+        .district-data-element-v2__current-value {
+            font-size: 36px;
+        }
     }
 
     .district-data-element-v1 {
@@ -680,7 +714,7 @@
     position: relative;
     display: flex;
     justify-content: center;
-    display: none;
+    // display: none;
 
     &:hover {
         .district-data-element-info__data-container {
@@ -1024,7 +1058,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 10px;
+    padding-top: 80px;
 
     .acordeon-data-claster__chart-diagram-wrapper {
         width: 163px;
@@ -1151,6 +1185,14 @@
     color: #938C87;
     font-size: 11px;
     margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.acordeon-data-claster__chart--type-2 {
+    .acordeon-data-claster__chart--type-3-row-chart-box-title {
+        position: absolute;
+        top: -26px;
+    }
 }
 
 .acordeon-data-claster__chart--type-3-row-chart-box {
@@ -1204,16 +1246,16 @@
     display: flex;
     justify-content: center;
 
-    .district-data-element-v2__value-claster {
-        &:first-child {
-            margin-right: 30px;
-        }
-    }
+
+}
+
+.district-data-element-v2__value-claster {
+    width: 50%;
 }
 
 .district-data-element-v2--dop {
     .district-data-element-v2__current-value {
-        font-size: 45px;
+        font-size: 36px;
         line-height: 60px;
 
 
@@ -1232,6 +1274,7 @@
     font-size: 12px;
     color: #938C87;
     text-align: center;
+    text-transform: uppercase;
 }
 
 .district-data-element-v2__past-row {
@@ -1251,6 +1294,9 @@
 }
 
 .acordeon-data-claster__col {
+    position: relative;
+    z-index: 40;
+
     .district-data-element {
         margin-bottom: 25px;
 
@@ -1434,13 +1480,13 @@
 
 
 
-.super-wrap {
-    display: none;
-}
+// .super-wrap {
+//     display: none;
+// }
 
-.members-wrap {
-    display: none;
-}
+// .members-wrap {
+//     display: none;
+// }
 
 
 .sad {
@@ -1455,14 +1501,84 @@
     display: inline-block;
 }
 
-.district-data-element--rise-mod .district-data-element-v2__current-value {}
 
 
+.district-data-element-info {
+    display: none;
+}
 
+.info-rate-popup {
+    .district-data-element-info__text {
+        display: inline-block;
+    }
+}
 
+.district-data-element-info__text {
+    display: none;
+}
 
+.acordeon-data-claster {
+    &:nth-child(1) {
+        .district-data-element {
+            &:nth-child(1) {
+                .district-data-element-info {
+                    display: flex;
+                }
 
+                .info-rate-popup {
+                    display: none;
+                }
+            }
+        }
+    }
 
+    &:nth-child(2) {
+        .district-data-element {
+
+            &:nth-child(1),
+            &:nth-child(3),
+            &:nth-child(4) {
+                .info-rate-popup {
+                    display: flex;
+                }
+            }
+        }
+    }
+
+    &:nth-child(3) {
+        .district-data-element {
+
+            &:nth-child(2) {
+                .district-data-element-info {
+                    display: flex;
+                }
+
+                .info-rate-popup {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    &:nth-child(4) {
+        .district-data-element {
+
+            &:nth-child(2) {
+                .district-data-element-info {
+                    display: flex;
+                }
+
+                .info-rate-popup {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+.controll-container .activ-select .select__head {
+    padding-right: 100px;
+}
 
 
 
@@ -1537,15 +1653,36 @@
         height: 190px;
     }
 
+    .graf-container__title-row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .graf-container__title {
+        font-size: 35px;
+    }
+
+    .graf-container__title-row.active {
+        .graf-container__title {
+            font-size: 28px;
+        }
+
+    }
+
+    .acordeon-data-claster__chart--type-2 {
+        padding-top: 20px;
+    }
+
 }
 
-@media only screen and (max-width: 1460px) {
-    .district-stat-sec__container {
-        width: 1200px;
-    }
+@media only screen and (max-width: 1780px) {
+    // .district-stat-sec__container {
+    //     width: 1200px;
+    // }
 
     .district-stat-sec__title {
         font-size: 45px;
+        max-width: calc(100% - 580px);
     }
 
     .graf-container__title {
@@ -1553,11 +1690,14 @@
     }
 
     .controll-container__title {
-        font-size: 26px;
+        font-size: 24px;
+        line-height: 1;
+        margin-bottom: 15px;
     }
 
     .controll-container {
         width: 450px;
+        padding: 20px 40px;
     }
 
     .district-stat-sec__graf-container {
@@ -1582,6 +1722,7 @@
 
     .controll-container__subtitle {
         padding-right: 0;
+        font-size: 16px;
     }
 
     .district-stat-sec__down-wrapper-aside {
@@ -1636,7 +1777,7 @@
     }
 
     .district-data-element-v1__top-values-value {
-        font-size: 46px;
+        font-size: 40px;
     }
 
     .district-data-element-v1__top-values {
@@ -1651,16 +1792,7 @@
         }
     }
 
-    .acordeon-data-claster__row--v3 {
-        flex-wrap: wrap;
-    }
 
-    .acordeon-data-claster__row--v3 .acordeon-data-claster__col {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: stretch;
-    }
 
     .acordeon-data-claster__col .district-data-element {
         margin-bottom: 20px;
@@ -1670,13 +1802,7 @@
         margin-bottom: 20px;
     }
 
-    .acordeon-data-claster__col .district-data-element {
-        width: calc(50% - 15px);
-    }
 
-    .acordeon-data-claster__chart-wrapper {
-        width: 100%;
-    }
 
     .acordeon-data-claster__row--v1 {
 
@@ -1685,7 +1811,7 @@
             margin: 0 15px 30px 15px;
 
             .district-data-element-v2__current-value {
-                font-size: 45px;
+                font-size: 40px;
                 line-height: 1;
             }
 
@@ -1702,7 +1828,7 @@
             margin: 0 0 30px 0;
 
             .district-data-element-v2__current-value {
-                font-size: 45px;
+                font-size: 40px;
                 line-height: 1;
             }
 
@@ -1713,22 +1839,7 @@
         }
     }
 
-    .acordeon-data-claster__col {
-        .district-data-element {
-            width: calc(50% - 15px);
 
-
-            .district-data-element-v2__current-value {
-                font-size: 45px;
-                line-height: 1;
-            }
-
-            .district-data-element-v2__current-title {
-                font-size: 16px;
-                line-height: 1.2;
-            }
-        }
-    }
 
     .acordeon-data-claster__row--v1 .district-data-element-v2--dop {
         width: calc(50% - 30px);
@@ -1786,6 +1897,158 @@
         width: 100%;
     }
 
+    .acordeon-data-claster__chart-diagram-value {
+        margin-left: 30px;
+    }
+
+    .district-data-element--rise-mod .district-data-element-v2__current-value {
+        font-size: 40px;
+    }
+
+    .acordeon-data-claster__col .district-data-element-v2--dop .district-data-element-v2__current-value {
+        font-size: 34px;
+    }
+
+    .district-stat-sec__title {
+        font-size: 40px;
+    }
+
+    .acordeon-data-claster__chart--type-1 {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+
+
+    .acordeon-data-claster__chart-diagram-value-two {
+        width: auto;
+        margin-top: 40px;
+    }
+
+    .district-stat-sec__header-export-btn {
+        font-size: 18px;
+    }
+
+}
+
+@media only screen and (max-width: 1460px) {
+
+    .district-stat-select--header {
+        width: 300px;
+    }
+
+    .district-stat-sec__title {
+        font-size: 36px;
+        max-width: calc(100% - 490px);
+    }
+
+    .district-stat-sec__container {
+        width: 1200px;
+    }
+
+    .acordeon-data-claster__col .district-data-element {
+        width: calc(50% - 15px);
+    }
+
+    .acordeon-data-claster__chart-wrapper {
+        width: 100%;
+    }
+
+    .acordeon-data-claster__row--v3 {
+        flex-wrap: wrap;
+    }
+
+    .acordeon-data-claster__row--v3 .acordeon-data-claster__col {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+    }
+
+    .acordeon-data-claster__col {
+        .district-data-element {
+            width: calc(50% - 15px);
+
+
+            .district-data-element-v2__current-value {
+                font-size: 35px;
+                line-height: 1;
+            }
+
+            .district-data-element-v2__current-title {
+                font-size: 16px;
+                line-height: 1.2;
+            }
+        }
+    }
+
+    .acordeon-data-claster__chart-diagram-value-two {
+        margin-top: 0;
+        width: calc(100% - 328px);
+    }
+
+    .district-data-element-v2__current-title {
+        font-size: 14px;
+    }
+
+    .district-data-element-v1__top-values-title {
+        font-size: 14px;
+    }
+
+    .controll-container {
+        width: 400px;
+    }
+
+    .district-stat-sec__graf-container {
+        width: calc(100% - 400px);
+    }
+
+    .district-stat-sec__down-wrapper-aside {
+        width: 400px;
+    }
+
+    .down-wrapper-main-data {
+        width: calc(100% - 400px);
+        padding-right: 30px;
+
+    }
+
+    .acordeon-data-claster__row--v2 .district-data-element-v2 .district-data-element-v2__current-title {
+        font-size: 14px;
+    }
+
+    .acordeon-data-claster__col .district-data-element .district-data-element-v2__current-title {
+        font-size: 14px;
+    }
+
+    .acordeon-data-claster__row--v1 .district-data-element-v2 .district-data-element-v2__current-title {
+        font-size: 14px;
+    }
+
+    .controll-container {
+        padding: 25px 30px;
+    }
+
+    .district-stat-select .select__head {
+        font-size: 16px;
+    }
+
+    .select__head-clear {
+        font-size: 18px;
+        top: 19px;
+    }
+
+    .graf-container__title-row.active {
+        .graf-container__title {
+            font-size: 22px;
+        }
+
+    }
+
+    .controll-container .activ-select .select__head {
+        padding-right: 80px;
+    }
+
 }
 
 @media only screen and (max-width: 1220px) {
@@ -1803,6 +2066,7 @@
         line-height: 1;
         width: 100%;
         margin-bottom: 20px;
+        max-width: 100%;
     }
 
     .district-stat-sec__header-export-btn {
@@ -1835,6 +2099,14 @@
         width: 100%;
         margin-top: 50px;
     }
+
+    .graf-container__title-row.active {
+        .graf-container__title {
+            font-size: 21px;
+        }
+
+    }
+
 }
 
 @media only screen and (max-width: 765px) {
@@ -1914,6 +2186,7 @@
     .timeline {
         width: calc(100% - 20px);
         margin-left: 10px;
+        margin-top: 20px;
     }
 
     .controll-container__title {
@@ -1929,6 +2202,7 @@
     .timeline .marks span {
         font-size: 14px;
         text-align: center;
+
     }
 
     .controll-container__select-wrapper {
@@ -1971,7 +2245,7 @@
 
     .district-data-element-v1__top-values-value {
         line-height: 1;
-        font-size: 35px;
+        font-size: 30px;
     }
 
     .district-data-element-v1__top-values {
@@ -2172,6 +2446,39 @@
 
     .district-data-element-v2__past-row .district-data-element-v2__past {
         width: 50%;
+    }
+
+    .info-rate-popup .district-data-element-info__text {
+        display: none;
+    }
+
+    .graf-container__canvas-wrapper {
+        padding-top: 10px;
+    }
+
+    .controll-container__select-wrapper {
+        margin-top: 5px;
+    }
+
+    .controll-container__select-wrapper-title {
+        font-size: 16px;
+        line-height: 1;
+    }
+
+    .controll-container__subtitle {
+        font-size: 14px;
+        line-height: 1.2;
+    }
+
+    .graf-container__title-row.active {
+        .graf-container__title {
+            font-size: 18px;
+        }
+
+    }
+
+    .controll-container .activ-select .select__head {
+        padding-right: 70px;
     }
 
 }
