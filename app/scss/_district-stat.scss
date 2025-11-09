@@ -681,10 +681,11 @@
     color: #013364;
     margin-bottom: 6px;
     font-weight: 700;
+    text-transform: capitalize;
 }
 
 .district-data-element-v1__top-values-value {
-    font-size: 60px;
+    font-size: 50px;
     line-height: 74px;
     font-weight: 700;
     color: #013364;
@@ -745,10 +746,16 @@
     padding-bottom: 15px;
     bottom: 21px;
     display: none;
+    text-align: center;
+
+    a {
+        color: #0273B2;
+        text-decoration: underline;
+    }
 }
 
 .district-data-element-info__data-container--big {
-    width: 312px;
+    width: 250px;
 }
 
 .district-data-element-info__data-container--small {
@@ -832,6 +839,7 @@
     width: 100%;
     text-align: center;
     font-weight: 700;
+    text-transform: capitalize;
 
     span {
         font-weight: 300;
@@ -855,7 +863,7 @@
 }
 
 .district-data-element-v2__current-value-ar {
-    margin-right: 10px;
+    margin-right: 5px;
     display: none;
 
     svg {
@@ -865,8 +873,8 @@
 
 .district-data-element-v2__current-value {
     color: #013364;
-    font-size: 60px;
-    line-height: 74px;
+    font-size: 50px;
+    line-height: 65px;
     font-weight: 700;
 }
 
@@ -1503,78 +1511,88 @@
 
 
 
-.district-data-element-info {
-    display: none;
-}
+// .district-data-element-info {
+//     display: none;
+// }
 
-.info-rate-popup {
-    .district-data-element-info__text {
-        display: inline-block;
-    }
-}
+// .info-rate-popup {
+//     .district-data-element-info__text {
+//         display: inline-block;
+//     }
+// }
 
-.district-data-element-info__text {
-    display: none;
-}
+// .district-data-element-info__text {
+//     display: none;
+// }
 
-.acordeon-data-claster {
-    &:nth-child(1) {
-        .district-data-element {
-            &:nth-child(1) {
-                .district-data-element-info {
-                    display: flex;
-                }
+// .acordeon-data-claster {
+//     &:nth-child(1) {
+//         .district-data-element {
+//             &:nth-child(1) {
+//                 .district-data-element-info {
+//                     display: flex;
+//                 }
 
-                .info-rate-popup {
-                    display: none;
-                }
-            }
-        }
-    }
+//                 .info-rate-popup {
+//                     display: none;
+//                 }
+//             }
+//         }
+//     }
 
-    &:nth-child(2) {
-        .district-data-element {
+//     &:nth-child(2) {
+//         .district-data-element {
 
-            &:nth-child(1),
-            &:nth-child(3),
-            &:nth-child(4) {
-                .info-rate-popup {
-                    display: flex;
-                }
-            }
-        }
-    }
+//             &:nth-child(1),
+//             &:nth-child(3),
+//             &:nth-child(4) {
+//                 .info-rate-popup {
+//                     display: flex;
+//                 }
+//             }
+//         }
+//     }
 
-    &:nth-child(3) {
-        .district-data-element {
+//     &:nth-child(3) {
+//         .district-data-element {
 
-            &:nth-child(2) {
-                .district-data-element-info {
-                    display: flex;
-                }
+//             &:nth-child(2) {
+//                 .district-data-element-info {
+//                     display: flex;
+//                 }
 
-                .info-rate-popup {
-                    display: none;
-                }
-            }
-        }
-    }
+//                 .info-rate-popup {
+//                     display: none;
+//                 }
+//             }
+//         }
+//     }
 
-    &:nth-child(4) {
-        .district-data-element {
+//     &:nth-child(4) {
+//         .district-data-element {
 
-            &:nth-child(2) {
-                .district-data-element-info {
-                    display: flex;
-                }
+//             &:nth-child(2) {
+//                 .district-data-element-info {
+//                     display: flex;
+//                 }
 
-                .info-rate-popup {
-                    display: none;
-                }
-            }
-        }
-    }
-}
+//                 .info-rate-popup {
+//                     display: none;
+//                 }
+//             }
+
+//             &:nth-child(4) {
+//                 .district-data-element-info {
+//                     display: flex;
+//                 }
+
+//                 .info-rate-popup {
+//                     display: none;
+//                 }
+//             }
+//         }
+//     }
+// }
 
 .controll-container .activ-select .select__head {
     padding-right: 100px;
@@ -1929,6 +1947,9 @@
         font-size: 18px;
     }
 
+    .acordeon-data-claster__col .district-data-element-v2--dop .district-data-element-v2__current-value {
+        font-size: 30px;
+    }
 }
 
 @media only screen and (max-width: 1460px) {

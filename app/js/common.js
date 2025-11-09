@@ -431,7 +431,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 url = districtData.link
 
                                 if (districtData.acf?.years[0]?.overall_score) {
-                                    score = (+districtData.acf.years[1].overall_score * 100).toFixed(2)
+                                    score = (+districtData.acf.years[1].overall_score).toFixed(2)
                                     console.log('bingo2', score)
                                 }
                                 else {
@@ -530,7 +530,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 url = districtData.link
 
                                 if (districtData.acf?.years[0]?.overall_score) {
-                                    score = (+districtData.acf.years[1].overall_score * 100).toFixed(2)
+                                    score = (+districtData.acf.years[1].overall_score).toFixed(2)
                                     console.log('bingo2', score)
                                 }
                                 else {
@@ -608,7 +608,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                         url = districtData.link
 
                                         if (districtData.acf?.years[0]?.overall_score) {
-                                            score = (+districtData.acf.years[1].overall_score * 100).toFixed(2)
+                                            score = (+districtData.acf.years[1].overall_score).toFixed(2)
                                             console.log('bingo2', score)
                                         }
                                         else {
@@ -1404,7 +1404,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const labelsCurrentDistryctsYears = currentDistrictYearListForChart.map(item => item.year);
 
             //создаем масив с значениями для графика
-            const dataCurrentDistryctsOveralScore = currentDistrictYearListForChart.map(item => item.overall_score * 100);
+            const dataCurrentDistryctsOveralScore = currentDistrictYearListForChart.map(item => item.overall_score);
 
             console.log('labelsCurrentDistryctsYears', labelsCurrentDistryctsYears)
             console.log('dataCurrentDistryctsOveralScore', dataCurrentDistryctsOveralScore)
@@ -1530,7 +1530,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const labelsCurrentDistryctsYears = currentDistrictYearListForChart.map(item => item.year);
 
                 //создаем масив с значениями для графика
-                const dataCurrentDistryctsOveralScore = currentDistrictYearListForChart.map(item => item.overall_score * 100);
+                const dataCurrentDistryctsOveralScore = currentDistrictYearListForChart.map(item => item.overall_score);
 
 
                 if (dopDistrictYearListForChart && multiDistrictData == true) {
@@ -1539,7 +1539,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const labelsCurrentDopDistryctsYears = dopDistrictYearListForChart.map(item => item.year);
 
                     //создаем масив с значениями для графика
-                    const dataCurrentDopDistryctsOveralScore = dopDistrictYearListForChart.map(item => item.overall_score * 100);
+                    const dataCurrentDopDistryctsOveralScore = dopDistrictYearListForChart.map(item => item.overall_score);
 
 
 
@@ -1604,7 +1604,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // dopDistrictSelectValue
             //задаем значение для первоначальной загрузки
-            currentScoreValue.innerHTML = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100) * 100) / 100
+            currentScoreValue.innerHTML = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100)) / 100
             currentScoreValue.classList.add('red')
             //чекаем подгрузку нового дистрикта для сравнения
             document.addEventListener('LoadDopDataDistrict', () => {
@@ -1614,8 +1614,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     dopScoreStateTitle.innerHTML = truncateString(titleDopDostrict, 20)
 
-                    let valueCurrent = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100) * 100) / 100
-                    let valueDop = Math.floor((+dopDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100) * 100) / 100
+                    let valueCurrent = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100)) / 100
+                    let valueDop = Math.floor((+dopDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100)) / 100
 
                     titleRow.classList.add('active')
                     currentScoreValue.innerHTML = valueCurrent
@@ -1638,7 +1638,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }
                 else {
-                    currentScoreValue.innerHTML = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100) * 100) / 100
+                    currentScoreValue.innerHTML = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100)) / 100
                     dopScoreWrapper.classList.remove('active')
                     currentScoreValue.classList.remove('green')
                     currentScoreValue.classList.add('red')
@@ -1649,8 +1649,8 @@ document.addEventListener("DOMContentLoaded", () => {
             //чекаем смену ползунка
             document.addEventListener('changeRangeEvent', () => {
                 if (dopDistrictYearListForChart && multiDistrictData == true) {
-                    let valueCurrent = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100) * 100) / 100
-                    let valueDop = Math.floor((+dopDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100) * 100) / 100
+                    let valueCurrent = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100)) / 100
+                    let valueDop = Math.floor((+dopDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100)) / 100
 
 
                     currentScoreValue.innerHTML = valueCurrent
@@ -1672,14 +1672,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }
                 else {
-                    currentScoreValue.innerHTML = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100) * 100) / 100
+                    currentScoreValue.innerHTML = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100)) / 100
                     dopScoreWrapper.classList.remove('active')
                     currentScoreValue.classList.remove('green')
                     currentScoreValue.classList.add('red')
                 }
             })
 
-            console.log('currentDistrictYearListForChart', +currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100, currentScoreValue)
+            console.log('currentDistrictYearListForChart', +currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score, currentScoreValue)
         }
 
 
@@ -1727,24 +1727,31 @@ document.addEventListener("DOMContentLoaded", () => {
                                 : currentDistrictYearListForChart[i].overall_public_enrollment === 0
                                     ? 0
                                     : null,
-                            'title': 'Overall public enrollment'
+                            'title': 'Overall public enrollment',
+                            'inform': {
+                                'status': true,
+                                'type': 'simple'
+                            }
                         },
+
+                        {
+                            'value': currentDistrictYearListForChart[i].percent_in_charter_data
+                                ? +currentDistrictYearListForChart[i].percent_in_charter_data + '%'
+                                : currentDistrictYearListForChart[i].percent_in_charter_data === 0
+                                    ? 0
+                                    : 'N/A',
+                            'title': 'Percent in Charter Schools'
+                        },
+
                         {
                             'value': currentDistrictYearListForChart[i].percent_in_private_enrollment
                                 ? +currentDistrictYearListForChart[i].percent_in_private_enrollment
                                 : currentDistrictYearListForChart[i].percent_in_private_enrollment === 0
                                     ? 0
                                     : 'N/A',
-                            'title': 'Percent in Private enrollment (CDE)'
+                            'title': 'Private enrollment'
                         },
-                        {
-                            'value': currentDistrictYearListForChart[i].percent_in_charter_data
-                                ? +currentDistrictYearListForChart[i].percent_in_charter_data
-                                : currentDistrictYearListForChart[i].percent_in_charter_data === 0
-                                    ? 0
-                                    : 'N/A',
-                            'title': 'Percent in Charter data (on CDE website)'
-                        },
+
                         // {
                         //     'value': currentDistrictYearListForChart[i].percent_utilizing_open_enrollment
                         //         ? +currentDistrictYearListForChart[i].percent_utilizing_open_enrollment
@@ -1755,20 +1762,28 @@ document.addEventListener("DOMContentLoaded", () => {
                         // },
                         {
                             'value': currentDistrictYearListForChart[i].intra_district_choice
-                                ? +currentDistrictYearListForChart[i].intra_district_choice
+                                ? +currentDistrictYearListForChart[i].intra_district_choice + '%'
                                 : currentDistrictYearListForChart[i].intra_district_choice === 0
                                     ? 0
                                     : 'N/A',
-                            'title': 'Intra-district choice'
+                            'title': 'Intra-district choice',
+                            'inform': {
+                                'status': true,
+                                'type': 'simple'
+                            }
                         },
 
                         {
                             'value': currentDistrictYearListForChart[i].inter_district_choice
-                                ? +currentDistrictYearListForChart[i].inter_district_choice
+                                ? +currentDistrictYearListForChart[i].inter_district_choice + '%'
                                 : currentDistrictYearListForChart[i].inter_district_choice === 0
                                     ? 0
                                     : 'N/A',
-                            'title': 'Inter-district choice'
+                            'title': 'Inter-district choice',
+                            'inform': {
+                                'status': true,
+                                'type': 'simple'
+                            }
                         },
                         {
                             'value': currentDistrictYearListForChart[i].absenteeism_rate
@@ -1776,7 +1791,22 @@ document.addEventListener("DOMContentLoaded", () => {
                                 : currentDistrictYearListForChart[i].absenteeism_rate === 0
                                     ? 0
                                     : 'N/A',
-                            'title': 'Absenteeism Rate'
+                            'title': 'Chronic absenteeism rate',
+                            'inform': {
+                                'status': true,
+                                'type': 'simple'
+                            },
+                            'revers_color_value': true,
+                        },
+
+                        {
+                            'value': currentDistrictYearListForChart[i].share_of_students_qualified_for_free_or_reduced_price_lunch
+                                ? (+currentDistrictYearListForChart[i].share_of_students_qualified_for_free_or_reduced_price_lunch) + '%'
+                                : currentDistrictYearListForChart[i].share_of_students_qualified_for_free_or_reduced_price_lunch === 0
+                                    ? 0
+                                    : 'N/A',
+                            'title': 'Share of Students Qualified for Free or Reduced-price Lunch',
+                            'compareStatus': false
                         },
                     ]
                 }
@@ -1790,25 +1820,37 @@ document.addEventListener("DOMContentLoaded", () => {
                                 : currentDistrictYearListForChart[i].rates_of_3rd_grade_language_arts === 0
                                     ? 0
                                     : 'N/A',
-                            'title': 'Rates of Grades 3–8 Language Arts'
+                            'title': 'English language arts proficiency rate (grades 3–8)',
+                            'inform': {
+                                'status': true,
+                                'type': 'simple'
+                            }
                         },
 
                         {
                             'value': currentDistrictYearListForChart[i].high_school_graduation_rate_within_6_years
-                                ? +currentDistrictYearListForChart[i].high_school_graduation_rate_within_6_years
+                                ? +currentDistrictYearListForChart[i].high_school_graduation_rate_within_6_years + '%'
                                 : currentDistrictYearListForChart[i].high_school_graduation_rate_within_6_years === 0
                                     ? 0
                                     : 'N/A',
-                            'title': 'High school graduation rate (within 6 years)'
+                            'title': 'High school 6-year graduation rate',
+                            'inform': {
+                                'status': true,
+                                'type': 'simple'
+                            }
                         },
 
                         {
                             'value': currentDistrictYearListForChart[i].rates_of_3rd_grade_mathematics
-                                ? +currentDistrictYearListForChart[i].rates_of_3rd_grade_mathematics
+                                ? +currentDistrictYearListForChart[i].rates_of_3rd_grade_mathematics + '%'
                                 : currentDistrictYearListForChart[i].rates_of_3rd_grade_mathematics === 0
                                     ? 0
                                     : 'N/A',
-                            'title': 'Rates of Grades 3–8 Mathematics'
+                            'title': 'Mathematics proficiency rate (grades 3–8)',
+                            'inform': {
+                                'status': true,
+                                'type': 'simple'
+                            }
                         },
 
                         // {
@@ -1831,16 +1873,21 @@ document.addEventListener("DOMContentLoaded", () => {
                                 : currentDistrictYearListForChart[i].spending_per_student === 0
                                     ? 0
                                     : 'N/A',
-                            'title': 'Spending per student'
+                            'title': 'Spending per student',
+                            'type': 'money'
                         },
 
                         {
                             'value': currentDistrictYearListForChart[i].instructional_spending_total_share_of_spending
-                                ? +currentDistrictYearListForChart[i].instructional_spending_total_share_of_spending
+                                ? +currentDistrictYearListForChart[i].instructional_spending_total_share_of_spending + '%'
                                 : currentDistrictYearListForChart[i].instructional_spending_total_share_of_spending === 0
                                     ? 0
                                     : 'N/A',
-                            'title': 'Instructional spending/ total share of spending'
+                            'title': 'Instructional share of total spending',
+                            'inform': {
+                                'status': true,
+                                'type': 'simple'
+                            }
                         },
 
                     ],
@@ -1880,11 +1927,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     'data': [
                         {
                             'value': currentDistrictYearListForChart[i].teacher_student_ratio
-                                ? (+currentDistrictYearListForChart[i].teacher_student_ratio).toFixed(1)
+                                ? (+currentDistrictYearListForChart[i].teacher_student_ratio).toFixed(0)
                                 : currentDistrictYearListForChart[i].teacher_student_ratio === 0
                                     ? 0
                                     : 'N/A',
-                            'title': 'Teacher student ratio',
+                            'title': 'Student–teacher ratio',
                             'type': 'more-one'
                         },
 
@@ -1899,8 +1946,20 @@ document.addEventListener("DOMContentLoaded", () => {
                                 : currentDistrictYearListForChart[i].staffing_instructional_staff === 0
                                     ? 0
                                     : 'N/A',
+                            'valueFull': currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== null &&
+                                currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== undefined &&
+                                currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== '' &&
+                                currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== '*' &&
+                                currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff.toString().toUpperCase() !== 'N/A'
+                                ? currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff
+                                : 'N/A',
                             'title': 'Staffing - Administrative staff versus instructional staff',
-                            'type': 'versus'
+                            'type': 'versus',
+                            'compareStatus': false,
+                            'inform': {
+                                'status': true,
+                                'type': 'simple'
+                            }
                         },
 
                         {
@@ -1909,7 +1968,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 : currentDistrictYearListForChart[i].ratio_of_psychologists_students === 0
                                     ? 0
                                     : 'N/A',
-                            'title': 'Ratio of psychologists: students',
+                            'title': 'Student–psychologist ratio',
                             'type': 'more-one'
                         },
 
@@ -1919,7 +1978,11 @@ document.addEventListener("DOMContentLoaded", () => {
                                 : currentDistrictYearListForChart[i].total_behavioral_incidents === 0
                                     ? 0
                                     : 'N/A',
-                            'title': 'Total behavioral incidents'
+                            'title': 'Disciplinary incidents',
+                            'inform': {
+                                'status': true,
+                                'type': 'simple'
+                            }
                         },
                     ]
                 }
@@ -1952,6 +2015,7 @@ document.addEventListener("DOMContentLoaded", () => {
             renderStaffingHtmlBox(1, staffingCurrentDistrictArray)
 
             normalisationBoxInfoTitle()
+            onResizeEnd(normalisationBoxInfoTitle)
 
 
 
@@ -1971,21 +2035,23 @@ document.addEventListener("DOMContentLoaded", () => {
                                         : 'N/A',
                                 'title': 'Overall public enrollment'
                             },
+
+                            {
+                                'value': dopDistrictYearListForChart[i].percent_in_charter_data
+                                    ? +dopDistrictYearListForChart[i].percent_in_charter_data + '%'
+                                    : dopDistrictYearListForChart[i].percent_in_charter_data === 0
+                                        ? 0
+                                        : 'N/A',
+                                'title': 'Percent in Charter Schools'
+                            },
+
                             {
                                 'value': dopDistrictYearListForChart[i].percent_in_private_enrollment
                                     ? +dopDistrictYearListForChart[i].percent_in_private_enrollment
                                     : dopDistrictYearListForChart[i].percent_in_private_enrollment === 0
                                         ? 0
                                         : 'N/A',
-                                'title': 'Percent in Private enrollment (CDE)'
-                            },
-                            {
-                                'value': dopDistrictYearListForChart[i].percent_in_charter_data
-                                    ? +dopDistrictYearListForChart[i].percent_in_charter_data
-                                    : dopDistrictYearListForChart[i].percent_in_charter_data === 0
-                                        ? 0
-                                        : 'N/A',
-                                'title': 'Percent in Charter data (on CDE website)'
+                                'title': 'Private enrollment'
                             },
                             // {
                             //     'value': dopDistrictYearListForChart[i].percent_utilizing_open_enrollment
@@ -1998,7 +2064,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                             {
                                 'value': dopDistrictYearListForChart[i].intra_district_choice
-                                    ? +dopDistrictYearListForChart[i].intra_district_choice
+                                    ? +dopDistrictYearListForChart[i].intra_district_choice + '%'
                                     : dopDistrictYearListForChart[i].intra_district_choice === 0
                                         ? 0
                                         : 'N/A',
@@ -2007,7 +2073,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                             {
                                 'value': dopDistrictYearListForChart[i].inter_district_choice
-                                    ? +dopDistrictYearListForChart[i].inter_district_choice
+                                    ? +dopDistrictYearListForChart[i].inter_district_choice + '%'
                                     : dopDistrictYearListForChart[i].inter_district_choice === 0
                                         ? 0
                                         : 'N/A',
@@ -2019,7 +2085,17 @@ document.addEventListener("DOMContentLoaded", () => {
                                     : dopDistrictYearListForChart[i].absenteeism_rate === 0
                                         ? 0
                                         : 'N/A',
-                                'title': 'Absenteeism Rate'
+                                'title': 'Chronic absenteeism rate',
+                                'revers_color_value': true,
+                            },
+                            {
+                                'value': dopDistrictYearListForChart[i].share_of_students_qualified_for_free_or_reduced_price_lunch
+                                    ? (+dopDistrictYearListForChart[i].share_of_students_qualified_for_free_or_reduced_price_lunch) + '%'
+                                    : dopDistrictYearListForChart[i].share_of_students_qualified_for_free_or_reduced_price_lunch === 0
+                                        ? 0
+                                        : 'N/A',
+                                'title': 'Share of Students Qualified for Free or Reduced-price Lunch',
+                                'compareStatus': false
                             },
                         ]
                     }
@@ -2033,25 +2109,25 @@ document.addEventListener("DOMContentLoaded", () => {
                                     : dopDistrictYearListForChart[i].rates_of_3rd_grade_language_arts === 0
                                         ? 0
                                         : 'N/A',
-                                'title': 'Rates of Grades 3–8 Language Arts'
+                                'title': 'English language arts proficiency rate (grades 3–8)'
                             },
 
                             {
                                 'value': dopDistrictYearListForChart[i].high_school_graduation_rate_within_6_years
-                                    ? +dopDistrictYearListForChart[i].high_school_graduation_rate_within_6_years
+                                    ? +dopDistrictYearListForChart[i].high_school_graduation_rate_within_6_years + '%'
                                     : dopDistrictYearListForChart[i].high_school_graduation_rate_within_6_years === 0
                                         ? 0
                                         : 'N/A',
-                                'title': 'High school graduation rate (within 6 years)'
+                                'title': 'High school 6-year graduation rate'
                             },
 
                             {
                                 'value': dopDistrictYearListForChart[i].rates_of_3rd_grade_mathematics
-                                    ? +dopDistrictYearListForChart[i].rates_of_3rd_grade_mathematics
+                                    ? +dopDistrictYearListForChart[i].rates_of_3rd_grade_mathematics + '%'
                                     : dopDistrictYearListForChart[i].rates_of_3rd_grade_mathematics === 0
                                         ? 0
                                         : 'N/A',
-                                'title': 'Rates of Grades 3–8 Mathematics'
+                                'title': 'Mathematics proficiency rate (grades 3–8)'
                             },
 
                             // {
@@ -2074,16 +2150,17 @@ document.addEventListener("DOMContentLoaded", () => {
                                     : dopDistrictYearListForChart[i].spending_per_student === 0
                                         ? 0
                                         : 'N/A',
-                                'title': 'Spending per student'
+                                'title': 'Spending per student',
+                                'type': 'money'
                             },
 
                             {
                                 'value': dopDistrictYearListForChart[i].instructional_spending_total_share_of_spending
-                                    ? +dopDistrictYearListForChart[i].instructional_spending_total_share_of_spending
+                                    ? +dopDistrictYearListForChart[i].instructional_spending_total_share_of_spending + '%'
                                     : dopDistrictYearListForChart[i].instructional_spending_total_share_of_spending === 0
                                         ? 0
                                         : 'N/A',
-                                'title': 'Instructional spending/ total share of spending'
+                                'title': 'Instructional share of total spending'
                             },
 
                         ],
@@ -2126,7 +2203,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     : dopDistrictYearListForChart[i].teacher_student_ratio === 0
                                         ? 0
                                         : 'N/A',
-                                'title': 'Teacher student ratio',
+                                'title': 'Student–teacher ratio',
                                 'type': 'more-one'
                             },
 
@@ -2141,8 +2218,16 @@ document.addEventListener("DOMContentLoaded", () => {
                                     : dopDistrictYearListForChart[i].staffing_instructional_staff === 0
                                         ? 0
                                         : 'N/A',
+                                'valueFull': dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== null &&
+                                    dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== undefined &&
+                                    dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== '' &&
+                                    dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== '*' &&
+                                    dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff.toString().toUpperCase() !== 'N/A'
+                                    ? dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff
+                                    : 'N/A',
                                 'title': 'Staffing - Administrative staff versus instructional staff',
-                                'type': 'versus'
+                                'type': 'versus',
+                                'compareStatus': false
                             },
 
                             {
@@ -2151,7 +2236,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     : dopDistrictYearListForChart[i].ratio_of_psychologists_students === 0
                                         ? 0
                                         : 'N/A',
-                                'title': 'Ratio of psychologists: students',
+                                'title': 'Student–psychologist ratio',
                                 'type': 'more-one'
                             },
 
@@ -2161,7 +2246,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     : dopDistrictYearListForChart[i].total_behavioral_incidents === 0
                                         ? 0
                                         : 'N/A',
-                                'title': 'Total behavioral incidents'
+                                'title': 'Disciplinary incidents'
                             },
                         ]
                     }
@@ -2694,24 +2779,40 @@ document.addEventListener("DOMContentLoaded", () => {
         function htmlDataBoxV1(data) {
             let blueMob = false
             let customValueElement = ''
+            let informPopup = ''
 
             if (data.type && data.type == 'more-one') {
                 customValueElement = `${data.value}:1`
             }
             else if (data.type && data.type == 'versus') {
-                customValueElement = `${data.value}/${data.value2}`
+                customValueElement = `${data.valueFull}`
             }
             else {
                 customValueElement = formatTruncated(data.value)
             }
 
             if (data.title == 'Overall public enrollment'
-                || data.title == 'High school graduation rate (within 6 years)'
+                || data.title == 'High school 6-year graduation rate'
                 || data.title == 'Spending per student') {
                 blueMob = true
             }
             else {
                 blueMob = false
+            }
+
+            //comas for money
+            if (data.type == 'money' || data.title == 'Overall public enrollment') {
+                customValueElement = addCommas(customValueElement)
+            }
+
+            //inform popup
+            if (data.inform?.status == true) {
+                if (data.inform.type == 'simple') {
+                    informPopup = htmlInformPopupSinple()
+                }
+            }
+            else {
+                informPopup = ''
             }
 
             let htmlCode = `
@@ -2724,66 +2825,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
 
-                
-
-                <div class="district-data-element-info">
-                    <div class="district-data-element-info__icon-wrapper">
-                        <div
-                            class="district-data-element-info__data-container  district-data-element-info__data-container--big">
-                            <div class="district-data-element-info__data-container-wrapper">
-                                <div
-                                    class="district-data-element-info__data-container-wrapper-text">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Maecenas nec convallis massa.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="district-data-element-info__icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1882 7.3739C12.8803 7.4792 13.5267 7.00351 13.632 6.3114C13.7374 5.61928 13.2616 4.97284 12.5695 4.86753C11.8774 4.76222 11.231 5.23791 11.1257 5.93003C11.0204 6.62214 11.4961 7.26859 12.1882 7.3739ZM11.0985 8.91768C10.637 8.84747 10.2061 9.16461 10.1359 9.62601C10.0657 10.0874 10.3828 10.5184 10.8442 10.5886L9.82723 17.2722C9.75702 17.7337 10.0741 18.1646 10.5356 18.2348C10.997 18.305 11.4279 17.9879 11.4981 17.5265L12.6423 10.0074C12.7125 9.54598 12.3953 9.11502 11.9339 9.04481L11.0985 8.91768Z" fill="#013364"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="district-data-element-info info-rate-popup">
-                    <p class="district-data-element-info__text">Display by socio
-                        economic
-                        status</p>
-                    <div class="district-data-element-info__icon-wrapper">
-                        <div
-                            class="district-data-element-info__data-container  district-data-element-info__data-container--small">
-                            <div class="district-data-element-info__data-container-wrapper">
-                                <div
-                                    class="district-data-element-info__data-container-wrapper-rate">
-                                    <p
-                                        class="district-data-element-info__data-container-wrapper-rate-title">
-                                        LSE RATE
-                                    </p>
-                                    <div
-                                        class="district-data-element-info__data-container-wrapper-rate-value red-text-mod">
-                                        <svg width="8" height="20" viewBox="0 0 8 20"
-                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M3.64645 19.8536C3.84171 20.0488 4.15829 20.0488 4.35355 19.8536L7.53553 16.6716C7.7308 16.4763 7.7308 16.1597 7.53553 15.9645C7.34027 15.7692 7.02369 15.7692 6.82843 15.9645L4 18.7929L1.17157 15.9645C0.976311 15.7692 0.659728 15.7692 0.464466 15.9645C0.269204 16.1597 0.269204 16.4763 0.464466 16.6716L3.64645 19.8536ZM4 0L3.5 0L3.5 19.5H4H4.5L4.5 0L4 0Z"
-                                                fill="#CE3538" />
-                                        </svg>
-
-                                        <span>60%</span>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="district-data-element-info__icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1882 7.3739C12.8803 7.4792 13.5267 7.00351 13.632 6.3114C13.7374 5.61928 13.2616 4.97284 12.5695 4.86753C11.8774 4.76222 11.231 5.23791 11.1257 5.93003C11.0204 6.62214 11.4961 7.26859 12.1882 7.3739ZM11.0985 8.91768C10.637 8.84747 10.2061 9.16461 10.1359 9.62601C10.0657 10.0874 10.3828 10.5184 10.8442 10.5886L9.82723 17.2722C9.75702 17.7337 10.0741 18.1646 10.5356 18.2348C10.997 18.305 11.4279 17.9879 11.4981 17.5265L12.6423 10.0074C12.7125 9.54598 12.3953 9.11502 11.9339 9.04481L11.0985 8.91768Z" fill="#013364"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
+                ${informPopup}
 
             </div>
             `
@@ -2796,7 +2838,11 @@ document.addEventListener("DOMContentLoaded", () => {
             let blueMob = false
             let riseMod = null
 
+            let informPopup = ''
+
             let customValueElement = ''
+
+            let reversStatus = data.revers_color_value
 
             if (data.type && data.type == 'more-one') {
 
@@ -2810,7 +2856,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
             else if (data.type && data.type == 'versus') {
-                customValueElement = `${data.value}/${data.value2}`
+                customValueElement = `${data.valueFull}`
             }
             else {
                 customValueElement = formatTruncated(data.value)
@@ -2828,7 +2874,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
             else if (data2.type && data2.type == 'versus') {
-                customValueElement2 = `${data2.value}/${data2.value2}`
+                customValueElement2 = `${data2.valueFull}`
             }
             else {
                 customValueElement2 = formatTruncated(data2.value)
@@ -2836,7 +2882,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             if (data.title == 'Overall public enrollment'
-                || data.title == 'High school graduation rate (within 6 years)'
+                || data.title == 'High school 6-year graduation rate'
                 || data.title == 'Spending per student') {
                 blueMob = true
             }
@@ -2844,19 +2890,48 @@ document.addEventListener("DOMContentLoaded", () => {
                 blueMob = false
             }
 
-            if (cleanNumberString(data.value) > cleanNumberString(data2.value)) {
-                riseMod = true
-            }
-            else if (cleanNumberString(data.value) < cleanNumberString(data2.value)) {
-                riseMod = false
-            }
-            else {
-                riseMod = null
+
+
+            if (data.compareStatus != false) {
+                if (cleanNumberString(data.value) > cleanNumberString(data2.value)) {
+                    riseMod = true
+                }
+                else if (cleanNumberString(data.value) < cleanNumberString(data2.value)) {
+                    riseMod = false
+                }
+                else {
+                    riseMod = null
+                }
             }
 
-            if (data.title == 'Staffing - Administrative staff versus instructional staff') {
-                riseMod = null
+            //comas for money
+            if (data.type == 'money' || data.title == 'Overall public enrollment') {
+                customValueElement = addCommas(customValueElement)
             }
+
+            if (data2.type == 'money' || data2.title == 'Overall public enrollment') {
+                customValueElement2 = addCommas(customValueElement2)
+            }
+
+
+            //inform popup
+            if (data.inform?.status == true) {
+                if (data.inform.type == 'simple') {
+                    informPopup = htmlInformPopupSinple()
+                }
+            }
+            else {
+                informPopup = ''
+            }
+
+            //revers color scheme
+            if (reversStatus && reversStatus == true) {
+                riseMod = !riseMod
+            }
+
+            // if (data.title == 'Staffing - Administrative staff versus instructional staff') {
+            //     riseMod = null
+            // }
 
 
 
@@ -2891,68 +2966,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="district-data-element-v2__past-year">2019</p>
                 </div>
 
-
-                <div class="district-data-element-info">
-                    <div class="district-data-element-info__icon-wrapper">
-                        <div
-                            class="district-data-element-info__data-container  district-data-element-info__data-container--big">
-                            <div class="district-data-element-info__data-container-wrapper">
-                                <div
-                                    class="district-data-element-info__data-container-wrapper-text">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Maecenas nec convallis massa.
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="district-data-element-info__icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1882 7.3739C12.8803 7.4792 13.5267 7.00351 13.632 6.3114C13.7374 5.61928 13.2616 4.97284 12.5695 4.86753C11.8774 4.76222 11.231 5.23791 11.1257 5.93003C11.0204 6.62214 11.4961 7.26859 12.1882 7.3739ZM11.0985 8.91768C10.637 8.84747 10.2061 9.16461 10.1359 9.62601C10.0657 10.0874 10.3828 10.5184 10.8442 10.5886L9.82723 17.2722C9.75702 17.7337 10.0741 18.1646 10.5356 18.2348C10.997 18.305 11.4279 17.9879 11.4981 17.5265L12.6423 10.0074C12.7125 9.54598 12.3953 9.11502 11.9339 9.04481L11.0985 8.91768Z" fill="#013364"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="district-data-element-info info-rate-popup">
-                    <p class="district-data-element-info__text">Display by socio
-                        economic
-                        status</p>
-                    <div class="district-data-element-info__icon-wrapper">
-                        <div
-                            class="district-data-element-info__data-container  district-data-element-info__data-container--small">
-                            <div class="district-data-element-info__data-container-wrapper">
-                                <div
-                                    class="district-data-element-info__data-container-wrapper-rate">
-                                    <p
-                                        class="district-data-element-info__data-container-wrapper-rate-title">
-                                        LSE RATE
-                                    </p>
-                                    <div
-                                        class="district-data-element-info__data-container-wrapper-rate-value red-text-mod">
-                                        <svg width="8" height="20" viewBox="0 0 8 20"
-                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M3.64645 19.8536C3.84171 20.0488 4.15829 20.0488 4.35355 19.8536L7.53553 16.6716C7.7308 16.4763 7.7308 16.1597 7.53553 15.9645C7.34027 15.7692 7.02369 15.7692 6.82843 15.9645L4 18.7929L1.17157 15.9645C0.976311 15.7692 0.659728 15.7692 0.464466 15.9645C0.269204 16.1597 0.269204 16.4763 0.464466 16.6716L3.64645 19.8536ZM4 0L3.5 0L3.5 19.5H4H4.5L4.5 0L4 0Z"
-                                                fill="#CE3538" />
-                                        </svg>
-
-                                        <span>60%</span>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="district-data-element-info__icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1882 7.3739C12.8803 7.4792 13.5267 7.00351 13.632 6.3114C13.7374 5.61928 13.2616 4.97284 12.5695 4.86753C11.8774 4.76222 11.231 5.23791 11.1257 5.93003C11.0204 6.62214 11.4961 7.26859 12.1882 7.3739ZM11.0985 8.91768C10.637 8.84747 10.2061 9.16461 10.1359 9.62601C10.0657 10.0874 10.3828 10.5184 10.8442 10.5886L9.82723 17.2722C9.75702 17.7337 10.0741 18.1646 10.5356 18.2348C10.997 18.305 11.4279 17.9879 11.4981 17.5265L12.6423 10.0074C12.7125 9.54598 12.3953 9.11502 11.9339 9.04481L11.0985 8.91768Z" fill="#013364"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
+                ${informPopup}
 
             </div>
             `
@@ -2963,10 +2977,23 @@ document.addEventListener("DOMContentLoaded", () => {
         //информ блок тип 3
         function htmlDataBoxV3(data, dataDop) {
             let titleDopDostrict = document.querySelector('.controll-container__select-wrapper .select__head').innerText
+
+            if (titleDopDostrict.includes("Colorado State")) {
+
+                if (data.title != 'Disciplinary incidents') {
+                    titleDopDostrict = 'STATE'
+                }
+                else {
+                    titleDopDostrict = 'Per district average'
+                }
+            }
             let blueMob = false
             let riseMod1 = null
             let riseMod2 = null
             let yearCurrent = data.year
+            let reversStatus = data.revers_color_value
+
+            let informPopup = ''
 
 
             let customValueElement = ''
@@ -2983,7 +3010,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
             else if (data.type && data.type == 'versus') {
-                customValueElement = `${data.value}/${data.value2}`
+                customValueElement = `${data.valueFull}`
             }
             else {
                 customValueElement = formatTruncated(data.value)
@@ -3001,7 +3028,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
             else if (dataDop.type && dataDop.type == 'versus') {
-                customValueElement2 = `${dataDop.value}/${dataDop.value2}`
+                customValueElement2 = `${dataDop.valueFull}`
             }
             else {
                 customValueElement2 = formatTruncated(dataDop.value)
@@ -3010,7 +3037,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             if (data.title == 'Overall public enrollment'
-                || data.title == 'High school graduation rate (within 6 years)'
+                || data.title == 'High school 6-year graduation rate'
                 || data.title == 'Spending per student') {
                 blueMob = true
             }
@@ -3021,19 +3048,50 @@ document.addEventListener("DOMContentLoaded", () => {
             let val1 = parseFloat(data.value.toString().replace(/[^\d.-]/g, ''));
             let val2 = parseFloat(dataDop.value.toString().replace(/[^\d.-]/g, ''));
 
-            if (val1 < val2) {
-                riseMod1 = false;
-            } else if (val1 > val2) {
-                riseMod1 = true;
+
+            if (data.compareStatus != false) {
+                if (val1 < val2) {
+                    riseMod1 = false;
+                } else if (val1 > val2) {
+                    riseMod1 = true;
+                }
             }
 
-            if (data.title == 'Staffing - Administrative staff versus instructional staff') {
-                riseMod1 = null
+
+            //comas for money
+            if (data.type == 'money' || data.title == 'Overall public enrollment') {
+                customValueElement = addCommas(customValueElement)
             }
 
-            if (dataDop.title == 'Staffing - Administrative staff versus instructional staff') {
-                riseMod2 = null
+            if (dataDop.type == 'money' || dataDop.title == 'Overall public enrollment') {
+                customValueElement2 = addCommas(customValueElement2)
             }
+
+
+
+            //inform popup
+            if (data.inform?.status == true) {
+                if (data.inform.type == 'simple') {
+                    informPopup = htmlInformPopupSinple()
+                }
+            }
+            else {
+                informPopup = ''
+            }
+
+
+            //revers color scheme
+            if (reversStatus && reversStatus == true) {
+                riseMod1 = !riseMod1
+            }
+
+            // if (data.title == 'Staffing - Administrative staff versus instructional staff') {
+            //     riseMod1 = null
+            // }
+
+            // if (dataDop.title == 'Staffing - Administrative staff versus instructional staff') {
+            //     riseMod2 = null
+            // }
 
 
             let htmlCode = `
@@ -3099,7 +3157,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
 
         
-
+                ${informPopup}
 
             </div>
             `
@@ -3111,11 +3169,25 @@ document.addEventListener("DOMContentLoaded", () => {
         function htmlDataBoxV4(data, data2, dataDop, dataDop2) {
             let titleDopDostrict = document.querySelector('.controll-container__select-wrapper .select__head').innerText
 
+            if (titleDopDostrict.includes("Colorado State")) {
+
+                if (data.title != 'Disciplinary incidents') {
+                    titleDopDostrict = 'STATE'
+                }
+                else {
+                    titleDopDostrict = 'Per district average'
+                }
+            }
+
             let blueMob = false
             let riseMod1 = null
             let riseMod2 = null
 
+            let informPopup = ''
+
             let customValueElement = ''
+
+            let reversStatus = data.revers_color_value
 
             if (data.type && data.type == 'more-one') {
 
@@ -3129,7 +3201,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
             else if (data.type && data.type == 'versus') {
-                customValueElement = `${data.value}/${data.value2}`
+                customValueElement = `${data.valueFull}`
             }
             else {
                 customValueElement = formatTruncated(data.value)
@@ -3147,7 +3219,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
             else if (data2.type && data2.type == 'versus') {
-                customValueElement2 = `${data2.value}/${data2.value2}`
+                customValueElement2 = `${data2.valueFull}`
             }
             else {
                 customValueElement2 = formatTruncated(data2.value)
@@ -3166,7 +3238,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
             else if (dataDop.type && dataDop.type == 'versus') {
-                customValueElementDop = `${dataDop.value}/${dataDop.value2}`
+                customValueElementDop = `${dataDop.valueFull}`
             }
             else {
                 customValueElementDop = formatTruncated(dataDop.value)
@@ -3185,7 +3257,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
             else if (dataDop2.type && dataDop2.type == 'versus') {
-                customValueElementDop2 = `${dataDop2.value}/${dataDop2.value2}`
+                customValueElementDop2 = `${dataDop2.valueFull}`
             }
             else {
                 customValueElementDop2 = formatTruncated(dataDop2.value)
@@ -3195,7 +3267,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             if (data.title == 'Overall public enrollment'
-                || data.title == 'High school graduation rate (within 6 years)'
+                || data.title == 'High school 6-year graduation rate'
                 || data.title == 'Spending per student') {
                 blueMob = true
             }
@@ -3208,26 +3280,71 @@ document.addEventListener("DOMContentLoaded", () => {
             let val2 = parseFloat(dataDop.value.toString().replace(/[^\d.-]/g, ''));
             let val2_old = parseFloat(dataDop2.value.toString().replace(/[^\d.-]/g, ''));
 
-            if (val1 < val1_old) {
-                riseMod1 = false;
-            } else if (val1 > val1_old) {
-                riseMod1 = true;
+
+            if (data.compareStatus != false) {
+                if (val1 < val1_old) {
+                    riseMod1 = false;
+                } else if (val1 > val1_old) {
+                    riseMod1 = true;
+                }
             }
 
-            if (val2 < val2_old) {
-                riseMod2 = false;
-            } else if (val2 > val2_old) {
-                riseMod2 = true;
+            if (dataDop.compareStatus != false) {
+                if (val2 < val2_old) {
+                    riseMod2 = false;
+                } else if (val2 > val2_old) {
+                    riseMod2 = true;
+                }
             }
 
 
-            if (data.title == 'Staffing - Administrative staff versus instructional staff') {
-                riseMod1 = null
+
+            //comas for money
+            if (data.type == 'money' || data.title == 'Overall public enrollment') {
+                customValueElement = addCommas(customValueElement)
             }
 
-            if (dataDop.title == 'Staffing - Administrative staff versus instructional staff') {
-                riseMod2 = null
+            if (data2.type == 'money' || data2.title == 'Overall public enrollment') {
+                customValueElementDop = addCommas(customValueElementDop)
             }
+
+            if (dataDop.type == 'money' || dataDop.title == 'Overall public enrollment') {
+                customValueElement2 = addCommas(customValueElement2)
+            }
+
+            if (dataDop2.type == 'money' || dataDop2.title == 'Overall public enrollment') {
+                customValueElementDop2 = addCommas(customValueElementDop2)
+            }
+
+
+
+            //inform popup
+            if (data.inform?.status == true) {
+                if (data.inform.type == 'simple') {
+                    informPopup = htmlInformPopupSinple()
+                }
+            }
+            else {
+                informPopup = ''
+            }
+
+
+
+            //revers color scheme
+            if (reversStatus && reversStatus == true) {
+                riseMod1 = !riseMod1
+                riseMod2 = !riseMod2
+            }
+
+
+
+            // if (data.title == 'Staffing - Administrative staff versus instructional staff') {
+            //     riseMod1 = null
+            // }
+
+            // if (dataDop.title == 'Staffing - Administrative staff versus instructional staff') {
+            //     riseMod2 = null
+            // }
 
 
             let htmlCode = `
@@ -3301,7 +3418,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
 
-
+                ${informPopup}
 
 
             </div>
@@ -3309,6 +3426,78 @@ document.addEventListener("DOMContentLoaded", () => {
 
             return htmlCode
         }
+
+
+        //информ подскзка type simple
+        function htmlInformPopupSinple() {
+            let htmlCode = `
+            <div class="district-data-element-info">
+                <div class="district-data-element-info__icon-wrapper">
+                    <div
+                        class="district-data-element-info__data-container  district-data-element-info__data-container--big">
+                        <div class="district-data-element-info__data-container-wrapper">
+                            <div
+                                class="district-data-element-info__data-container-wrapper-text">
+                                For definition, <a href="https://coloradoeducationdashboard.com/about#definitions">click here.</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="district-data-element-info__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1882 7.3739C12.8803 7.4792 13.5267 7.00351 13.632 6.3114C13.7374 5.61928 13.2616 4.97284 12.5695 4.86753C11.8774 4.76222 11.231 5.23791 11.1257 5.93003C11.0204 6.62214 11.4961 7.26859 12.1882 7.3739ZM11.0985 8.91768C10.637 8.84747 10.2061 9.16461 10.1359 9.62601C10.0657 10.0874 10.3828 10.5184 10.8442 10.5886L9.82723 17.2722C9.75702 17.7337 10.0741 18.1646 10.5356 18.2348C10.997 18.305 11.4279 17.9879 11.4981 17.5265L12.6423 10.0074C12.7125 9.54598 12.3953 9.11502 11.9339 9.04481L11.0985 8.91768Z" fill="#013364"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>`
+
+            return htmlCode
+        }
+
+        function htmlInformPopupRate() {
+            let htmlCode = `
+            <div class="district-data-element-info info-rate-popup">
+                <p class="district-data-element-info__text">Display by socio
+                    economic
+                    status</p>
+                <div class="district-data-element-info__icon-wrapper">
+                    <div
+                        class="district-data-element-info__data-container  district-data-element-info__data-container--small">
+                        <div class="district-data-element-info__data-container-wrapper">
+                            <div
+                                class="district-data-element-info__data-container-wrapper-rate">
+                                <p
+                                    class="district-data-element-info__data-container-wrapper-rate-title">
+                                    LSE RATE
+                                </p>
+                                <div
+                                    class="district-data-element-info__data-container-wrapper-rate-value red-text-mod">
+                                    <svg width="8" height="20" viewBox="0 0 8 20"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M3.64645 19.8536C3.84171 20.0488 4.15829 20.0488 4.35355 19.8536L7.53553 16.6716C7.7308 16.4763 7.7308 16.1597 7.53553 15.9645C7.34027 15.7692 7.02369 15.7692 6.82843 15.9645L4 18.7929L1.17157 15.9645C0.976311 15.7692 0.659728 15.7692 0.464466 15.9645C0.269204 16.1597 0.269204 16.4763 0.464466 16.6716L3.64645 19.8536ZM4 0L3.5 0L3.5 19.5H4H4.5L4.5 0L4 0Z"
+                                            fill="#CE3538" />
+                                    </svg>
+
+                                    <span>60%</span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="district-data-element-info__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1882 7.3739C12.8803 7.4792 13.5267 7.00351 13.632 6.3114C13.7374 5.61928 13.2616 4.97284 12.5695 4.86753C11.8774 4.76222 11.231 5.23791 11.1257 5.93003C11.0204 6.62214 11.4961 7.26859 12.1882 7.3739ZM11.0985 8.91768C10.637 8.84747 10.2061 9.16461 10.1359 9.62601C10.0657 10.0874 10.3828 10.5184 10.8442 10.5886L9.82723 17.2722C9.75702 17.7337 10.0741 18.1646 10.5356 18.2348C10.997 18.305 11.4279 17.9879 11.4981 17.5265L12.6423 10.0074C12.7125 9.54598 12.3953 9.11502 11.9339 9.04481L11.0985 8.91768Z" fill="#013364"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>`
+
+            return htmlCode
+        }
+
+
 
         //диаграма тип 1
         function htmlDataDiagramV1(data, diargamColorList) {
@@ -3873,6 +4062,19 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
+
+        function onResizeEnd(callback, delay = 1000) {
+            let resizeTimer;
+
+            window.addEventListener("resize", () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    callback();
+                }, delay);
+            });
+        }
+
+
         //нормализация высот заголовков блоков
         function normalisationBoxInfoTitle() {
             const allRows = document.querySelectorAll('.acordeon-data-claster__row');
@@ -3934,8 +4136,13 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
+        //запятая для цен
+        function addCommas(data) {
+            let stringNumber = cleanNumberString(data)
+            let formatted = String(stringNumber).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-
+            return '$' + formatted
+        }
 
 
 

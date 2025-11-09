@@ -125,6 +125,7 @@
     &:nth-child(2) {
         .hero-sec__nav-link {
             background: #D58D21;
+            display: none;
         }
     }
 
@@ -725,8 +726,6 @@
 }
 
 .map-pop {
-
-
     .map-pop__title {
         margin: 0;
         font-size: 18px;
@@ -744,6 +743,7 @@
         font-size: 14px;
         color: #938C87;
         line-height: 1;
+        display: none;
 
         b {
             color: #CE3538;
