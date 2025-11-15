@@ -43,7 +43,7 @@ jQuery(function ($) {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    let devMod = true
+    let devMod = false
 
 
 
@@ -861,9 +861,10 @@ document.addEventListener("DOMContentLoaded", () => {
         //кнопка скачивания
         function loadDataDistrictScript(data) {
             let btn = document.querySelector('.district-stat-sec__header-export-btn')
+            let fileTile = document.querySelector('.district-stat-sec__title').innerText.replaceAll(" ", "_");
             console.log('download district data', data)
             btn.addEventListener('click', () => {
-                downloadFile(data)
+                downloadFile(data, fileTile)
             })
         }
 
@@ -1604,7 +1605,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // dopDistrictSelectValue
             //задаем значение для первоначальной загрузки
-            currentScoreValue.innerHTML = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100)) / 100
+            currentScoreValue.innerHTML = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100)) / 100 + '%'
             currentScoreValue.classList.add('red')
             //чекаем подгрузку нового дистрикта для сравнения
             document.addEventListener('LoadDopDataDistrict', () => {
@@ -1618,8 +1619,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     let valueDop = Math.floor((+dopDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100)) / 100
 
                     titleRow.classList.add('active')
-                    currentScoreValue.innerHTML = valueCurrent
-                    dopScoreValue.innerHTML = valueDop
+                    currentScoreValue.innerHTML = valueCurrent + '%'
+                    dopScoreValue.innerHTML = valueDop + '%'
 
                     dopScoreWrapper.classList.add('active')
 
@@ -1638,7 +1639,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }
                 else {
-                    currentScoreValue.innerHTML = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100)) / 100
+                    currentScoreValue.innerHTML = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100)) / 100 + '%'
                     dopScoreWrapper.classList.remove('active')
                     currentScoreValue.classList.remove('green')
                     currentScoreValue.classList.add('red')
@@ -1653,8 +1654,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     let valueDop = Math.floor((+dopDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100)) / 100
 
 
-                    currentScoreValue.innerHTML = valueCurrent
-                    dopScoreValue.innerHTML = valueDop
+                    currentScoreValue.innerHTML = valueCurrent + '%'
+                    dopScoreValue.innerHTML = valueDop + '%'
                     currentScoreValue.classList.add('red')
                     dopScoreWrapper.classList.add('active')
 
@@ -1672,7 +1673,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }
                 else {
-                    currentScoreValue.innerHTML = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100)) / 100
+                    currentScoreValue.innerHTML = Math.floor((+currentDistrictYearListForChart[+currentSelectYearRangeValue].overall_score * 100)) / 100 + '%'
                     dopScoreWrapper.classList.remove('active')
                     currentScoreValue.classList.remove('green')
                     currentScoreValue.classList.add('red')
@@ -1816,7 +1817,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     'data': [
                         {
                             'value': currentDistrictYearListForChart[i].rates_of_3rd_grade_language_arts
-                                ? +currentDistrictYearListForChart[i].rates_of_3rd_grade_language_arts
+                                ? +currentDistrictYearListForChart[i].rates_of_3rd_grade_language_arts + '%'
                                 : currentDistrictYearListForChart[i].rates_of_3rd_grade_language_arts === 0
                                     ? 0
                                     : 'N/A',
@@ -1932,35 +1933,53 @@ document.addEventListener("DOMContentLoaded", () => {
                                     ? 0
                                     : 'N/A',
                             'title': 'Student–teacher ratio',
-                            'type': 'more-one'
+                            'type': 'more-one',
+                            'revers_color_value': true,
                         },
 
                         {
-                            'value': currentDistrictYearListForChart[i].staffing_administrative_staff
-                                ? (+currentDistrictYearListForChart[i].staffing_administrative_staff).toFixed(0)
-                                : currentDistrictYearListForChart[i].staffing_administrative_staff === 0
+                            'value': currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff
+                                ? (+getNumberBeforeColon(currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff))
+                                : currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff === 0
                                     ? 0
                                     : 'N/A',
-                            'value2': currentDistrictYearListForChart[i].staffing_instructional_staff
-                                ? (+currentDistrictYearListForChart[i].staffing_instructional_staff).toFixed(0)
-                                : currentDistrictYearListForChart[i].staffing_instructional_staff === 0
-                                    ? 0
-                                    : 'N/A',
-                            'valueFull': currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== null &&
-                                currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== undefined &&
-                                currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== '' &&
-                                currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== '*' &&
-                                currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff.toString().toUpperCase() !== 'N/A'
-                                ? currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff
-                                : 'N/A',
-                            'title': 'Staffing - Administrative staff versus instructional staff',
-                            'type': 'versus',
-                            'compareStatus': false,
+                            'title': 'Instructional staff to administrative staff ratio',
+                            'type': 'more-one',
+                            'compareStatus': true,
                             'inform': {
                                 'status': true,
                                 'type': 'simple'
-                            }
+                            },
+                            'hide_status': true,
                         },
+
+
+                        // {
+                        //     'value': currentDistrictYearListForChart[i].staffing_administrative_staff
+                        //         ? (+currentDistrictYearListForChart[i].staffing_administrative_staff).toFixed(0)
+                        //         : currentDistrictYearListForChart[i].staffing_administrative_staff === 0
+                        //             ? 0
+                        //             : 'N/A',
+                        //     'value2': currentDistrictYearListForChart[i].staffing_instructional_staff
+                        //         ? (+currentDistrictYearListForChart[i].staffing_instructional_staff).toFixed(0)
+                        //         : currentDistrictYearListForChart[i].staffing_instructional_staff === 0
+                        //             ? 0
+                        //             : 'N/A',
+                        //     'valueFull': currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== null &&
+                        //         currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== undefined &&
+                        //         currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== '' &&
+                        //         currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== '*' &&
+                        //         currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff.toString().toUpperCase() !== 'N/A'
+                        //         ? currentDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff
+                        //         : 'N/A',
+                        //     'title': 'Instructional staff to administrative staff ratio',
+                        //     'type': 'versus',
+                        //     'compareStatus': true,
+                        //     'inform': {
+                        //         'status': true,
+                        //         'type': 'simple'
+                        //     }
+                        // },
 
                         {
                             'value': currentDistrictYearListForChart[i].ratio_of_psychologists_students
@@ -1969,7 +1988,8 @@ document.addEventListener("DOMContentLoaded", () => {
                                     ? 0
                                     : 'N/A',
                             'title': 'Student–psychologist ratio',
-                            'type': 'more-one'
+                            'type': 'more-one',
+                            'revers_color_value': true,
                         },
 
                         {
@@ -1978,7 +1998,8 @@ document.addEventListener("DOMContentLoaded", () => {
                                 : currentDistrictYearListForChart[i].total_behavioral_incidents === 0
                                     ? 0
                                     : 'N/A',
-                            'title': 'Disciplinary incidents',
+                            'title': 'Disciplinary incidents per 1,000 students',
+                            'revers_color_value': true,
                             'inform': {
                                 'status': true,
                                 'type': 'simple'
@@ -2105,7 +2126,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         'data': [
                             {
                                 'value': dopDistrictYearListForChart[i].rates_of_3rd_grade_language_arts
-                                    ? +dopDistrictYearListForChart[i].rates_of_3rd_grade_language_arts
+                                    ? +dopDistrictYearListForChart[i].rates_of_3rd_grade_language_arts + '%'
                                     : dopDistrictYearListForChart[i].rates_of_3rd_grade_language_arts === 0
                                         ? 0
                                         : 'N/A',
@@ -2199,36 +2220,53 @@ document.addEventListener("DOMContentLoaded", () => {
                         'data': [
                             {
                                 'value': dopDistrictYearListForChart[i].teacher_student_ratio
-                                    ? (+dopDistrictYearListForChart[i].teacher_student_ratio).toFixed(1)
+                                    ? (+dopDistrictYearListForChart[i].teacher_student_ratio).toFixed(0)
                                     : dopDistrictYearListForChart[i].teacher_student_ratio === 0
                                         ? 0
                                         : 'N/A',
                                 'title': 'Student–teacher ratio',
-                                'type': 'more-one'
+                                'type': 'more-one',
+                                'revers_color_value': true,
                             },
 
                             {
-                                'value': dopDistrictYearListForChart[i].staffing_administrative_staff
-                                    ? (+dopDistrictYearListForChart[i].staffing_administrative_staff).toFixed(0)
-                                    : dopDistrictYearListForChart[i].staffing_administrative_staff === 0
+                                'value': dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff
+                                    ? (+getNumberBeforeColon(dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff))
+                                    : dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff === 0
                                         ? 0
                                         : 'N/A',
-                                'value2': dopDistrictYearListForChart[i].staffing_instructional_staff
-                                    ? (+dopDistrictYearListForChart[i].staffing_instructional_staff).toFixed(0)
-                                    : dopDistrictYearListForChart[i].staffing_instructional_staff === 0
-                                        ? 0
-                                        : 'N/A',
-                                'valueFull': dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== null &&
-                                    dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== undefined &&
-                                    dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== '' &&
-                                    dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== '*' &&
-                                    dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff.toString().toUpperCase() !== 'N/A'
-                                    ? dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff
-                                    : 'N/A',
-                                'title': 'Staffing - Administrative staff versus instructional staff',
-                                'type': 'versus',
-                                'compareStatus': false
+                                'title': 'Instructional staff to administrative staff ratio',
+                                'type': 'more-one',
+                                'compareStatus': true,
+                                'inform': {
+                                    'status': true,
+                                    'type': 'simple'
+                                },
+                                'hide_status': true,
                             },
+
+                            // {
+                            //     'value': dopDistrictYearListForChart[i].staffing_administrative_staff
+                            //         ? (+dopDistrictYearListForChart[i].staffing_administrative_staff).toFixed(0)
+                            //         : dopDistrictYearListForChart[i].staffing_administrative_staff === 0
+                            //             ? 0
+                            //             : 'N/A',
+                            //     'value2': dopDistrictYearListForChart[i].staffing_instructional_staff
+                            //         ? (+dopDistrictYearListForChart[i].staffing_instructional_staff).toFixed(0)
+                            //         : dopDistrictYearListForChart[i].staffing_instructional_staff === 0
+                            //             ? 0
+                            //             : 'N/A',
+                            //     'valueFull': dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== null &&
+                            //         dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== undefined &&
+                            //         dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== '' &&
+                            //         dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff !== '*' &&
+                            //         dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff.toString().toUpperCase() !== 'N/A'
+                            //         ? dopDistrictYearListForChart[i].ratio_of_instructional_staff_to_administrative_staff
+                            //         : 'N/A',
+                            //     'title': 'Instructional staff to administrative staff ratio',
+                            //     'type': 'versus',
+                            //     'compareStatus': false
+                            // },
 
                             {
                                 'value': dopDistrictYearListForChart[i].ratio_of_psychologists_students
@@ -2237,7 +2275,8 @@ document.addEventListener("DOMContentLoaded", () => {
                                         ? 0
                                         : 'N/A',
                                 'title': 'Student–psychologist ratio',
-                                'type': 'more-one'
+                                'type': 'more-one',
+                                'revers_color_value': true,
                             },
 
                             {
@@ -2246,10 +2285,17 @@ document.addEventListener("DOMContentLoaded", () => {
                                     : dopDistrictYearListForChart[i].total_behavioral_incidents === 0
                                         ? 0
                                         : 'N/A',
-                                'title': 'Disciplinary incidents'
+                                'title': 'Disciplinary incidents per 1,000 students',
+                                'revers_color_value': true,
+                                'inform': {
+                                    'status': true,
+                                    'type': 'simple'
+                                }
                             },
                         ]
                     }
+
+
 
                     enrollmentAndChoiceDopDistrictArray.push(objectNewEnrollment)
                     proficiencyDopDistrictArray.push(objectNewProficiency)
@@ -2271,6 +2317,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 enrollmentAndChoiceDopDistrictArray = []
                 proficiencyDopDistrictArray = []
                 financeyDopDistrictArray = []
+                staffingDopDistrictArray = []
 
                 if (dopDistrictYearListForChart && multiDistrictData == true) {
 
@@ -2314,6 +2361,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 enrollmentAndChoiceDopDistrictArray = []
                 proficiencyDopDistrictArray = []
                 financeyDopDistrictArray = []
+                staffingDopDistrictArray = []
 
                 if (dopDistrictYearListForChart && multiDistrictData == true) {
 
@@ -2331,6 +2379,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         renderFinanceyHtmlBox(3, financeyCurrentDistrictArray, financeyDopDistrictArray)
                         renderStaffingHtmlBox(3, staffingCurrentDistrictArray, staffingDopDistrictArray)
                     }
+
+                    console.log('staffingDopDistrictArray', staffingDopDistrictArray)
                 }
                 else {
 
@@ -2741,7 +2791,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 for (let i = 0; i < maxYearItem.data.length; i++) {
                     let htmlElement = htmlDataBoxV3(maxYearItem.data[i], maxYearItemDop.data[i])
-                    console.log(maxYearItem.data[i])
+                    console.log('asddddddddd', maxYearItem.data[i], maxYearItemDop.data[i])
 
                     row.insertAdjacentHTML('beforeend', htmlElement);
                 }
@@ -2780,6 +2830,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let blueMob = false
             let customValueElement = ''
             let informPopup = ''
+            let hideBox = data.hide_status
 
             if (data.type && data.type == 'more-one') {
                 customValueElement = `${data.value}:1`
@@ -2801,9 +2852,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             //comas for money
-            if (data.type == 'money' || data.title == 'Overall public enrollment') {
-                customValueElement = addCommas(customValueElement)
+            if (data.type == 'money' || data.title == 'Overall public enrollment' || data.title == 'Private enrollment') {
+                customValueElement = addCommas(customValueElement, data.type)
             }
+            if (data.type == 'money') {
+                customValueElement = '$' + customValueElement
+            }
+
 
             //inform popup
             if (data.inform?.status == true) {
@@ -2817,7 +2872,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let htmlCode = `
                 <div
-                class="district-data-element district-data-element-v1 ${blueMob ? 'district-data-element--blue-mod' : ''}">
+                class="district-data-element district-data-element-v1 ${blueMob ? 'district-data-element--blue-mod' : ''} ${hideBox ? 'district-data-element--hide-mod' : ''}">
                 <div class="district-data-element-v1__wrapper">
                     <div class="district-data-element-v1__top-values">
                         <div class="district-data-element-v1__top-values-title">${data.title}</div>
@@ -2842,11 +2897,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let customValueElement = ''
 
+            let hideBox = data.hide_status
+
             let reversStatus = data.revers_color_value
 
             if (data.type && data.type == 'more-one') {
 
-                if (data.value == '-') {
+                if (data.value == '-' || data.value == 'N/A') {
                     customValueElement = 'N/A'
                 }
                 else {
@@ -2865,7 +2922,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let customValueElement2 = ''
 
             if (data2.type && data2.type == 'more-one') {
-                if (data2.value == '-') {
+                if (data2.value == '-' || data2.value == 'N/A') {
                     customValueElement2 = 'N/A'
                 }
                 else {
@@ -2892,11 +2949,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-            if (data.compareStatus != false) {
-                if (cleanNumberString(data.value) > cleanNumberString(data2.value)) {
+            if (data.compareStatus != false && data.value && data2.value) {
+
+
+                if (+cleanNumberString(data.value) > +cleanNumberString(data2.value)) {
                     riseMod = true
                 }
-                else if (cleanNumberString(data.value) < cleanNumberString(data2.value)) {
+                else if (+cleanNumberString(data.value) < +cleanNumberString(data2.value)) {
                     riseMod = false
                 }
                 else {
@@ -2905,12 +2964,19 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             //comas for money
-            if (data.type == 'money' || data.title == 'Overall public enrollment') {
-                customValueElement = addCommas(customValueElement)
+            if (data.type == 'money' || data.title == 'Overall public enrollment' || data.title == 'Private enrollment') {
+                customValueElement = addCommas(customValueElement, data.type)
+            }
+            if (data.type == 'money') {
+                customValueElement = '$' + customValueElement
             }
 
-            if (data2.type == 'money' || data2.title == 'Overall public enrollment') {
-                customValueElement2 = addCommas(customValueElement2)
+            if (data2.type == 'money' || data2.title == 'Overall public enrollment' || data2.title == 'Private enrollment') {
+                customValueElement2 = addCommas(customValueElement2, data2.type)
+            }
+
+            if (data2.type == 'money') {
+                customValueElement2 = '$' + customValueElement2
             }
 
 
@@ -2925,7 +2991,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             //revers color scheme
-            if (reversStatus && reversStatus == true) {
+            if (reversStatus && reversStatus == true && riseMod != null) {
+
                 riseMod = !riseMod
             }
 
@@ -2939,7 +3006,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="district-data-element district-data-element-v2 
                 ${blueMob ? 'district-data-element--light-blue-mod' : ''}
                 ${riseMod == true ? 'district-data-element--rise-mod' : ''}
-                ${riseMod == false ? 'district-data-element--down-mod' : ''}   
+                ${riseMod == false ? 'district-data-element--down-mod' : ''}
+                ${reversStatus == true && riseMod == false ? 'district-data-element--down-mod-ar-top' : ''}
+                ${reversStatus == true && riseMod == true ? 'district-data-element--down-mod-ar-down' : ''}
+                ${hideBox ? 'district-data-element--hide-mod' : ''}    
                 ">
 
                 <div class="district-data-element-v2__current">
@@ -2980,7 +3050,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (titleDopDostrict.includes("Colorado State")) {
 
-                if (data.title != 'Disciplinary incidents') {
+                if (data.title != 'Disciplinary incidents per 1,000 students') {
                     titleDopDostrict = 'STATE'
                 }
                 else {
@@ -2995,12 +3065,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let informPopup = ''
 
+            let hideBox = data.hide_status
+
 
             let customValueElement = ''
 
             if (data.type && data.type == 'more-one') {
 
-                if (data.value == '-') {
+                if (data.value == '-' || data.value == 'N/A') {
                     customValueElement = 'N/A'
                 }
                 else {
@@ -3019,7 +3091,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let customValueElement2 = ''
 
             if (dataDop.type && dataDop.type == 'more-one') {
-                if (dataDop.value == '-') {
+                if (dataDop.value == '-' || dataDop.value == 'N/A') {
                     customValueElement2 = 'N/A'
                 }
                 else {
@@ -3055,16 +3127,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else if (val1 > val2) {
                     riseMod1 = true;
                 }
+                else {
+                    riseMod1 = null
+                }
             }
 
 
             //comas for money
-            if (data.type == 'money' || data.title == 'Overall public enrollment') {
-                customValueElement = addCommas(customValueElement)
+            if (data.type == 'money' || data.title == 'Overall public enrollment' || data.title == 'Private enrollment') {
+                customValueElement = addCommas(customValueElement, data.type)
+            }
+            if (data.type == 'money') {
+                customValueElement = '$' + customValueElement
             }
 
-            if (dataDop.type == 'money' || dataDop.title == 'Overall public enrollment') {
-                customValueElement2 = addCommas(customValueElement2)
+            if (dataDop.type == 'money' || dataDop.title == 'Overall public enrollment' || dataDop.title == 'Private enrollment') {
+                customValueElement2 = addCommas(customValueElement2, dataDop.type)
+            }
+
+            if (dataDop.type == 'money') {
+                customValueElement2 = '$' + customValueElement2
             }
 
 
@@ -3081,7 +3163,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             //revers color scheme
-            if (reversStatus && reversStatus == true) {
+            if (reversStatus && reversStatus == true && riseMod1 != null) {
                 riseMod1 = !riseMod1
             }
 
@@ -3098,6 +3180,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div
                 class="district-data-element district-data-element-v2 district-data-element-v2--dop district-data-element-v2--no-border
                 ${blueMob ? 'district-data-element--light-blue-mod' : ''}
+                ${hideBox ? 'district-data-element--hide-mod' : ''}  
                 ">
 
                 <div class="district-data-element-v2__current">
@@ -3112,6 +3195,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="district-data-element-v2__value-claster 
                         ${riseMod1 == false ? 'district-data-element--down-mod' : ''}
                         ${riseMod1 == true ? 'district-data-element--rise-mod' : ''} 
+                        ${reversStatus == true && riseMod1 == false ? 'district-data-element--down-mod-ar-top' : ''}
+                        ${reversStatus == true && riseMod1 == true ? 'district-data-element--down-mod-ar-down' : ''}
+                         
                         ">
                             <p class="district-data-element-v2__value-claster-title">CURRENT
                                 DISTRICT</p>
@@ -3171,7 +3257,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (titleDopDostrict.includes("Colorado State")) {
 
-                if (data.title != 'Disciplinary incidents') {
+                if (data.title != 'Disciplinary incidents per 1,000 students') {
                     titleDopDostrict = 'STATE'
                 }
                 else {
@@ -3185,13 +3271,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let informPopup = ''
 
+            let hideBox = data.hide_status
+
             let customValueElement = ''
 
             let reversStatus = data.revers_color_value
 
             if (data.type && data.type == 'more-one') {
 
-                if (data.value == '-') {
+                if (data.value == '-' || data.value == 'N/A') {
                     customValueElement = 'N/A'
                 }
                 else {
@@ -3210,7 +3298,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let customValueElement2 = ''
 
             if (data2.type && data2.type == 'more-one') {
-                if (data2.value == '-') {
+                if (data2.value == '-' || data2.value == 'N/A') {
                     customValueElement2 = 'N/A'
                 }
                 else {
@@ -3229,7 +3317,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let customValueElementDop = ''
 
             if (dataDop.type && dataDop.type == 'more-one') {
-                if (data2.value == '-') {
+                if (dataDop.value == '-' || dataDop.value == 'N/A') {
                     customValueElementDop = 'N/A'
                 }
                 else {
@@ -3248,7 +3336,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let customValueElementDop2 = ''
 
             if (dataDop2.type && dataDop2.type == 'more-one') {
-                if (data2.value == '-') {
+                if (dataDop2.value == '-' || dataDop2.value == 'N/A') {
                     customValueElementDop2 = 'N/A'
                 }
                 else {
@@ -3300,20 +3388,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             //comas for money
-            if (data.type == 'money' || data.title == 'Overall public enrollment') {
-                customValueElement = addCommas(customValueElement)
+            if (data.type == 'money' || data.title == 'Overall public enrollment' || data.title == 'Private enrollment') {
+                customValueElement = addCommas(customValueElement, data.type)
+            }
+            if (data.type == 'money') {
+                customValueElement = '$' + customValueElement
             }
 
-            if (data2.type == 'money' || data2.title == 'Overall public enrollment') {
-                customValueElementDop = addCommas(customValueElementDop)
+
+            if (data2.type == 'money' || data2.title == 'Overall public enrollment' || data2.title == 'Private enrollment') {
+                customValueElementDop = addCommas(customValueElementDop, data2.type)
             }
 
-            if (dataDop.type == 'money' || dataDop.title == 'Overall public enrollment') {
-                customValueElement2 = addCommas(customValueElement2)
+            if (data2.type == 'money') {
+                customValueElementDop = '$' + customValueElementDop
             }
 
-            if (dataDop2.type == 'money' || dataDop2.title == 'Overall public enrollment') {
-                customValueElementDop2 = addCommas(customValueElementDop2)
+
+            if (dataDop.type == 'money' || dataDop.title == 'Overall public enrollment' || dataDop.title == 'Private enrollment') {
+                customValueElement2 = addCommas(customValueElement2, dataDop.type)
+            }
+
+            if (dataDop.type == 'money') {
+                customValueElement2 = '$' + customValueElement2
+            }
+
+
+            if (dataDop2.type == 'money' || dataDop2.title == 'Overall public enrollment' || dataDop2.title == 'Private enrollment') {
+                customValueElementDop2 = addCommas(customValueElementDop2, dataDop2.type)
+            }
+
+            if (dataDop2.type == 'money') {
+                customValueElementDop2 = '$' + customValueElementDop2
             }
 
 
@@ -3332,8 +3438,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
             //revers color scheme
             if (reversStatus && reversStatus == true) {
-                riseMod1 = !riseMod1
-                riseMod2 = !riseMod2
+
+                if (riseMod1 != null) {
+                    riseMod1 = !riseMod1
+                }
+
+                if (riseMod2 != null) {
+                    riseMod2 = !riseMod2
+                }
+
             }
 
 
@@ -3350,6 +3463,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let htmlCode = `
                 <div class="district-data-element district-data-element-v2 district-data-element-v2--dop 
                 ${blueMob ? 'district-data-element--light-blue-mod' : ''}
+                ${hideBox ? 'district-data-element--hide-mod' : ''} 
                 ">
 
                 <div class="district-data-element-v2__current">
@@ -3364,6 +3478,10 @@ document.addEventListener("DOMContentLoaded", () => {
                             class="district-data-element-v2__value-claster 
                             ${riseMod1 == false ? 'district-data-element--down-mod' : ''}
                             ${riseMod1 == true ? 'district-data-element--rise-mod' : ''} 
+                            ${reversStatus == true && riseMod1 == false ? 'district-data-element--down-mod-ar-top' : ''}
+                            ${reversStatus == true && riseMod1 == true ? 'district-data-element--down-mod-ar-down' : ''}
+                              
+                            
                             ">
                             <p class="district-data-element-v2__value-claster-title">CURRENT
                                 DISTRICT</p>
@@ -3385,6 +3503,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             class="district-data-element-v2__value-claster 
                             ${riseMod2 == false ? 'district-data-element--down-mod' : ''}
                             ${riseMod2 == true ? 'district-data-element--rise-mod' : ''} 
+
+                            ${reversStatus == true && riseMod2 == false ? 'district-data-element--down-mod-ar-top' : ''}
+                            ${reversStatus == true && riseMod2 == true ? 'district-data-element--down-mod-ar-down' : ''}   
                             ">
                             <p class="district-data-element-v2__value-claster-title">${truncateString(titleDopDostrict)}</p>
                             <div class="district-data-element-v2__current-value-row">
@@ -4137,11 +4258,33 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         //запятая для цен
-        function addCommas(data) {
+        function addCommas(data, dataType) {
             let stringNumber = cleanNumberString(data)
             let formatted = String(stringNumber).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-            return '$' + formatted
+            if (dataType && dataType == 'money') {
+                return formatted
+            }
+            else {
+                return formatted
+            }
+
+        }
+
+
+        //обрезка до двоиточия
+        function getNumberBeforeColon(str) {
+            // Проверяем, что вход — строка
+            if (typeof str !== 'string') return null
+
+            // Разделяем строку по двоеточию
+            const parts = str.split(':')
+
+            // Берём первую часть и преобразуем в число
+            const num = Number(parts[0])
+
+            // Если не число — возвращаем null
+            return isNaN(num) ? null : num
         }
 
 
