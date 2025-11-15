@@ -43,7 +43,7 @@ jQuery(function ($) {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    let devMod = false
+    let devMod = true
 
 
 
