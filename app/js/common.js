@@ -578,7 +578,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         .then(data => {
 
                             console.log(data)
-                            if (!data.results.length) { alert("District dont finded"); return; }
+                            if (!data.results.length) { alert("District not found"); return; }
 
                             const { lat, lng } = data.results[0].geometry.location;
                             const point = turf.point([lng, lat]);
@@ -654,7 +654,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 }
                             });
 
-                            if (!found) alert("District dont finded");
+                            if (!found) alert("District not found");
                         });
                 });
 
@@ -960,7 +960,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     newListElement.classList.add('select__item--state')
                 }
                 if (districtsListArray[i].title.rendered == 'State') {
-                    newListElement.innerHTML = `Colorado State Average`
+                    newListElement.innerHTML = `Colorado`
                 }
                 else {
                     newListElement.innerHTML = `${districtsListArray[i].title.rendered}`
@@ -1750,7 +1750,11 @@ document.addEventListener("DOMContentLoaded", () => {
                                 : currentDistrictYearListForChart[i].percent_in_private_enrollment === 0
                                     ? 0
                                     : 'N/A',
-                            'title': 'Private enrollment'
+                            'title': 'Private enrollment',
+                            'inform': {
+                                'status': true,
+                                'type': 'simple'
+                            }
                         },
 
                         // {
@@ -1767,7 +1771,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 : currentDistrictYearListForChart[i].intra_district_choice === 0
                                     ? 0
                                     : 'N/A',
-                            'title': 'Intra-district choice',
+                            'title': 'Choice Within School District',
                             'inform': {
                                 'status': true,
                                 'type': 'simple'
@@ -1780,7 +1784,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 : currentDistrictYearListForChart[i].inter_district_choice === 0
                                     ? 0
                                     : 'N/A',
-                            'title': 'Inter-district choice',
+                            'title': 'Choice Across School District Lines',
                             'inform': {
                                 'status': true,
                                 'type': 'simple'
@@ -2089,7 +2093,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     : dopDistrictYearListForChart[i].intra_district_choice === 0
                                         ? 0
                                         : 'N/A',
-                                'title': 'Intra-district choice'
+                                'title': 'Choice Within School District'
                             },
 
                             {
@@ -2098,7 +2102,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     : dopDistrictYearListForChart[i].inter_district_choice === 0
                                         ? 0
                                         : 'N/A',
-                                'title': 'Inter-district choice'
+                                'title': 'Choice Across School District Lines'
                             },
                             {
                                 'value': dopDistrictYearListForChart[i].absenteeism_rate
