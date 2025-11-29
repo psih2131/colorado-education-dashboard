@@ -526,6 +526,18 @@
     list-style-type: none;
 }
 
+.search-container {
+    .select__list .select__item {
+
+        padding: 0;
+
+        a {
+            padding: 10px 15px;
+            color: #013364;
+        }
+    }
+}
+
 .select__list .select__item:hover {
     background-color: rgba(224, 229, 231, 0.5);
 }
@@ -755,8 +767,9 @@
 
     .map-pop__link {
         text-align: center;
-        font-size: 12px;
+        font-size: 14px;
         margin: 0;
+        font-weight: 600;
         margin-top: 5px;
 
         a {
@@ -805,7 +818,7 @@
 
         .map-pop__link {
 
-            font-size: 12px;
+            font-size: 14px;
             margin: 0;
             margin-top: 5px;
 
@@ -1069,7 +1082,7 @@
 
         .map-pop__link {
 
-            font-size: 10px;
+            font-size: 12px;
             margin: 0;
             margin-top: 5px;
 

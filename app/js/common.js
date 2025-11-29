@@ -1,4 +1,3 @@
-
 $(function () {
     let allClusters = $('.acordeon-data-claster')
     allClusters.find('.acordeon-data-claster__header').on('click', function () {
@@ -22,7 +21,6 @@ $(function () {
             }
         });
     }
-
 });
 
 //для якорей
@@ -43,18 +41,11 @@ jQuery(function ($) {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    let devMod = true
-
-
+    let devMod = false
 
     let devModData = devMod
     let urlGeoFile = ''
     let urlDomain = ''
-
-
-
-
-
 
     if (devMod == true) {
         urlGeoFile = '../js/map.geojson'
@@ -68,15 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     else {
         // urlDomain = 'https://csi.theprojectview.com'
+
         urlDomain = '   https://coloradoeducationdashboard.com'
-
-
-
     }
-
-
-
-
 
     var swiper = new Swiper(".post-slider-swiper", {
         slidesPerView: 3,
@@ -117,10 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-
-
-
-
     //нормализация высот заголовков блоков
     function normalisationEventBox() {
         const elements = document.querySelectorAll('.event-element__title-wrapper');
@@ -139,12 +120,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // Устанавливаем всем одинаковую высоту
             elements.forEach(el => (el.style.height = `${maxHeight}px`));
         }
-
-
     }
 
     normalisationEventBox()
-
 
     //map district search and load
     function mapSearchLoad() {
@@ -154,7 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (mapSec) {
 
             let districtListDataServer = []
-
 
             function customSelect() {
 
@@ -254,7 +231,29 @@ document.addEventListener("DOMContentLoaded", () => {
                     let newOptionLi = document.createElement('li')
                     newOptionLi.classList.add('select__item')
                     newOptionLi.setAttribute('data-value', dataListObjects[i].properties.GEOID)
-                    newOptionLi.innerHTML = `${dataListObjects[i].properties.NAME}`
+                    // newOptionLi.innerHTML = `${dataListObjects[i].properties.NAME}`
+
+
+                    let geoIdFile = dataListObjects[i].properties.GEOID; // нужный geoid
+                    let districtData = districtListDataServer.find(
+                        item => +item.acf.geoid === +geoIdFile
+                    );
+
+                    let url = ''
+
+                    if (districtData && +districtData.acf.geoid == +geoIdFile) {
+                        url = districtData.link
+                    }
+                    else {
+
+                    }
+
+                    let linlHtml = `
+                                    <a href="${url}">${dataListObjects[i].properties.NAME}</a>
+                                    `
+
+                    newOptionLi.innerHTML = linlHtml
+
                     selectContainer.appendChild(newOptionLi)
                 }
 
@@ -480,91 +479,91 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 console.log('test', document.querySelector('.map-home-select .select__input'))
 
-                document.querySelector('.map-home-select .select__input').addEventListener('input', () => {
-                    console.log('test 2')
-                    document.getElementById('addressInput').value = ""
-                    let currentDistryctIDValue = document.querySelector('.map-home-select .select__input').value;
-                    console.log(currentDistryctIDValue)
+                // document.querySelector('.map-home-select .select__input').addEventListener('input', () => {
+                //     console.log('test 2')
+                //     document.getElementById('addressInput').value = ""
+                //     let currentDistryctIDValue = document.querySelector('.map-home-select .select__input').value;
+                //     console.log(currentDistryctIDValue)
 
-                    if (!geojson) return;
+                //     if (!geojson) return;
 
-                    geojson.eachLayer(layer => {
-                        if (layer.feature.properties.GEOID == currentDistryctIDValue) {
-                            // Подсветка
-                            layer.setStyle({
-                                weight: 2.5,
-                                color: "#fff",
-                                fillColor: "#91B4D3",
-                                fillOpacity: 1
-                            });
+                //     geojson.eachLayer(layer => {
+                //         if (layer.feature.properties.GEOID == currentDistryctIDValue) {
+                //             // Подсветка
+                //             layer.setStyle({
+                //                 weight: 2.5,
+                //                 color: "#fff",
+                //                 fillColor: "#91B4D3",
+                //                 fillOpacity: 1
+                //             });
 
-                            // Центрируем на объекте
-                            if (layer.getBounds && typeof layer.getBounds().getCenter === 'function') {
-                                map.setView(layer.getBounds().getCenter(), map.getZoom());
-                            } else if (layer.getLatLng) {
-                                map.setView(layer.getLatLng(), map.getZoom());
+                //             // Центрируем на объекте
+                //             if (layer.getBounds && typeof layer.getBounds().getCenter === 'function') {
+                //                 map.setView(layer.getBounds().getCenter(), map.getZoom());
+                //             } else if (layer.getLatLng) {
+                //                 map.setView(layer.getLatLng(), map.getZoom());
 
-                            }
+                //             }
 
-                            if (window.matchMedia('(max-width: 765px)').matches) {
-                                document.getElementById("map").scrollIntoView({
-                                    behavior: "smooth",
-                                    block: "start"
-                                });
-                            }
+                //             if (window.matchMedia('(max-width: 765px)').matches) {
+                //                 document.getElementById("map").scrollIntoView({
+                //                     behavior: "smooth",
+                //                     block: "start"
+                //                 });
+                //             }
 
-                            // Показываем popup
-
-
-                            let geoIdFile = layer.feature.properties.GEOID; // нужный geoid
-                            let districtData = districtListDataServer.find(
-                                item => +item.acf.geoid === +geoIdFile
-                            );
+                //             // Показываем popup
 
 
-                            let name = layer.feature.properties.NAME;
-                            let url = ''
-                            let score = ''
-                            console.log('districtData,', districtData)
-                            if (districtData && +districtData.acf.geoid == +geoIdFile) {
-                                url = districtData.link
-
-                                if (districtData.acf?.years[0]?.overall_score) {
-                                    score = (+districtData.acf.years[1].overall_score).toFixed(2)
-                                    console.log('bingo2', score)
-                                }
-                                else {
-                                    score = 'N/A'
-                                }
-
-                                console.log('bingo', url)
-                            }
-                            else {
-                                score = 'N/A'
-                            }
+                //             let geoIdFile = layer.feature.properties.GEOID; // нужный geoid
+                //             let districtData = districtListDataServer.find(
+                //                 item => +item.acf.geoid === +geoIdFile
+                //             );
 
 
-                            let popupContent = `
-                                <div class="map-pop" style="font-size: 14px; line-height: 1.4;">
-                                    <p class="map-pop__title">${name}</p>
-                                    <p class="map-pop__value">Overall Score: <b> ${score}</b></p>
-                                    <p class="map-pop__link">
-                                        <a href="${url}" >
-                                            VIEW ALL DISTRICT DATA
-                                        </a>
-                                    </p>
-                                    
-                                </div>
-                            `;
+                //             let name = layer.feature.properties.NAME;
+                //             let url = ''
+                //             let score = ''
+                //             console.log('districtData,', districtData)
+                //             if (districtData && +districtData.acf.geoid == +geoIdFile) {
+                //                 url = districtData.link
+
+                //                 if (districtData.acf?.years[0]?.overall_score) {
+                //                     score = (+districtData.acf.years[1].overall_score).toFixed(2)
+                //                     console.log('bingo2', score)
+                //                 }
+                //                 else {
+                //                     score = 'N/A'
+                //                 }
+
+                //                 console.log('bingo', url)
+                //             }
+                //             else {
+                //                 score = 'N/A'
+                //             }
 
 
-                            layer.bindPopup(popupContent).openPopup();
+                //             let popupContent = `
+                //                 <div class="map-pop" style="font-size: 14px; line-height: 1.4;">
+                //                     <p class="map-pop__title">${name}</p>
+                //                     <p class="map-pop__value">Overall Score: <b> ${score}</b></p>
+                //                     <p class="map-pop__link">
+                //                         <a href="${url}" >
+                //                             VIEW ALL DISTRICT DATA
+                //                         </a>
+                //                     </p>
 
-                        } else {
-                            geojson.resetStyle(layer);
-                        }
-                    });
-                });
+                //                 </div>
+                //             `;
+
+
+                //             layer.bindPopup(popupContent).openPopup();
+
+                //         } else {
+                //             geojson.resetStyle(layer);
+                //         }
+                //     });
+                // });
 
 
 
@@ -648,6 +647,8 @@ document.addEventListener("DOMContentLoaded", () => {
                                         });
                                     }
 
+
+
                                     document.querySelector('.map-home-select .select__head').innerHTML = layer.feature.properties.NAME
                                 } else {
                                     geojson.resetStyle(layer);
@@ -703,7 +704,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (devMod == true) {
             // slug = 'mapleton-1';
             // slug = 'otis-r-3';
-            slug = 'weld-county-school-district-re-3j';
+
+            // slug = 'weld-county-school-district-re-3j';
+            slug = 'arickaree-r-2';
 
         }
         else {
@@ -1811,7 +1814,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     ? 0
                                     : 'N/A',
                             'title': 'Share of Students Qualified for Free or Reduced-price Lunch',
-                            'compareStatus': false
+                            'compareStatus': true
                         },
                     ]
                 }
@@ -2120,7 +2123,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                         ? 0
                                         : 'N/A',
                                 'title': 'Share of Students Qualified for Free or Reduced-price Lunch',
-                                'compareStatus': false
+                                'compareStatus': true
                             },
                         ]
                     }
@@ -2837,7 +2840,14 @@ document.addEventListener("DOMContentLoaded", () => {
             let hideBox = data.hide_status
 
             if (data.type && data.type == 'more-one') {
-                customValueElement = `${data.value}:1`
+
+                if (data.value == '-' || data.value == 'N/A') {
+                    customValueElement = 'N/A'
+                }
+                else {
+
+                    customValueElement = `${data.value}:1`
+                }
             }
             else if (data.type && data.type == 'versus') {
                 customValueElement = `${data.valueFull}`
@@ -3465,7 +3475,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             let htmlCode = `
-                <div class="district-data-element district-data-element-v2 district-data-element-v2--dop 
+                <div class="district-data-element district-data-element--no-arrows district-data-element-v2 district-data-element-v2--dop 
                 ${blueMob ? 'district-data-element--light-blue-mod' : ''}
                 ${hideBox ? 'district-data-element--hide-mod' : ''} 
                 ">

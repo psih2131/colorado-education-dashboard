@@ -1278,7 +1278,10 @@
 
 
     }
+
+
 }
+
 
 .district-data-element-v2--no-border {
     .district-data-element-v2__current {
@@ -1651,6 +1654,25 @@
             fill: #013364;
         }
     }
+}
+
+
+.district-data-element--no-arrows {
+    .district-data-element-v2__current-value-ar {
+        display: none;
+    }
+
+    // .district-data-element--down-mod {
+    //     .district-data-element-v2__current-value-ar {
+    //         display: none;
+    //     }
+    // }
+
+    // .district-data-element--rise-mod {
+    //     .district-data-element-v2__current-value-ar {
+    //         display: none;
+    //     }
+    // }
 }
 
 
