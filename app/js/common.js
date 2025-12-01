@@ -41,7 +41,7 @@ jQuery(function ($) {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    let devMod = false
+    let devMod = true
 
     let devModData = devMod
     let urlGeoFile = ''
@@ -705,8 +705,8 @@ document.addEventListener("DOMContentLoaded", () => {
             // slug = 'mapleton-1';
             // slug = 'otis-r-3';
 
-            // slug = 'weld-county-school-district-re-3j';
-            slug = 'arickaree-r-2';
+            slug = 'weld-county-school-district-re-3j';
+            // slug = 'arickaree-r-2';
 
         }
         else {
@@ -2846,7 +2846,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 else {
 
-                    customValueElement = `${data.value}:1`
+                    customValueElement = `${addCommas(data.value, data.type)}:1`
                 }
             }
             else if (data.type && data.type == 'versus') {
@@ -2922,7 +2922,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 else {
 
-                    customValueElement = `${data.value}:1`
+                    customValueElement = `${addCommas(data.value, data.type)}:1`
                 }
 
             }
@@ -2941,7 +2941,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 else {
 
-                    customValueElement2 = `${data2.value}:1`
+                    customValueElement2 = `${addCommas(data2.value, data2.type)}:1`
                 }
             }
             else if (data2.type && data2.type == 'versus') {
@@ -3091,7 +3091,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 else {
 
-                    customValueElement = `${data.value}:1`
+                    customValueElement = `${addCommas(data.value, data.type)}:1`
                 }
 
             }
@@ -3110,7 +3110,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 else {
 
-                    customValueElement2 = `${dataDop.value}:1`
+                    customValueElement2 = `${addCommas(dataDop.value, dataDop.type)}:1`
                 }
             }
             else if (dataDop.type && dataDop.type == 'versus') {
@@ -3298,7 +3298,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 else {
 
-                    customValueElement = `${data.value}:1`
+                    customValueElement = `${addCommas(data.value, data.type)}:1`
                 }
 
             }
@@ -3317,7 +3317,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 else {
 
-                    customValueElement2 = `${data2.value}:1`
+                    customValueElement2 = `${addCommas(data2.value, data2.type)}:1`
                 }
             }
             else if (data2.type && data2.type == 'versus') {
@@ -3336,7 +3336,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 else {
 
-                    customValueElementDop = `${dataDop.value}:1`
+                    customValueElementDop = `${addCommas(dataDop.value, dataDop.type)}:1`
                 }
             }
             else if (dataDop.type && dataDop.type == 'versus') {
@@ -3355,7 +3355,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 else {
 
-                    customValueElementDop2 = `${dataDop2.value}:1`
+                    customValueElementDop2 = `${addCommas(dataDop2.value, dataDop2.type)}:1`
                 }
             }
             else if (dataDop2.type && dataDop2.type == 'versus') {
