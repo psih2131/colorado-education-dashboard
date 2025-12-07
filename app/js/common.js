@@ -867,8 +867,982 @@ document.addEventListener("DOMContentLoaded", () => {
             let fileTile = document.querySelector('.district-stat-sec__title').innerText.replaceAll(" ", "_");
             console.log('download district data', data)
             btn.addEventListener('click', () => {
-                downloadFile(data, fileTile)
+                // downloadFile(data, fileTile)
+                createPdfDoc(data)
             })
+
+            createPdfDoc(data)
+        }
+
+        //формироание pdf документа
+        function createPdfDoc(data) {
+            // const element = document.getElementById('content');
+
+            // const options = {
+            //     margin: 10,
+            //     filename: 'document.pdf',
+            //     html2canvas: { scale: 2 },
+            //     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            // };
+
+            // html2pdf().set(options).from(element).save();
+
+            // let pdfWrapper = document.querySelector('.pdf-file-load')
+            // pdfWrapper.style.display = 'block'
+
+            // let afterPrint = function () {
+            //     let pdfWrapper = document.querySelector('.pdf-file-load')
+            //     console.log('Functionality to run before printing.');
+            //     pdfWrapper.style.display = 'none'
+            // };
+
+            // window.print();
+            // window.onafterprint = afterPrint
+            // window.onbeforeprint = afterPrint
+
+            console.log('currentSelectYearRangeValue', currentSelectYearRangeValue)
+
+            console.log('multiDistrictData', multiDistrictData)
+
+            console.log('data', data)
+
+
+            let pdfFile = document.querySelector('.page-pdf')
+            let pdfAllClaster = pdfFile.querySelectorAll('.page-pdf__claster')
+            let pdfTitle = pdfFile.querySelector('.page-pdf__disctrict-name')
+
+            if (multiDistrictData != true) {
+                if (currentSelectYearRangeValue == 1) {
+
+
+                    let allClaster = document.querySelectorAll('.acordeon-data-claster')
+
+                    let boxtClaster1 = allClaster[0].querySelectorAll('.district-data-element')
+
+                    let boxtClaster2 = allClaster[1].querySelectorAll('.district-data-element')
+
+                    let boxtClaster3 = allClaster[2].querySelectorAll('.district-data-element')
+
+                    let boxtClaster3Table = allClaster[2].querySelectorAll('.chart-diagram-value-list__element')
+
+                    let boxtClaster4 = allClaster[3].querySelectorAll('.district-data-element')
+
+                    let stap1Data = []
+
+                    let stap2Data = []
+
+                    let stap3Data = []
+
+                    let stap3DataTable = []
+
+                    let stap4Data = []
+
+                    for (let i = 0; i < boxtClaster1.length; i++) {
+                        let title = boxtClaster1[i].querySelector('.district-data-element-v1__top-values-title').innerHTML
+                        let valueBox = boxtClaster1[i].querySelector('.district-data-element-v1__top-values-value').innerHTML
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBox,
+                            'hideClass': boxtClaster1[i].classList.contains('district-data-element--hide-mod'),
+                            'blueClass': boxtClaster1[i].classList.contains('district-data-element--blue-mod'),
+
+                        }
+                        stap1Data.push(objectNew)
+                    }
+
+
+                    for (let i = 0; i < boxtClaster2.length; i++) {
+                        let title = boxtClaster2[i].querySelector('.district-data-element-v1__top-values-title').innerHTML
+                        let valueBox = boxtClaster2[i].querySelector('.district-data-element-v1__top-values-value').innerHTML
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBox,
+                            'hideClass': boxtClaster2[i].classList.contains('district-data-element--hide-mod'),
+                            'blueClass': boxtClaster2[i].classList.contains('district-data-element--blue-mod'),
+                        }
+                        stap2Data.push(objectNew)
+                    }
+
+
+                    for (let i = 0; i < boxtClaster3.length; i++) {
+                        let title = boxtClaster3[i].querySelector('.district-data-element-v1__top-values-title').innerHTML
+                        let valueBox = boxtClaster3[i].querySelector('.district-data-element-v1__top-values-value').innerHTML
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBox,
+                            'hideClass': boxtClaster3[i].classList.contains('district-data-element--hide-mod'),
+                            'blueClass': boxtClaster3[i].classList.contains('district-data-element--blue-mod'),
+                        }
+                        stap3Data.push(objectNew)
+                    }
+
+
+                    for (let i = 0; i < boxtClaster3Table.length; i++) {
+                        let title = boxtClaster3Table[i].querySelector('.chart-diagram-value-list__element-text').innerHTML
+                        let valueBox = boxtClaster3Table[i].querySelector('.chart-diagram-value-list__element-text').getAttribute('data-value')
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBox,
+                        }
+                        stap3DataTable.push(objectNew)
+                    }
+
+
+
+
+
+
+                    for (let i = 0; i < boxtClaster4.length; i++) {
+                        let title = boxtClaster4[i].querySelector('.district-data-element-v1__top-values-title').innerHTML
+                        let valueBox = boxtClaster4[i].querySelector('.district-data-element-v1__top-values-value').innerHTML
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBox,
+                            'hideClass': boxtClaster4[i].classList.contains('district-data-element--hide-mod'),
+                            'blueClass': boxtClaster4[i].classList.contains('district-data-element--blue-mod'),
+                        }
+                        stap4Data.push(objectNew)
+                    }
+
+                    console.log('stap1Data', stap1Data)
+
+                    console.log('stap2Data', stap2Data)
+
+                    console.log('stap3Data', stap3Data)
+
+                    console.log('stap3DataTable', stap3DataTable)
+
+                    console.log('stap4Data', stap4Data)
+
+
+
+                    function renderHtmlV1(data) {
+                        return `
+                    <div class="page-pdf__box page-pdf__box--type-1
+                    ${data.hideClass ? 'hideClass' : ''} 
+                    ${data.blueClass ? 'blueClass' : ''}">
+                        <p class="page-pdf__box-title">${data.title}</p>
+                        <div class="page-pdf__box-value-wrapper">
+                            <p class="page-pdf__box-current-value">${data.value}</p>
+                        </div>
+                    </div>
+                `;
+                    }
+
+
+                    //первый кластер
+                    let htmlClaster1 = ``;
+
+                    for (let i = 0; i < stap1Data.length; i++) {
+                        let elementHtml = renderHtmlV1(stap1Data[i]);
+                        htmlClaster1 += elementHtml;
+                    }
+
+                    pdfAllClaster[0].querySelector('.page-pdf__claster-content').innerHTML = htmlClaster1;
+
+
+                    //второй кластер
+                    let htmlClaster2 = ``;
+
+                    for (let i = 0; i < stap2Data.length; i++) {
+                        let elementHtml = renderHtmlV1(stap2Data[i]);
+                        htmlClaster2 += elementHtml;
+                    }
+
+                    pdfAllClaster[1].querySelector('.page-pdf__claster-content').innerHTML = htmlClaster2;
+
+
+
+
+                    //третий кластер
+                    let htmlClaster3 = ``;
+
+                    for (let i = 0; i < stap3Data.length; i++) {
+                        let elementHtml = renderHtmlV1(stap3Data[i]);
+                        htmlClaster3 += elementHtml;
+                    }
+
+                    let htmlClaster3Table = ``
+                    for (let i = 0; i < stap3DataTable.length; i++) {
+                        let elementHtml = `
+                    <div class="page-pdf__box-value-wrapper-box">
+                        <p class="page-pdf__box-value-wrapper-box-value">$${stap3DataTable[i].value}</p>
+                        <p class="page-pdf__box-value-wrapper-box-title">${stap3DataTable[i].title}</p>
+                    </div>`
+                        htmlClaster3Table += elementHtml;
+                    }
+
+                    console.log('htmlClaster3Table', htmlClaster3Table)
+
+                    let tableDiagramData = `
+                <div class="page-pdf__box page-pdf__box--type-1 page-pdf__box--type-long">
+                    <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                    <div class="page-pdf__box-value-wrapper page-pdf__box-value-wrapper--flex">
+                        ${htmlClaster3Table}
+                    </div>
+                </div>`
+
+
+                    htmlClaster3 += tableDiagramData
+
+                    console.log('htmlClaster3', htmlClaster3)
+
+                    pdfAllClaster[2].querySelector('.page-pdf__claster-content').innerHTML = htmlClaster3;
+
+
+                    //четвертый кластер
+                    let htmlClaster4 = ``;
+
+                    for (let i = 0; i < stap4Data.length; i++) {
+                        let elementHtml = renderHtmlV1(stap4Data[i]);
+                        htmlClaster4 += elementHtml;
+                    }
+                    pdfAllClaster[3].querySelector('.page-pdf__claster-content').innerHTML = ''
+                    pdfAllClaster[3].querySelector('.page-pdf__claster-content').innerHTML = htmlClaster4;
+
+
+                }
+                else if (currentSelectYearRangeValue == 0) {
+                    let allClaster = document.querySelectorAll('.acordeon-data-claster')
+
+                    let boxtClaster1 = allClaster[0].querySelectorAll('.district-data-element')
+
+                    let boxtClaster2 = allClaster[1].querySelectorAll('.district-data-element')
+
+                    let boxtClaster3 = allClaster[2].querySelectorAll('.district-data-element')
+
+                    let boxtClaster3Table = allClaster[2].querySelectorAll('.chart-diagram-value-list--sub li')
+
+                    let boxtClaster3Table2 = allClaster[2].querySelectorAll('.chart-diagram-value-list--main li')
+
+                    let boxtClaster4 = allClaster[3].querySelectorAll('.district-data-element')
+
+                    let stap1Data = []
+
+                    let stap2Data = []
+
+                    let stap3Data = []
+
+                    let stap3DataTable = []
+
+                    let stap4Data = []
+
+                    for (let i = 0; i < boxtClaster1.length; i++) {
+                        let title = boxtClaster1[i].querySelector('.district-data-element-v2__current-title').innerHTML
+                        let valueBox = boxtClaster1[i].querySelector('.district-data-element-v2__current-value').innerHTML
+                        let valueBox2 = boxtClaster1[i].querySelector('.district-data-element-v2__past-value').innerHTML
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBox,
+                            'value2': valueBox2,
+                            'hideClass': boxtClaster1[i].classList.contains('district-data-element--hide-mod'),
+                            'blueClass': boxtClaster1[i].classList.contains('district-data-element--light-blue-mod'),
+
+                        }
+                        stap1Data.push(objectNew)
+                    }
+
+
+                    for (let i = 0; i < boxtClaster2.length; i++) {
+                        let title = boxtClaster2[i].querySelector('.district-data-element-v2__current-title').innerHTML
+                        let valueBox = boxtClaster2[i].querySelector('.district-data-element-v2__current-value').innerHTML
+                        let valueBox2 = boxtClaster2[i].querySelector('.district-data-element-v2__past-value').innerHTML
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBox,
+                            'value2': valueBox2,
+                            'hideClass': boxtClaster2[i].classList.contains('district-data-element--hide-mod'),
+                            'blueClass': boxtClaster2[i].classList.contains('district-data-element--light-blue-mod'),
+                        }
+                        stap2Data.push(objectNew)
+                    }
+
+
+                    for (let i = 0; i < boxtClaster3.length; i++) {
+                        let title = boxtClaster3[i].querySelector('.district-data-element-v2__current-title').innerHTML
+                        let valueBox = boxtClaster3[i].querySelector('.district-data-element-v2__current-value').innerHTML
+                        let valueBox2 = boxtClaster3[i].querySelector('.district-data-element-v2__past-value').innerHTML
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBox,
+                            'value2': valueBox2,
+                            'hideClass': boxtClaster3[i].classList.contains('district-data-element--hide-mod'),
+                            'blueClass': boxtClaster3[i].classList.contains('district-data-element--light-blue-mod'),
+                        }
+                        stap3Data.push(objectNew)
+                    }
+
+
+                    for (let i = 0; i < boxtClaster3Table.length; i++) {
+
+                        let valueBox = boxtClaster3Table[i].querySelector('.chart-diagram-value-list__element-value').getAttribute('data-value')
+                        let valueBox2 = boxtClaster3Table2[i].querySelector('.chart-diagram-value-list__element-text').getAttribute('data-value')
+                        let title = boxtClaster3Table2[i].querySelector('.chart-diagram-value-list__element-text').innerHTML
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBox,
+                            'value2': valueBox2,
+                        }
+                        stap3DataTable.push(objectNew)
+                    }
+
+
+
+                    for (let i = 0; i < boxtClaster4.length; i++) {
+                        let title = boxtClaster4[i].querySelector('.district-data-element-v2__current-title').innerHTML
+                        let valueBox = boxtClaster4[i].querySelector('.district-data-element-v2__current-value').innerHTML
+                        let valueBox2 = boxtClaster4[i].querySelector('.district-data-element-v2__past-value').innerHTML
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBox,
+                            'value2': valueBox2,
+                            'hideClass': boxtClaster4[i].classList.contains('district-data-element--hide-mod'),
+                            'blueClass': boxtClaster4[i].classList.contains('district-data-element--light-blue-mod'),
+                        }
+                        stap4Data.push(objectNew)
+                    }
+
+                    console.log('stap1Data', stap1Data)
+
+                    console.log('stap2Data', stap2Data)
+
+                    console.log('stap3Data', stap3Data)
+
+                    console.log('stap3DataTable', stap3DataTable)
+
+                    console.log('stap4Data', stap4Data)
+
+
+
+                    function renderHtmlV1(data) {
+                        return `
+                    <div class="page-pdf__box page-pdf__box--type-1 page-pdf__box--type-1-heightx
+                    ${data.hideClass ? 'hideClass' : ''} 
+                    ${data.blueClass ? 'blueClass' : ''}">
+                        <p class="page-pdf__box-title">${data.title}</p>
+                        <div class="page-pdf__box-value-wrapper">
+                            <p class="page-pdf__box-current-value">${data.value}</p>
+                            <div class="page-pdf__box-current-value-dow-value">
+                                <p class="page-pdf__box-current-value-dop-value">${data.value2}</p>
+                                <p class="page-pdf__box-current-value-year">2019</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                    }
+
+
+                    //первый кластер
+                    let htmlClaster1 = ``;
+
+                    for (let i = 0; i < stap1Data.length; i++) {
+                        let elementHtml = renderHtmlV1(stap1Data[i]);
+                        htmlClaster1 += elementHtml;
+                    }
+
+                    pdfAllClaster[0].querySelector('.page-pdf__claster-content').innerHTML = htmlClaster1;
+
+
+                    //второй кластер
+                    let htmlClaster2 = ``;
+
+                    for (let i = 0; i < stap2Data.length; i++) {
+                        let elementHtml = renderHtmlV1(stap2Data[i]);
+                        htmlClaster2 += elementHtml;
+                    }
+
+                    pdfAllClaster[1].querySelector('.page-pdf__claster-content').innerHTML = htmlClaster2;
+
+
+
+
+                    //третий кластер
+                    let htmlClaster3 = ``;
+
+                    for (let i = 0; i < stap3Data.length; i++) {
+                        let elementHtml = renderHtmlV1(stap3Data[i]);
+                        htmlClaster3 += elementHtml;
+                    }
+
+                    let htmlClaster3Table = ``
+                    for (let i = 0; i < stap3DataTable.length; i++) {
+                        let elementHtml = `
+                    <div class="page-pdf__box-value-wrapper-box">
+                        <p class="page-pdf__box-value-wrapper-box-title">${stap3DataTable[i].title}</p>
+
+                        <p class="page-pdf__box-value-wrapper-box-value">$${stap3DataTable[i].value2}</p>
+
+                        <p class="page-pdf__box-value-wrapper-box-value-old">$${stap3DataTable[i].value}</p>
+                        
+                    </div>`
+                        htmlClaster3Table += elementHtml;
+                    }
+
+                    console.log('htmlClaster3Table', htmlClaster3Table)
+
+                    let tableDiagramData = `
+                <div class="page-pdf__box page-pdf__box--type-1 page-pdf__box--type-long page-pdf__box--type-1-heightx">
+                    <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                    <div class="page-pdf__box-value-wrapper page-pdf__box-value-wrapper--flex">
+                        ${htmlClaster3Table}
+                    </div>
+                </div>`
+
+
+                    htmlClaster3 += tableDiagramData
+
+                    console.log('htmlClaster3', htmlClaster3)
+
+                    pdfAllClaster[2].querySelector('.page-pdf__claster-content').innerHTML = htmlClaster3;
+
+
+                    //четвертый кластер
+                    let htmlClaster4 = ``;
+
+                    for (let i = 0; i < stap4Data.length; i++) {
+                        let elementHtml = renderHtmlV1(stap4Data[i]);
+                        htmlClaster4 += elementHtml;
+                    }
+                    pdfAllClaster[3].querySelector('.page-pdf__claster-content').innerHTML = ''
+                    pdfAllClaster[3].querySelector('.page-pdf__claster-content').innerHTML = htmlClaster4;
+                }
+            }
+            else {
+                if (currentSelectYearRangeValue == 1) {
+
+
+                    let allClaster = document.querySelectorAll('.acordeon-data-claster')
+
+                    let boxtClaster1 = allClaster[0].querySelectorAll('.district-data-element')
+
+                    let boxtClaster2 = allClaster[1].querySelectorAll('.district-data-element')
+
+                    let boxtClaster3 = allClaster[2].querySelectorAll('.district-data-element')
+
+                    let boxtClaster3Table = allClaster[2].querySelectorAll('.chart-diagram-value-list li')
+
+                    let boxtClaster4 = allClaster[3].querySelectorAll('.district-data-element')
+
+                    let stap1Data = []
+
+                    let stap2Data = []
+
+                    let stap3Data = []
+
+                    let stap3DataTable = []
+
+                    let stap4Data = []
+
+                    for (let i = 0; i < boxtClaster1.length; i++) {
+                        let title = boxtClaster1[i].querySelector('.district-data-element-v2__current-title').innerHTML
+                        let valueBoxs = boxtClaster1[i].querySelectorAll('.district-data-element-v2__value-claster')
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBoxs[0].querySelector('.district-data-element-v2__current-value').innerHTML,
+                            'valueDistr': valueBoxs[0].querySelector('.district-data-element-v2__value-claster-title').innerHTML,
+                            'value2': valueBoxs[1].querySelector('.district-data-element-v2__current-value').innerHTML,
+                            'value2Distr': valueBoxs[1].querySelector('.district-data-element-v2__value-claster-title').innerHTML,
+                            'hideClass': boxtClaster1[i].classList.contains('district-data-element--hide-mod'),
+                            'blueClass': boxtClaster1[i].classList.contains('district-data-element--light-blue-mod'),
+
+                        }
+                        stap1Data.push(objectNew)
+                    }
+
+
+                    for (let i = 0; i < boxtClaster2.length; i++) {
+                        let title = boxtClaster2[i].querySelector('.district-data-element-v2__current-title').innerHTML
+                        let valueBoxs = boxtClaster2[i].querySelectorAll('.district-data-element-v2__value-claster')
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBoxs[0].querySelector('.district-data-element-v2__current-value').innerHTML,
+                            'valueDistr': valueBoxs[0].querySelector('.district-data-element-v2__value-claster-title').innerHTML,
+                            'value2': valueBoxs[1].querySelector('.district-data-element-v2__current-value').innerHTML,
+                            'value2Distr': valueBoxs[1].querySelector('.district-data-element-v2__value-claster-title').innerHTML,
+                            'hideClass': boxtClaster2[i].classList.contains('district-data-element--hide-mod'),
+                            'blueClass': boxtClaster2[i].classList.contains('district-data-element--light-blue-mod'),
+
+                        }
+                        stap2Data.push(objectNew)
+                    }
+
+
+                    for (let i = 0; i < boxtClaster3.length; i++) {
+                        let title = boxtClaster3[i].querySelector('.district-data-element-v2__current-title').innerHTML
+                        let valueBoxs = boxtClaster3[i].querySelectorAll('.district-data-element-v2__value-claster')
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBoxs[0].querySelector('.district-data-element-v2__current-value').innerHTML,
+                            'valueDistr': valueBoxs[0].querySelector('.district-data-element-v2__value-claster-title').innerHTML,
+                            'value2': valueBoxs[1].querySelector('.district-data-element-v2__current-value').innerHTML,
+                            'value2Distr': valueBoxs[1].querySelector('.district-data-element-v2__value-claster-title').innerHTML,
+                            'hideClass': boxtClaster3[i].classList.contains('district-data-element--hide-mod'),
+                            'blueClass': boxtClaster3[i].classList.contains('district-data-element--light-blue-mod'),
+
+                        }
+                        stap3Data.push(objectNew)
+                    }
+
+
+                    for (let i = 0; i < boxtClaster3Table.length; i++) {
+
+                        let valueBox = boxtClaster3Table[i].getAttribute('data-value1')
+                        let valueBox2 = boxtClaster3Table[i].getAttribute('data-value2')
+                        let title = boxtClaster3Table[i].querySelector('.chart-diagram-value-list__element-text').innerHTML
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBox,
+                            'value2': valueBox2,
+                        }
+                        stap3DataTable.push(objectNew)
+                    }
+
+
+
+
+                    for (let i = 0; i < boxtClaster4.length; i++) {
+                        let title = boxtClaster4[i].querySelector('.district-data-element-v2__current-title').innerHTML
+                        let valueBoxs = boxtClaster4[i].querySelectorAll('.district-data-element-v2__value-claster')
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBoxs[0].querySelector('.district-data-element-v2__current-value').innerHTML,
+                            'valueDistr': valueBoxs[0].querySelector('.district-data-element-v2__value-claster-title').innerHTML,
+                            'value2': valueBoxs[1].querySelector('.district-data-element-v2__current-value').innerHTML,
+                            'value2Distr': valueBoxs[1].querySelector('.district-data-element-v2__value-claster-title').innerHTML,
+                            'hideClass': boxtClaster4[i].classList.contains('district-data-element--hide-mod'),
+                            'blueClass': boxtClaster4[i].classList.contains('district-data-element--light-blue-mod'),
+
+                        }
+                        stap4Data.push(objectNew)
+                    }
+
+                    console.log('stap1Data', stap1Data)
+
+                    console.log('stap2Data', stap2Data)
+
+                    console.log('stap3Data', stap3Data)
+
+                    // console.log('stap3DataTable', stap3DataTable)
+
+                    console.log('stap4Data', stap4Data)
+
+
+
+                    function renderHtmlV1(data) {
+                        return `
+                    <div class="page-pdf__box page-pdf__box--type-1 
+                    page-pdf__box--type-1-heightx 
+                    page-pdf__box page-pdf__box--two-distr
+                    ${data.hideClass ? 'hideClass' : ''} 
+                    ${data.blueClass ? 'blueClass' : ''}"">
+                        <p class="page-pdf__box-title">${data.title}</p>
+                        <div class="page-pdf__box-value-wrapper">
+
+                            <div class="page-pdf__box-value-wrapper-box-x">
+                                <div class="page-pdf__box-value-name-district">${data.valueDistr}</div>
+                                <div class="page-pdf__box-value-two-distr-value">${data.value}</div>
+                            </div>
+
+                            <div class="page-pdf__box-value-wrapper-box-x">
+                                <div class="page-pdf__box-value-name-district">${data.value2Distr}</div>
+                                <div class="page-pdf__box-value-two-distr-value">${data.value2}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                `;
+                    }
+
+
+                    //первый кластер
+                    let htmlClaster1 = ``;
+
+                    for (let i = 0; i < stap1Data.length; i++) {
+                        let elementHtml = renderHtmlV1(stap1Data[i]);
+                        htmlClaster1 += elementHtml;
+                    }
+
+                    pdfAllClaster[0].querySelector('.page-pdf__claster-content').innerHTML = htmlClaster1;
+
+
+                    //второй кластер
+                    let htmlClaster2 = ``;
+
+                    for (let i = 0; i < stap2Data.length; i++) {
+                        let elementHtml = renderHtmlV1(stap2Data[i]);
+                        htmlClaster2 += elementHtml;
+                    }
+
+                    pdfAllClaster[1].querySelector('.page-pdf__claster-content').innerHTML = htmlClaster2;
+
+
+
+
+                    //третий кластер
+                    let htmlClaster3 = ``;
+
+                    for (let i = 0; i < stap3Data.length; i++) {
+                        let elementHtml = renderHtmlV1(stap3Data[i]);
+                        htmlClaster3 += elementHtml;
+                    }
+
+                    let htmlClaster3Table = ``
+                    for (let i = 0; i < stap3DataTable.length; i++) {
+                        let elementHtml = `
+                    <div class="page-pdf__box-value-wrapper-box">
+                        <p class="page-pdf__box-value-wrapper-box-title">${stap3DataTable[i].title}</p>
+
+                        <p class="page-pdf__box-value-wrapper-box-value">$${stap3DataTable[i].value2}</p>
+
+                        <p class="page-pdf__box-value-wrapper-box-value-old">$${stap3DataTable[i].value}</p>
+                        
+                    </div>`
+                        htmlClaster3Table += elementHtml;
+                    }
+
+                    console.log('htmlClaster3Table', htmlClaster3Table)
+
+                    let tableDiagramData = `
+                <div class="page-pdf__box page-pdf__box--type-1 page-pdf__box--type-long page-pdf__box--type-1-heightx">
+                    <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                    <div class="page-pdf__box-value-wrapper page-pdf__box-value-wrapper--flex">
+                        ${htmlClaster3Table}
+                    </div>
+                </div>`
+
+
+                    htmlClaster3 += tableDiagramData
+
+                    console.log('htmlClaster3', htmlClaster3)
+
+                    pdfAllClaster[2].querySelector('.page-pdf__claster-content').innerHTML = htmlClaster3;
+
+
+                    //четвертый кластер
+                    let htmlClaster4 = ``;
+
+                    for (let i = 0; i < stap4Data.length; i++) {
+                        let elementHtml = renderHtmlV1(stap4Data[i]);
+                        htmlClaster4 += elementHtml;
+                    }
+                    pdfAllClaster[3].querySelector('.page-pdf__claster-content').innerHTML = ''
+                    pdfAllClaster[3].querySelector('.page-pdf__claster-content').innerHTML = htmlClaster4;
+
+
+                }
+                else if (currentSelectYearRangeValue == 0) {
+                    let allClaster = document.querySelectorAll('.acordeon-data-claster')
+
+                    let boxtClaster1 = allClaster[0].querySelectorAll('.district-data-element')
+
+                    let boxtClaster2 = allClaster[1].querySelectorAll('.district-data-element')
+
+                    let boxtClaster3 = allClaster[2].querySelectorAll('.district-data-element')
+
+                    let boxtClaster3Table = allClaster[2].querySelectorAll('.acordeon-data-claster__chart--type-3-table .claster-value-table__row ')
+
+                    let boxtClaster4 = allClaster[3].querySelectorAll('.district-data-element')
+
+                    let stap1Data = []
+
+                    let stap2Data = []
+
+                    let stap3Data = []
+
+                    let stap3DataTable = []
+
+                    let stap3DataTable2 = []
+
+                    let stap4Data = []
+
+                    for (let i = 0; i < boxtClaster1.length; i++) {
+                        let title = boxtClaster1[i].querySelector('.district-data-element-v2__current-title').innerHTML
+                        let valueBoxs = boxtClaster1[i].querySelectorAll('.district-data-element-v2__value-claster')
+                        let valueBoxsOld = boxtClaster1[i].querySelectorAll('.district-data-element-v2__past')
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBoxs[0].querySelector('.district-data-element-v2__current-value').innerHTML,
+                            'valueOld': valueBoxsOld[0].querySelector('.district-data-element-v2__past-value').innerHTML,
+                            'valueDistr': valueBoxs[0].querySelector('.district-data-element-v2__value-claster-title').innerHTML,
+                            'value2': valueBoxs[1].querySelector('.district-data-element-v2__current-value').innerHTML,
+                            'value2Old': valueBoxsOld[0].querySelector('.district-data-element-v2__past-value').innerHTML,
+                            'value2Distr': valueBoxs[1].querySelector('.district-data-element-v2__value-claster-title').innerHTML,
+                            'hideClass': boxtClaster1[i].classList.contains('district-data-element--hide-mod'),
+                            'blueClass': boxtClaster1[i].classList.contains('district-data-element--light-blue-mod'),
+
+                        }
+                        stap1Data.push(objectNew)
+                    }
+
+
+                    for (let i = 0; i < boxtClaster2.length; i++) {
+                        let title = boxtClaster2[i].querySelector('.district-data-element-v2__current-title').innerHTML
+                        let valueBoxs = boxtClaster2[i].querySelectorAll('.district-data-element-v2__value-claster')
+                        let valueBoxsOld = boxtClaster2[i].querySelectorAll('.district-data-element-v2__past')
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBoxs[0].querySelector('.district-data-element-v2__current-value').innerHTML,
+                            'valueOld': valueBoxsOld[0].querySelector('.district-data-element-v2__past-value').innerHTML,
+                            'valueDistr': valueBoxs[0].querySelector('.district-data-element-v2__value-claster-title').innerHTML,
+                            'value2': valueBoxs[1].querySelector('.district-data-element-v2__current-value').innerHTML,
+                            'value2Old': valueBoxsOld[0].querySelector('.district-data-element-v2__past-value').innerHTML,
+                            'value2Distr': valueBoxs[1].querySelector('.district-data-element-v2__value-claster-title').innerHTML,
+                            'hideClass': boxtClaster2[i].classList.contains('district-data-element--hide-mod'),
+                            'blueClass': boxtClaster2[i].classList.contains('district-data-element--light-blue-mod'),
+
+                        }
+                        stap2Data.push(objectNew)
+                    }
+
+
+                    for (let i = 0; i < boxtClaster3.length; i++) {
+                        let title = boxtClaster3[i].querySelector('.district-data-element-v2__current-title').innerHTML
+                        let valueBoxs = boxtClaster3[i].querySelectorAll('.district-data-element-v2__value-claster')
+                        let valueBoxsOld = boxtClaster3[i].querySelectorAll('.district-data-element-v2__past')
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBoxs[0].querySelector('.district-data-element-v2__current-value').innerHTML,
+                            'valueOld': valueBoxsOld[0].querySelector('.district-data-element-v2__past-value').innerHTML,
+                            'valueDistr': valueBoxs[0].querySelector('.district-data-element-v2__value-claster-title').innerHTML,
+                            'value2': valueBoxs[1].querySelector('.district-data-element-v2__current-value').innerHTML,
+                            'value2Old': valueBoxsOld[0].querySelector('.district-data-element-v2__past-value').innerHTML,
+                            'value2Distr': valueBoxs[1].querySelector('.district-data-element-v2__value-claster-title').innerHTML,
+                            'hideClass': boxtClaster3[i].classList.contains('district-data-element--hide-mod'),
+                            'blueClass': boxtClaster3[i].classList.contains('district-data-element--light-blue-mod'),
+
+                        }
+                        stap3Data.push(objectNew)
+                    }
+
+
+                    for (let i = 1; i < boxtClaster3Table.length; i++) {
+
+                        let col = boxtClaster3Table[i].querySelectorAll('.claster-value-table__col')
+
+                        let objectNew = {
+                            'district': 'CURRENT',
+                            'year': col[0].querySelector('.claster-value-table__el-year').innerHTML,
+                            'value1': col[1].querySelector('.claster-value-table__el-value').getAttribute('data-st-1'),
+                            'value2': col[2].querySelector('.claster-value-table__el-value').getAttribute('data-st-1'),
+                            'value3': col[3].querySelector('.claster-value-table__el-value').getAttribute('data-st-1'),
+
+                        }
+
+                        let objectNew2 = {
+                            'district': 'COMPARE',
+                            'year': col[0].querySelector('.claster-value-table__el-year').innerHTML,
+                            'value1': col[1].querySelector('.claster-value-table__el-value').getAttribute('data-st-2'),
+                            'value2': col[2].querySelector('.claster-value-table__el-value').getAttribute('data-st-2'),
+                            'value3': col[3].querySelector('.claster-value-table__el-value').getAttribute('data-st-2'),
+                        }
+
+                        stap3DataTable.push(objectNew)
+                        stap3DataTable2.push(objectNew2)
+                    }
+                    console.log('boxtClaster3Table', boxtClaster3Table)
+                    console.log('stap3DataTable', stap3DataTable)
+                    console.log('stap3DataTable2', stap3DataTable2)
+
+
+                    for (let i = 0; i < boxtClaster4.length; i++) {
+                        let title = boxtClaster4[i].querySelector('.district-data-element-v2__current-title').innerHTML
+                        let valueBoxs = boxtClaster4[i].querySelectorAll('.district-data-element-v2__value-claster')
+                        let valueBoxsOld = boxtClaster4[i].querySelectorAll('.district-data-element-v2__past')
+                        let objectNew = {
+                            'title': title,
+                            'value': valueBoxs[0].querySelector('.district-data-element-v2__current-value').innerHTML,
+                            'valueOld': valueBoxsOld[0].querySelector('.district-data-element-v2__past-value').innerHTML,
+                            'valueDistr': valueBoxs[0].querySelector('.district-data-element-v2__value-claster-title').innerHTML,
+                            'value2': valueBoxs[1].querySelector('.district-data-element-v2__current-value').innerHTML,
+                            'value2Old': valueBoxsOld[0].querySelector('.district-data-element-v2__past-value').innerHTML,
+                            'value2Distr': valueBoxs[1].querySelector('.district-data-element-v2__value-claster-title').innerHTML,
+                            'hideClass': boxtClaster4[i].classList.contains('district-data-element--hide-mod'),
+                            'blueClass': boxtClaster4[i].classList.contains('district-data-element--light-blue-mod'),
+
+                        }
+                        stap4Data.push(objectNew)
+                    }
+
+                    console.log('stap1Data', stap1Data)
+
+                    console.log('stap2Data', stap2Data)
+
+                    console.log('stap3Data', stap3Data)
+
+                    // console.log('stap3DataTable', stap3DataTable)
+
+                    console.log('stap4Data', stap4Data)
+
+
+
+                    function renderHtmlV1(data) {
+                        return `
+                    <div class="page-pdf__box page-pdf__box--type-1 
+                    page-pdf__box--type-1-heightx 
+                    page-pdf__box page-pdf__box--two-distr
+                    page-pdf__box page-pdf__box--two-distr-old
+                    ${data.hideClass ? 'hideClass' : ''} 
+                    ${data.blueClass ? 'blueClass' : ''}"">
+                        <p class="page-pdf__box-title">${data.title}</p>
+                        <div class="page-pdf__box-value-wrapper">
+
+                            <div class="page-pdf__box-value-wrapper-box-x">
+                                <div class="page-pdf__box-value-name-district">${data.valueDistr}</div>
+                                <div class="page-pdf__box-value-two-distr-value">${data.value}</div>
+                                <div class="page-pdf__box-value-two-distr-old-year">
+                                    <p class="page-pdf__box-value-two-distr-old-year-value">${data.valueOld}</p>
+                                    <p class="page-pdf__box-value-two-distr-old-year-year">2019</p>
+                                </div>
+                            </div>
+
+                            <div class="page-pdf__box-value-wrapper-box-x">
+                                <div class="page-pdf__box-value-name-district">${data.value2Distr}</div>
+                                <div class="page-pdf__box-value-two-distr-value">${data.value2}</div>
+                                <div class="page-pdf__box-value-two-distr-old-year">
+                                    <p class="page-pdf__box-value-two-distr-old-year-value">${data.value2Old}</p>
+                                    <p class="page-pdf__box-value-two-distr-old-year-year">2019</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                `;
+                    }
+
+
+                    //первый кластер
+                    let htmlClaster1 = ``;
+
+                    for (let i = 0; i < stap1Data.length; i++) {
+                        let elementHtml = renderHtmlV1(stap1Data[i]);
+                        htmlClaster1 += elementHtml;
+                    }
+
+                    pdfAllClaster[0].querySelector('.page-pdf__claster-content').innerHTML = htmlClaster1;
+
+
+                    //второй кластер
+                    let htmlClaster2 = ``;
+
+                    for (let i = 0; i < stap2Data.length; i++) {
+                        let elementHtml = renderHtmlV1(stap2Data[i]);
+                        htmlClaster2 += elementHtml;
+                    }
+
+                    pdfAllClaster[1].querySelector('.page-pdf__claster-content').innerHTML = htmlClaster2;
+
+
+
+
+                    //третий кластер
+                    let htmlClaster3 = ``;
+
+                    for (let i = 0; i < stap3Data.length; i++) {
+                        let elementHtml = renderHtmlV1(stap3Data[i]);
+                        htmlClaster3 += elementHtml;
+                    }
+
+
+                    let tableDiagramData = `
+                    <div class="page-pdf__box page-pdf__box--type-1 page-pdf__box--type-long page-pdf__box--type-1-heightx  page-pdf__box--type-1-table-container">
+                        <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                        <div class="page-pdf__box-value-wrapper page-pdf__box-value-wrapper--flex">
+
+                                <div class="page-pdf__box-value-wrapper-box">
+                                    <p class="page-pdf__box-value-wrapper-box-title">Federal revenue</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value">${stap3DataTable[0].value1}</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value-old">${stap3DataTable[1].value1}</p>
+
+                                </div>
+                                <div class="page-pdf__box-value-wrapper-box">
+                                    <p class="page-pdf__box-value-wrapper-box-title">State revenue</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value">${stap3DataTable[0].value2}</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value-old">${stap3DataTable[1].value2}</p>
+
+                                </div>
+                                <div class="page-pdf__box-value-wrapper-box">
+                                    <p class="page-pdf__box-value-wrapper-box-title">Local revenue</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value">${stap3DataTable[0].value3}</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value-old">$${stap3DataTable[1].value3}</p>
+
+                                </div>
+                            </div>
+
+
+                            <div class="page-pdf__box-value-wrapper page-pdf__box-value-wrapper--flex">
+
+                                <div class="page-pdf__box-value-wrapper-box">
+                                    <p class="page-pdf__box-value-wrapper-box-title">Federal revenue</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value">${stap3DataTable2[0].value1}</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value-old">${stap3DataTable2[1].value1}</p>
+
+                                </div>
+                                <div class="page-pdf__box-value-wrapper-box">
+                                    <p class="page-pdf__box-value-wrapper-box-title">State revenue</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value">${stap3DataTable2[0].value2}</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value-old">${stap3DataTable2[1].value2}</p>
+
+                                </div>
+                                <div class="page-pdf__box-value-wrapper-box">
+                                    <p class="page-pdf__box-value-wrapper-box-title">Local revenue</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value">${stap3DataTable2[0].value3}</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value-old">$${stap3DataTable2[1].value3}</p>
+
+                                </div>
+                            </div>
+                    </div>`
+
+
+                    console.log('tableDiagramData_________', tableDiagramData)
+
+                    console.log('stap3DataTable', stap3DataTable)
+
+                    console.log('stap3DataTable2', stap3DataTable2)
+
+                    stap3DataTable
+
+                    htmlClaster3 += tableDiagramData
+
+                    console.log('htmlClaster3', htmlClaster3)
+
+                    pdfAllClaster[2].querySelector('.page-pdf__claster-content').innerHTML = htmlClaster3;
+
+
+                    //четвертый кластер
+                    let htmlClaster4 = ``;
+
+                    for (let i = 0; i < stap4Data.length; i++) {
+                        let elementHtml = renderHtmlV1(stap4Data[i]);
+                        htmlClaster4 += elementHtml;
+                    }
+                    pdfAllClaster[3].querySelector('.page-pdf__claster-content').innerHTML = ''
+                    pdfAllClaster[3].querySelector('.page-pdf__claster-content').innerHTML = htmlClaster4;
+
+
+                }
+            }
+
+            let titleGetDistrict = document.querySelector('.district-stat-sec__title').innerHTML
+            pdfTitle.innerHTML = `
+            <b>School District:</b>
+            ${titleGetDistrict}
+            `
+
+
+
+
         }
 
         //формирование файла .csv
@@ -1007,9 +1981,6 @@ document.addEventListener("DOMContentLoaded", () => {
             let htmlDistrictTitleElement = document.querySelector('.district-stat-sec__title')
             htmlDistrictTitleElement.innerHTML = `${dataCurrentDistrict.title.rendered}`
         }
-
-
-
 
         //получаем список id учасников
         function getMembersData() {
@@ -2028,8 +2999,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 "objectNewStaffing": staffingCurrentDistrictArray,
             }
 
-            //вызов метода для скачивания файла
-            loadDataDistrictScript(districtDataClasterDownload)
+            // //вызов метода для скачивания файла
+            // loadDataDistrictScript(districtDataClasterDownload)
 
 
             console.log('enrollmentAndChoiceCurrentDistrictArray', enrollmentAndChoiceCurrentDistrictArray)
@@ -2407,7 +3378,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 normalisationBoxInfoTitle()
+
+                loadDataDistrictScript()
             })
+
+
+            //вызов метода для скачивания файла
+            loadDataDistrictScript(districtDataClasterDownload)
         }
 
         //рендер первого кластера блоков данных Enroll
@@ -3645,7 +4622,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 let liElement = `
                 <li class="chart-diagram-value-list__element">
                         <span class="chart-diagram-value-list__element-value" style="background: ${diargamColorList[i]}"></span>
-                    <span class="chart-diagram-value-list__element-text">${data[i].title}</span>
+                    <span class="chart-diagram-value-list__element-text" data-value="${data[i].value}">${data[i].title}</span>
                 </li>
                 `
 
@@ -3688,14 +4665,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 let liElementFront = `
                 <li class="chart-diagram-value-list__element">
-                    <span class="chart-diagram-value-list__element-value" style="background: ${diargamColorListFront[i]}"></span>
+                    <span class="chart-diagram-value-list__element-value" style="background: ${diargamColorListFront[i]}" data-value="${data[i].value}"></span>
                 </li> 
                 `
 
                 let liElement = `
                 <li class="chart-diagram-value-list__element">
                     <span class="chart-diagram-value-list__element-value" style="background: ${diargamColorList[i]}"></span>
-                    <span class="chart-diagram-value-list__element-text">${data2[i].title}</span>
+                    <span class="chart-diagram-value-list__element-text" data-value="${data2[i].value}">${data2[i].title}</span>
                 </li>
                 `
 
@@ -3760,7 +4737,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 let liElement = `
-                <li class="chart-diagram-value-list__element">
+                <li class="chart-diagram-value-list__element" data-value1="${data[i].value}" data-value2="${data2[i].value}">
                     <span class="chart-diagram-value-list__element-value" style="background: ${diargamColorList[i]}"></span>
                     <span class="chart-diagram-value-list__element-text">${data[i].title}</span>
                 </li>
@@ -3831,13 +4808,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 let colorRowElement = `
                 <div class="claster-value-table__col">
-                    <span class="claster-value-table__el-value" style="background: ${diargamColorList[i]}"></span>
+                    <span class="claster-value-table__el-value" 
+                    data-st-1="${data1Current[i].value}" data-st-2="${data2Current[i].value}" style="background: ${diargamColorList[i]}"></span>
                 </div>
                 `
 
                 let colorRowElement2 = `
                 <div class="claster-value-table__col">
-                    <span class="claster-value-table__el-value" style="background: ${diargamColorListFront[i]}"></span>
+                    <span class="claster-value-table__el-value"
+                     data-st-1="${data1Old[i].value}" data-st-2="${data2Old[i].value}" style="background: ${diargamColorListFront[i]}"></span>
                 </div>
                 `
 

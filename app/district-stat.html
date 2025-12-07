@@ -36,7 +36,7 @@
 </head>
 
 <body>
-    <div class="app">
+    <div class="app" id="app">
 
         <header class="header-new">
             <div class="header-new__container">
@@ -2655,11 +2655,515 @@
             </section>
 
         </main>
+
+        <div class="pdf-file-load">
+
+            <div class="page-pdf" id="pdf-print">
+
+                <div class="page-pdf__header">
+                    <div class="page-pdf__disctrict-name">
+                        <b>School District:</b> Englewood 1
+                    </div>
+                </div>
+
+                <div class="page-pdf__body">
+
+                    <!-- <div class="page-pdf__claster ">
+                        <div class="page-pdf__claster-header">Enrollment and Choice</div>
+
+                        <div class="page-pdf__box page-pdf__box--type-1 page-pdf__box--type-1-heightx">
+                            <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                            <div class="page-pdf__box-value-wrapper">
+                                <p class="page-pdf__box-current-value">2,406</p>
+                                <div class="page-pdf__box-current-value-dow-value">
+                                    <p class="page-pdf__box-current-value-dop-value">2123</p>
+                                    <p class="page-pdf__box-current-value-year">2019</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="page-pdf__box page-pdf__box--type-1 
+                        page-pdf__box--type-1-heightx 
+                        page-pdf__box page-pdf__box--two-distr">
+                            <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                            <div class="page-pdf__box-value-wrapper">
+
+                                <div class="page-pdf__box-value-wrapper-box-x">
+                                    <div class="page-pdf__box-value-name-district">CURRENT DISTRICT</div>
+                                    <div class="page-pdf__box-value-two-distr-value">2,666</div>
+                                </div>
+
+                                <div class="page-pdf__box-value-wrapper-box-x">
+                                    <div class="page-pdf__box-value-name-district">CURRENT DISTRICT</div>
+                                    <div class="page-pdf__box-value-two-distr-value">2,666</div>
+                                </div>
+
+                            </div>
+                        </div> -->
+
+                    <div class="page-pdf__box page-pdf__box--type-1 
+                        page-pdf__box--type-1-heightx 
+                        page-pdf__box page-pdf__box--two-distr
+                        page-pdf__box page-pdf__box--two-distr-old">
+                        <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                        <div class="page-pdf__box-value-wrapper">
+
+                            <div class="page-pdf__box-value-wrapper-box-x">
+                                <div class="page-pdf__box-value-name-district">CURRENT DISTRICT</div>
+                                <div class="page-pdf__box-value-two-distr-value">2,666</div>
+
+                                <div class="page-pdf__box-value-two-distr-old-year">
+                                    <p class="page-pdf__box-value-two-distr-old-year-value">2,666</p>
+                                    <p class="page-pdf__box-value-two-distr-old-year-year">2019</p>
+                                </div>
+                            </div>
+
+                            <div class="page-pdf__box-value-wrapper-box-x">
+                                <div class="page-pdf__box-value-name-district">CURRENT DISTRICT</div>
+                                <div class="page-pdf__box-value-two-distr-value">2,666</div>
+
+                                <div class="page-pdf__box-value-two-distr-old-year">
+                                    <p class="page-pdf__box-value-two-distr-old-year-value">2,666</p>
+                                    <p class="page-pdf__box-value-two-distr-old-year-year">2019</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="page-pdf__claster-content page-pdf__claster-content--4-elements">
+                        <div class="page-pdf__box page-pdf__box--type-1 page-pdf__box--type-long">
+                            <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                            <div class="page-pdf__box-value-wrapper page-pdf__box-value-wrapper--flex">
+
+                                <div class="page-pdf__box-value-wrapper-box">
+                                    <p class="page-pdf__box-value-wrapper-box-title">Federal revenue</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value">$1619473.02</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value-old">$4491043</p>
+
+                                </div>
+                                <div class="page-pdf__box-value-wrapper-box">
+                                    <p class="page-pdf__box-value-wrapper-box-title">State revenue</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value">$8259545.82</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value-old">$2926497</p>
+
+                                </div>
+                                <div class="page-pdf__box-value-wrapper-box">
+                                    <p class="page-pdf__box-value-wrapper-box-title">Local revenue</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value">$27798554.78</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value-old">$45345387</p>
+
+                                </div>
+                            </div>
+
+
+                            <div class="page-pdf__box-value-wrapper page-pdf__box-value-wrapper--flex">
+
+                                <div class="page-pdf__box-value-wrapper-box">
+                                    <p class="page-pdf__box-value-wrapper-box-title">Federal revenue</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value">$1619473.02</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value-old">$4491043</p>
+
+                                </div>
+                                <div class="page-pdf__box-value-wrapper-box">
+                                    <p class="page-pdf__box-value-wrapper-box-title">State revenue</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value">$8259545.82</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value-old">$2926497</p>
+
+                                </div>
+                                <div class="page-pdf__box-value-wrapper-box">
+                                    <p class="page-pdf__box-value-wrapper-box-title">Local revenue</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value">$27798554.78</p>
+
+                                    <p class="page-pdf__box-value-wrapper-box-value-old">$45345387</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="page-pdf__claster-content page-pdf__claster-content--4-elements">
+
+                        <div class="page-pdf__box page-pdf__box--type-1">
+                            <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                            <div class="page-pdf__box-value-wrapper">
+                                <p class="page-pdf__box-current-value">2,406</p>
+                                <div class="page-pdf__box-current-value-dow-value">
+                                    <p class="page-pdf__box-current-value-dop-value">2123</p>
+                                    <p class="page-pdf__box-current-value-year">2019</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="page-pdf__box page-pdf__box--type-1">
+                            <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                            <div class="page-pdf__box-value-wrapper">
+                                <p class="page-pdf__box-current-value">0%</p>
+                            </div>
+                        </div>
+
+                        <div class="page-pdf__box page-pdf__box--type-1">
+                            <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                            <div class="page-pdf__box-value-wrapper">
+                                <p class="page-pdf__box-current-value">453</p>
+                            </div>
+                        </div>
+
+                        <div class="page-pdf__box page-pdf__box--type-1">
+                            <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                            <div class="page-pdf__box-value-wrapper">
+                                <p class="page-pdf__box-current-value">14.4%</p>
+                            </div>
+                        </div>
+
+
+
+                        <div class="page-pdf__box page-pdf__box--type-1">
+                            <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                            <div class="page-pdf__box-value-wrapper">
+                                <p class="page-pdf__box-current-value">25.3%</p>
+                            </div>
+                        </div>
+
+                        <div class="page-pdf__box page-pdf__box--type-1">
+                            <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                            <div class="page-pdf__box-value-wrapper">
+                                <p class="page-pdf__box-current-value">40.4%</p>
+                            </div>
+                        </div>
+
+                        <div class="page-pdf__box page-pdf__box--type-1">
+                            <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                            <div class="page-pdf__box-value-wrapper">
+                                <p class="page-pdf__box-current-value">62.3%</p>
+                            </div>
+                        </div>
+
+                        <div class="page-pdf__box page-pdf__box--type-1">
+                            <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                            <div class="page-pdf__box-value-wrapper">
+                                <p class="page-pdf__box-current-value">14.4%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-pdf__claster">
+                    <div class="page-pdf__claster-header">Proficiency</div>
+                    <div class="page-pdf__claster-content page-pdf__claster-content--3-elements">
+
+                        <div class="page-pdf__box page-pdf__box--type-1">
+                            <p class="page-pdf__box-title">English language arts proficiency rate
+                                (grades 3–8)</p>
+                            <div class="page-pdf__box-value-wrapper">
+                                <p class="page-pdf__box-current-value">2,406</p>
+                            </div>
+                        </div>
+
+                        <div class="page-pdf__box page-pdf__box--type-1">
+                            <p class="page-pdf__box-title">High school 6-year graduation rate</p>
+                            <div class="page-pdf__box-value-wrapper">
+                                <p class="page-pdf__box-current-value">0%</p>
+                            </div>
+                        </div>
+
+                        <div class="page-pdf__box page-pdf__box--type-1">
+                            <p class="page-pdf__box-title">Mathematics proficiency rate (grades 3–8)</p>
+                            <div class="page-pdf__box-value-wrapper">
+                                <p class="page-pdf__box-current-value">453</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="page-pdf__claster">
+                    <div class="page-pdf__claster-header">School Finance</div>
+                    <div class="page-pdf__claster-content page-pdf__claster-content--4-elements">
+
+                        <div class="page-pdf__box page-pdf__box--type-1">
+                            <p class="page-pdf__box-title">Spending per student</p>
+                            <div class="page-pdf__box-value-wrapper">
+                                <p class="page-pdf__box-current-value">$23,299</p>
+                            </div>
+                        </div>
+
+                        <div class="page-pdf__box page-pdf__box--type-1">
+                            <p class="page-pdf__box-title">Instructional share of total spending</p>
+                            <div class="page-pdf__box-value-wrapper">
+                                <p class="page-pdf__box-current-value">42%</p>
+                            </div>
+                        </div>
+
+                        <div class="page-pdf__box page-pdf__box--type-1 page-pdf__box--type-long">
+                            <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                            <div class="page-pdf__box-value-wrapper page-pdf__box-value-wrapper--flex">
+                                <div class="page-pdf__box-value-wrapper-box">
+                                    <p class="page-pdf__box-value-wrapper-box-value">$5,053,000</p>
+                                    <p class="page-pdf__box-value-wrapper-box-title">Federal revenue</p>
+                                </div>
+
+                                <div class="page-pdf__box-value-wrapper-box">
+                                    <p class="page-pdf__box-value-wrapper-box-value">$5,053,000</p>
+                                    <p class="page-pdf__box-value-wrapper-box-title">State revenue</p>
+                                </div>
+
+                                <div class="page-pdf__box-value-wrapper-box">
+                                    <p class="page-pdf__box-value-wrapper-box-value">$5,053,000</p>
+                                    <p class="page-pdf__box-value-wrapper-box-title">Local revenue</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="page-pdf__claster">
+                    <div class="page-pdf__claster-header">Staffing & Safety</div>
+                    <div class="page-pdf__claster-content page-pdf__claster-content--3-elements">
+
+                        <div class="page-pdf__box page-pdf__box--type-1">
+                            <p class="page-pdf__box-title">Student–teacher ratio</p>
+                            <div class="page-pdf__box-value-wrapper">
+                                <p class="page-pdf__box-current-value">14:1</p>
+                            </div>
+                        </div>
+
+                        <div class="page-pdf__box page-pdf__box--type-1">
+                            <p class="page-pdf__box-title">Student–psychologist ratio</p>
+                            <div class="page-pdf__box-value-wrapper">
+                                <p class="page-pdf__box-current-value">344:1</p>
+                            </div>
+                        </div>
+
+                        <div class="page-pdf__box page-pdf__box--type-1">
+                            <p class="page-pdf__box-title">Disciplinary incidents per 1,000 students</p>
+                            <div class="page-pdf__box-value-wrapper">
+                                <p class="page-pdf__box-current-value">105</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-pdf__footer">
+                <p class="page-pdf__footer-title">Learn more at: ColoradoEducationDashboard.com</p>
+            </div>
+
+        </div>
+
+    </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
     <script src="js/scripts.min.js"></script>
+
+
+    <script>
+        const htmlContent = `
+        <div class="page-pdf" id="pdf-print">
+
+                <div class="page-pdf__header">
+                    <div class="page-pdf__disctrict-name">
+                        <b>School District:</b> Englewood 1
+                    </div>
+                </div>
+
+                <div class="page-pdf__body">
+
+                    <div class="page-pdf__claster">
+                        <div class="page-pdf__claster-header">Enrollment and Choice</div>
+                        <div class="page-pdf__claster-content page-pdf__claster-content--4-elements">
+
+                            <div class="page-pdf__box page-pdf__box--type-1">
+                                <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                                <div class="page-pdf__box-value-wrapper">
+                                    <p class="page-pdf__box-current-value">2,406</p>
+                                </div>
+                            </div>
+
+                            <div class="page-pdf__box page-pdf__box--type-1">
+                                <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                                <div class="page-pdf__box-value-wrapper">
+                                    <p class="page-pdf__box-current-value">0%</p>
+                                </div>
+                            </div>
+
+                            <div class="page-pdf__box page-pdf__box--type-1">
+                                <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                                <div class="page-pdf__box-value-wrapper">
+                                    <p class="page-pdf__box-current-value">453</p>
+                                </div>
+                            </div>
+
+                            <div class="page-pdf__box page-pdf__box--type-1">
+                                <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                                <div class="page-pdf__box-value-wrapper">
+                                    <p class="page-pdf__box-current-value">14.4%</p>
+                                </div>
+                            </div>
+
+
+
+                            <div class="page-pdf__box page-pdf__box--type-1">
+                                <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                                <div class="page-pdf__box-value-wrapper">
+                                    <p class="page-pdf__box-current-value">25.3%</p>
+                                </div>
+                            </div>
+
+                            <div class="page-pdf__box page-pdf__box--type-1">
+                                <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                                <div class="page-pdf__box-value-wrapper">
+                                    <p class="page-pdf__box-current-value">40.4%</p>
+                                </div>
+                            </div>
+
+                            <div class="page-pdf__box page-pdf__box--type-1">
+                                <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                                <div class="page-pdf__box-value-wrapper">
+                                    <p class="page-pdf__box-current-value">62.3%</p>
+                                </div>
+                            </div>
+
+                            <div class="page-pdf__box page-pdf__box--type-1">
+                                <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                                <div class="page-pdf__box-value-wrapper">
+                                    <p class="page-pdf__box-current-value">14.4%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-pdf__claster">
+                        <div class="page-pdf__claster-header">Proficiency</div>
+                        <div class="page-pdf__claster-content page-pdf__claster-content--3-elements">
+
+                            <div class="page-pdf__box page-pdf__box--type-1">
+                                <p class="page-pdf__box-title">English language arts proficiency rate
+                                    (grades 3–8)</p>
+                                <div class="page-pdf__box-value-wrapper">
+                                    <p class="page-pdf__box-current-value">2,406</p>
+                                </div>
+                            </div>
+
+                            <div class="page-pdf__box page-pdf__box--type-1">
+                                <p class="page-pdf__box-title">High school 6-year graduation rate</p>
+                                <div class="page-pdf__box-value-wrapper">
+                                    <p class="page-pdf__box-current-value">0%</p>
+                                </div>
+                            </div>
+
+                            <div class="page-pdf__box page-pdf__box--type-1">
+                                <p class="page-pdf__box-title">Mathematics proficiency rate (grades 3–8)</p>
+                                <div class="page-pdf__box-value-wrapper">
+                                    <p class="page-pdf__box-current-value">453</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="page-pdf__claster">
+                        <div class="page-pdf__claster-header">School Finance</div>
+                        <div class="page-pdf__claster-content page-pdf__claster-content--3-elements-x">
+
+                            <div class="page-pdf__box page-pdf__box--type-1">
+                                <p class="page-pdf__box-title">Spending per student</p>
+                                <div class="page-pdf__box-value-wrapper">
+                                    <p class="page-pdf__box-current-value">$23,299</p>
+                                </div>
+                            </div>
+
+                            <div class="page-pdf__box page-pdf__box--type-1">
+                                <p class="page-pdf__box-title">Instructional share of total spending</p>
+                                <div class="page-pdf__box-value-wrapper">
+                                    <p class="page-pdf__box-current-value">42%</p>
+                                </div>
+                            </div>
+
+                            <div class="page-pdf__box page-pdf__box--type-1 page-pdf__box--type-long">
+                                <p class="page-pdf__box-title">Overall Public Enrollment</p>
+                                <div class="page-pdf__box-value-wrapper page-pdf__box-value-wrapper--flex">
+                                    <div class="page-pdf__box-value-wrapper-box">
+                                        <p class="page-pdf__box-value-wrapper-box-value">$5,053,000</p>
+                                        <p class="page-pdf__box-value-wrapper-box-title">Federal revenue</p>
+                                    </div>
+
+                                    <div class="page-pdf__box-value-wrapper-box">
+                                        <p class="page-pdf__box-value-wrapper-box-value">$5,053,000</p>
+                                        <p class="page-pdf__box-value-wrapper-box-title">State revenue</p>
+                                    </div>
+
+                                    <div class="page-pdf__box-value-wrapper-box">
+                                        <p class="page-pdf__box-value-wrapper-box-value">$5,053,000</p>
+                                        <p class="page-pdf__box-value-wrapper-box-title">Local revenue</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="page-pdf__claster">
+                        <div class="page-pdf__claster-header">Staffing & Safety</div>
+                        <div class="page-pdf__claster-content page-pdf__claster-content--3-elements">
+
+                            <div class="page-pdf__box page-pdf__box--type-1">
+                                <p class="page-pdf__box-title">Student–teacher ratio</p>
+                                <div class="page-pdf__box-value-wrapper">
+                                    <p class="page-pdf__box-current-value">14:1</p>
+                                </div>
+                            </div>
+
+                            <div class="page-pdf__box page-pdf__box--type-1">
+                                <p class="page-pdf__box-title">Student–psychologist ratio</p>
+                                <div class="page-pdf__box-value-wrapper">
+                                    <p class="page-pdf__box-current-value">344:1</p>
+                                </div>
+                            </div>
+
+                            <div class="page-pdf__box page-pdf__box--type-1">
+                                <p class="page-pdf__box-title">Disciplinary incidents per 1,000 students</p>
+                                <div class="page-pdf__box-value-wrapper">
+                                    <p class="page-pdf__box-current-value">105</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-pdf__footer">
+                    <p class="page-pdf__footer-title">Learn more at: ColoradoEducationDashboard.com</p>
+                </div>
+
+            </div>
+    `;
+
+        document.getElementById('pdfForm').addEventListener('submit', function (e) {
+            document.getElementById('pdfHtml').value = htmlContent;
+        });
+    </script>
 </body>
 
 </html>

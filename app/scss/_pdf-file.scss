@@ -1,0 +1,355 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    box-shadow: none;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+li {
+    list-style-type: none;
+}
+
+button {
+    cursor: pointer;
+    outline: 0 none !important;
+    box-shadow: none;
+
+}
+
+.pdf-file-load {
+    display: block;
+    z-index: 999;
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 1100px;
+    // height: 100vh;
+    // overflow-y: scroll;
+    // pointer-events: none;
+    overflow-y: auto;
+    height: 100vh;
+
+}
+
+/* A4 wrapper в пикселях при ~96dpi */
+.page-pdf {
+    // width: 938px;
+    // min-height: 1123px;
+    margin: 20px auto;
+    padding: 50px 50px;
+    box-sizing: border-box;
+    background: #ffffff;
+    color: #111;
+    font-size: 16px;
+    line-height: 1.2;
+    position: relative;
+    // display: none;
+
+}
+
+
+
+.page-pdf__disctrict-name {
+    width: 100%;
+    border-top: solid 2px #C9C6C3;
+    border-bottom: solid 2px #C9C6C3;
+    color: #003568;
+    padding: 10px 0;
+    font-size: 25px;
+    font-weight: 400;
+
+}
+
+.page-pdf__disctrict-name b {
+    font-weight: 700;
+}
+
+.page-pdf__body {
+    margin-top: 40px;
+}
+
+.page-pdf__claster {}
+
+.page-pdf__claster:last-child {
+    margin-bottom: 0;
+}
+
+.page-pdf__claster-header {
+    font-weight: normal;
+    color: #003568;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1;
+    padding-bottom: 10px;
+    border-bottom: solid 2px #003568;
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+.page-pdf__claster-content {
+    width: 100%;
+    padding-top: 30px;
+
+}
+
+
+
+.page-pdf__claster-content--4-elements .page-pdf__box {
+    width: 210px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.page-pdf__claster-content--4-elements .page-pdf__box--type-long {
+    width: 400px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+
+}
+
+.page-pdf__claster-content--3-elements .page-pdf__box {
+    width: 295px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+
+}
+
+.page-pdf__box {
+    padding: 20px 10px 20px 10px;
+    background: #EFEEED;
+    height: 100px;
+
+    display: inline-block;
+}
+
+.page-pdf__box-title {
+    font-size: 16px;
+    color: #003568;
+    text-align: center;
+    font-weight: 400;
+    font-family: "Helvetica", sans-serif;
+}
+
+.page-pdf__box-current-value {
+    text-align: center;
+    font-size: 24px;
+    color: #003568;
+    font-weight: 700;
+    margin-top: 22px;
+    font-family: "Helvetica", sans-serif;
+}
+
+
+.page-pdf__box-value-wrapper-box-value {
+    color: #003568;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1;
+    font-size: 16px;
+    font-family: "Helvetica", sans-serif;
+}
+
+.page-pdf__box-value-wrapper-box-value-old {
+    border-top: solid 1px #948C87;
+    color: #948C87;
+    padding-top: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+}
+
+.page-pdf__box-value-wrapper-box {
+    width: 32%;
+    display: inline-block;
+}
+
+.page-pdf__box-value-wrapper-box-title {
+    text-align: center;
+    font-size: 14px;
+    line-height: 1;
+    margin-top: 10px;
+    color: #003568;
+}
+
+.page-pdf__footer {
+    border-top: solid 2px #003568;
+    padding-top: 15px;
+    margin-top: 70px;
+}
+
+.page-pdf__footer-title {
+    font-weight: 700;
+    color: #003568;
+    font-size: 16px;
+}
+
+.page-pdf__box-current-value-dow-value {
+    border-top: solid 1px #948C87;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.page-pdf__box-current-value-dop-value {
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    color: #948C87;
+    margin-top: 5px;
+    font-weight: 400;
+}
+
+.page-pdf__box-current-value-year {
+    font-size: 12px;
+    width: 100%;
+    text-align: center;
+    color: #948C87;
+    margin-top: 5px;
+}
+
+.page-pdf__box--type-1-heightx {
+    height: 130px;
+    padding: 15px 10px;
+}
+
+.page-pdf__box--type-1-heightx .page-pdf__box-title {
+    font-size: 14px;
+}
+
+.page-pdf__box--type-1-heightx .page-pdf__box-current-value {
+    margin-top: 8px;
+}
+
+.page-pdf__box-value-wrapper {
+    width: 100%;
+    text-align: center;
+}
+
+.page-pdf__box-value-wrapper-box-x {
+    display: inline-block;
+    width: 45%;
+}
+
+.page-pdf__box-value-name-district {
+    text-align: center;
+    width: 100%;
+    line-height: 1;
+    color: #948C87;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.page-pdf__box-value-two-distr-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #003568;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+    line-height: 1;
+}
+
+.page-pdf__box--two-distr .page-pdf__box-title {
+    margin-bottom: 25px;
+
+}
+
+.page-pdf__box-value-two-distr-old-year {
+    margin-top: 10px;
+    width: 100%;
+    border-top: 1px solid #948C87;
+}
+
+.page-pdf__box-value-two-distr-old-year-value {
+    font-size: 13px;
+    color: #948C87;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.page-pdf__box-value-two-distr-old-year-year {
+    font-size: 10px;
+    color: #948C87;
+
+    width: 100%;
+    text-align: center;
+}
+
+.page-pdf__box--type-1-table-container .page-pdf__box-value-wrapper--flex {
+    margin-top: 10px;
+}
+
+.page-pdf__box--type-1-table-container .page-pdf__box-value-wrapper-box-title {
+    margin-top: 0;
+    margin-bottom: 4px;
+    font-size: 12px;
+}
+
+.page-pdf__box--type-1-table-container .page-pdf__box-value-wrapper-box-value {
+    font-size: 14px;
+}
+
+.page-pdf__box--type-1-table-container .page-pdf__box-value-wrapper-box-value-old {
+    padding-top: 5px;
+    font-size: 12px;
+}
+
+
+.hideClass {
+    display: none;
+}
+
+.blueClass {
+    background: #248EC3;
+}
+
+.blueClass .page-pdf__box-title {
+    color: #fff;
+}
+
+.blueClass .page-pdf__box-current-value {
+    color: #fff;
+}
+
+.blueClass .page-pdf__box-current-value-dop-value {
+    color: #fff;
+}
+
+.blueClass .page-pdf__box-current-value-year {
+    color: #fff;
+}
+
+.blueClass .page-pdf__box-current-value-dow-value {
+    border-top: solid 1px #fff;
+}
+
+.blueClass .page-pdf__box-value-two-distr-value {
+    color: #fff;
+}
+
+.blueClass .page-pdf__box-value-name-district {
+    color: #fff;
+}
+
+.blueClass .page-pdf__box-value-two-distr-old-year-value {
+    color: #ccc;
+}
+
+.blueClass .page-pdf__box-value-two-distr-old-year-year {
+    color: #ccc;
+}
+
+.blueClass .page-pdf__box-value-two-distr-old-year {
+    border-top: solid 1px #ccc;
+}
